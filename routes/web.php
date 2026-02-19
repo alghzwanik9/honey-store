@@ -75,5 +75,7 @@ Route::middleware('auth')->group(function () {
 // --- Webhooks (No Auth Required) ---
 Route::post('/checkout/webhook', [\App\Http\Controllers\PaymentController::class, 'webhook'])->name('checkout.webhook');
 
+
+
 // --- Auth Routes (Breeze) ---
 require __DIR__ . '/auth.php';

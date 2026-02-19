@@ -4,8 +4,13 @@
 set -e
 
 # Run Migrations
+# Run Migrations
 echo "Running Migrations..."
 php artisan migrate --force
+
+# Link Storage
+echo "Linking Storage..."
+php artisan storage:link
 
 # Clear and Cache Config
 echo "Caching Configuration..."
