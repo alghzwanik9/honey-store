@@ -10,9 +10,8 @@ class PaymentController extends Controller
     public function show(Order $order)
     {
         // Ensure order belongs to user
-        // Ensure order belongs to user
         if ($order->user_id != auth()->id()) {
-            die("Debug Error: Order User ID ({$order->user_id}) does not match Auth User ID (" . auth()->id() . ")");
+            return redirect()->route('dashboard');
         }
 
         // If paid, redirect to success/receipt
@@ -28,7 +27,7 @@ class PaymentController extends Controller
 
     public function bnpl(Order $order)
     {
-        if ($order->user_id !== auth()->id()) {
+        if ($order->user_id != auth()->id()) {
             return redirect()->route('dashboard');
         }
 
@@ -131,7 +130,7 @@ class PaymentController extends Controller
     {
         // Allow if user is owner OR if order is recent/paid (relaxing check for now to fix redirect issue)
         // In production, use signed URLs or session tokens for better security without strict auth.
-        if (auth()->check() && $order->user_id !== auth()->id()) {
+        if (auth()->check() && $order->user_id != auth()->id()) {
             abort(403);
         }
 
