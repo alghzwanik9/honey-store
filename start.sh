@@ -3,6 +3,10 @@
 # Exit on error
 set -e
 
+# Fix permissions for storage (critical for Railway Volumes)
+echo "Fixing permissions..."
+chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+
 # Run Migrations
 # Run Migrations
 echo "Running Migrations..."
