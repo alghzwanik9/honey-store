@@ -9,9 +9,14 @@ class PaymentController extends Controller
 {
     public function show(Order $order)
     {
-        // Ensure order belongs to user and is pending payment
-        if ($order->user_id !== auth()->id() || $order->payment_status === 'paid') {
+        // Ensure order belongs to user
+        if ($order->user_id !== auth()->id()) {
             return redirect()->route('dashboard');
+        }
+
+        // If paid, redirect to success/receipt
+        if ($order->payment_status === 'paid') {
+            return redirect()->route('payment.success', $order);
         }
 
         return view('checkout.payment', [
@@ -22,8 +27,12 @@ class PaymentController extends Controller
 
     public function bnpl(Order $order)
     {
-        if ($order->user_id !== auth()->id() || $order->payment_status === 'paid') {
+        if ($order->user_id !== auth()->id()) {
             return redirect()->route('dashboard');
+        }
+
+        if ($order->payment_status === 'paid') {
+            return redirect()->route('payment.success', $order);
         }
 
         return view('checkout.bnpl', compact('order'));
