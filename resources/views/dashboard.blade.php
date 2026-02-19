@@ -14,8 +14,8 @@
                              <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-32 w-auto object-contain mx-auto" style="height: 8rem; max-width: 100%;">
                         </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-amber-900 mb-3">{{ __("شكراً لتسجيلك في مناحل وادي الجرفة") }}</h3>
-                    <p class="text-amber-800/80 mb-8 text-lg font-medium">{{ __("تم إنشاء حسابك بنجاح. يمكنك الآن الاستمتاع بتجربة تسوق فريدة لأجود أنواع العسل.") }}</p>
+                    <h3 class="text-2xl font-bold text-amber-900 mb-3">{{ __("مرحباً بك في لوحة التحكم") }}</h3>
+                    <p class="text-amber-800/80 mb-8 text-lg font-medium">{{ __("من هنا يمكنك متابعة طلباتك وإدارة حسابك.") }}</p>
                     
                     <div class="flex justify-center mt-6">
                         <a href="/" class="inline-flex items-center justify-center px-8 py-3 text-base font-bold text-white transition-all duration-200 transform rounded-lg hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-600 shadow-md" style="background-color: #b45309; min-width: 200px; text-decoration: none;">
