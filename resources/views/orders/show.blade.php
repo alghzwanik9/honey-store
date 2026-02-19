@@ -1,0 +1,159 @@
+<x-layout title="تفاصيل الطلب #{{ $order->id }}">
+    <div class="container mx-auto px-4 py-8" dir="rtl">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-amber-900 flex items-center gap-3">
+                        <span>تفاصيل الطلب #{{ $order->id }}</span>
+                        <span class="text-sm px-3 py-1 rounded-full {{ $order->payment_status == 'paid' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700' }}">
+                            {{ $order->payment_status == 'paid' ? 'مدفوع' : 'غير مدفوع' }}
+                        </span>
+                    </h1>
+                    <p class="text-gray-500 mt-1">تاريخ الطلب: {{ $order->created_at->format('Y-m-d h:i A') }}</p>
+                </div>
+                <div class="flex gap-3">
+                    @if($order->payment_status == 'paid')
+                        <a href="{{ route('orders.invoice', $order) }}" class="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition shadow-sm font-bold">
+                            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            <span>تحميل الفاتورة</span>
+                        </a>
+                    @else
+                        <a href="{{ route('checkout.payment', $order) }}" class="inline-flex items-center gap-2 bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700 transition shadow-md font-bold">
+                            <span>إتمام الدفع</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </a>
+                    @endif
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="bg-white rounded-2xl shadow-sm border border-amber-100 p-8 mb-8">
+                <h3 class="text-lg font-bold text-gray-800 mb-6 border-b border-gray-100 pb-2">حالة الطلب</h3>
+                
+                <div class="relative">
+                    <div class="absolute top-1/2 left-0 w-full h-1 bg-gray-200 -translate-y-1/2 rounded-full z-0"></div>
+                    <div class="absolute top-1/2 right-0 h-1 bg-green-500 -translate-y-1/2 rounded-full z-0 transition-all duration-1000" 
+                         style="width: {{ $order->status == 'completed' ? '100%' : ($order->status == 'shipped' ? '50%' : '0%') }}"></div>
+
+                    <div class="relative z-10 flex justify-between w-full">
+                        <!-- Step 1: Pending -->
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center border-4 border-white shadow-sm {{ $order->status != 'cancelled' ? 'bg-green-500 text-white' : 'bg-gray-300' }}">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                            </div>
+                            <span class="text-sm font-bold {{ $order->status != 'cancelled' ? 'text-green-600' : 'text-gray-500' }}">تم استلام الطلب</span>
+                        </div>
+
+                        <!-- Step 2: Shipped -->
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center border-4 border-white shadow-sm {{ in_array($order->status, ['shipped', 'completed']) ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-400' }}">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                            </div>
+                            <span class="text-sm font-bold {{ in_array($order->status, ['shipped', 'completed']) ? 'text-green-600' : 'text-gray-400' }}">تم الشحن</span>
+                        </div>
+
+                        <!-- Step 3: Completed -->
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center border-4 border-white shadow-sm {{ $order->status == 'completed' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-400' }}">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <span class="text-sm font-bold {{ $order->status == 'completed' ? 'text-green-600' : 'text-gray-400' }}">تم التوصيل</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Items & Summary -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Items List -->
+                <div class="md:col-span-2 space-y-6">
+                    <div class="bg-white rounded-2xl shadow-sm border border-amber-100 overflow-hidden">
+                        <table class="w-full text-sm text-right">
+                            <thead class="bg-amber-50 text-amber-900 font-bold uppercase">
+                                <tr>
+                                    <th class="px-6 py-4">المنتج</th>
+                                    <th class="px-6 py-4 text-center">الكمية</th>
+                                    <th class="px-6 py-4">السعر</th>
+                                    <th class="px-6 py-4">المجموع</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                @foreach($order->items as $item)
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 font-medium text-gray-900">
+                                            {{ $item->product->name }}
+                                        </td>
+                                        <td class="px-6 py-4 text-center">{{ $item->quantity }}</td>
+                                        <td class="px-6 py-4">
+                                            <span class="flex items-center gap-3" style="gap: 0.75rem;">
+                                                {{ number_format($item->price, 2) }} 
+                                                <svg class="w-3 h-3 text-emerald-700" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
+                                                    <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
+                                                </svg>
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 font-bold text-amber-700">
+                                            <span class="flex items-center gap-3" style="gap: 0.75rem;">
+                                                {{ number_format($item->price * $item->quantity, 2) }} 
+                                                <svg class="w-3 h-3 text-emerald-700" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
+                                                    <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
+                                                </svg>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Summary Card -->
+                <div class="md:col-span-1">
+                    <div class="bg-white rounded-2xl shadow-sm border border-amber-100 p-6 sticky top-24">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">ملخص الطلب</h3>
+                        <div class="space-y-3 text-sm border-b border-gray-100 pb-4 mb-4">
+                            <div class="flex justify-between text-gray-600">
+                                <span>المجموع الفرعي</span>
+                                <span class="flex items-center gap-3" style="gap: 0.75rem;">
+                                    {{ number_format($order->total_amount, 2) }} 
+                                    <svg class="w-3 h-3 text-emerald-700" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
+                                        <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
+                                    </svg>
+                                </span>
+                            </div>
+                            <!-- Mock Tax/Shipping if needed later -->
+                            <div class="flex justify-between text-gray-600">
+                                <span>الشحن</span>
+                                <span>مجاني</span>
+                            </div>
+                            <div class="flex justify-between text-gray-600">
+                                <span>الضريبة (15%)</span>
+                                <span>شامل الضريبة</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="font-bold text-gray-900 text-lg">الإجمالي</span>
+                            <span class="font-bold text-amber-700 text-xl flex items-center gap-3" style="gap: 1rem;">
+                                {{ number_format($order->total_amount, 2) }} 
+                                <svg class="w-8 h-8 text-emerald-600 drop-shadow-sm mr-4" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
+                                    <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
+                                </svg>
+                            </span>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4 rounded-lg text-xs text-gray-500 space-y-2">
+                            <p><span class="font-bold">طريقة الدفع:</span> {{ $order->payment_method ?? 'بطاقة ائتمان' }}</p>
+                            <p><span class="font-bold">العنوان:</span> {{ $order->address ?? 'غير محدد' }} - {{ $order->city }}</p>
+                            <p><span class="font-bold">الجوال:</span> {{ $order->customer_phone }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-layout>

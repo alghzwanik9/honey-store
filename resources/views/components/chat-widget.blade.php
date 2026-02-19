@@ -1,0 +1,179 @@
+<div x-data="chatWidget" 
+     class="fixed bottom-6 right-6 z-50 font-cairo" 
+     style="direction: rtl;"
+     x-cloak>
+
+    <!-- Chat Window -->
+    <div x-show="open && !minimized" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 translate-y-10 scale-95"
+         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+         x-transition:leave-end="opacity-0 translate-y-10 scale-95"
+         class="bg-white w-80 md:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-gray-100 mb-4">
+        
+        <!-- Header -->
+        <div class="bg-gray-900 border-b border-gray-800 p-4 flex justify-between items-center shadow-md">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/30">
+                    <span class="text-xl">🐝</span>
+                </div>
+                <div>
+                    <h3 class="font-bold text-white text-lg leading-tight">المساعد الذكي</h3>
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+                        <span class="text-gray-300 text-xs">متاح الآن</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button @click="minimized = true" class="text-gray-400 hover:text-white transition p-1 hover:bg-white/10 rounded-full">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6"></path></svg>
+                </button>
+                <button @click="open = false" class="text-gray-400 hover:text-white transition p-1 hover:bg-white/10 rounded-full">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Messages Area -->
+        <div x-ref="scrollContainer" class="flex-1 bg-slate-50 p-4 h-80 overflow-y-auto space-y-4">
+            <template x-for="msg in messages" :key="msg.id">
+                <div :class="{'flex justify-start': msg.sender === 'bot', 'flex justify-end': msg.sender === 'user'}">
+                    <div :class="{
+                        'bg-white text-gray-700 rounded-tl-none border border-gray-100': msg.sender === 'bot', 
+                        'bg-gray-900 text-white rounded-tr-none': msg.sender === 'user'
+                    }" class="max-w-[85%] rounded-2xl px-4 py-3 shadow-sm relative group text-sm leading-relaxed">
+                        <p x-text="msg.text"></p>
+                        <span class="text-[10px] opacity-0 group-hover:opacity-70 transition-opacity absolute bottom-0.5" 
+                              :class="{'left-2 text-gray-400': msg.sender === 'bot', 'right-2 text-gray-300': msg.sender === 'user'}"
+                              x-text="msg.time"></span>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Typing Indicator -->
+            <div x-show="isTyping" class="flex justify-start">
+                <div class="bg-white border border-gray-100 rounded-2xl rounded-tl-none px-4 py-3 shadow-sm flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0ms"></span>
+                    <span class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 150ms"></span>
+                    <span class="w-1.5 h-1.5 bg-gray-600 rounded-full animate-bounce" style="animation-delay: 300ms"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="p-3 bg-white border-t border-gray-100">
+            <form @submit.prevent="sendMessage" class="flex gap-2 items-center">
+                <input x-model="message" type="text" placeholder="اسألني هنا..." 
+                       class="flex-1 h-10 bg-gray-50 border-gray-200 text-gray-700 rounded-xl px-4 focus:ring-2 focus:ring-gray-500/20 focus:border-gray-900 transition-all placeholder-gray-400 text-sm">
+                
+                <button type="submit" 
+                        :disabled="!message.trim()"
+                        class="h-10 w-10 bg-gray-900 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl transition-all duration-300 transform active:scale-95 shadow-md flex items-center justify-center">
+                    <svg class="w-5 h-5 transform -rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                </button>
+            </form>
+            <div class="text-center mt-2">
+                <span class="text-[10px] text-gray-400">مدعوم بالذكاء الاصطناعي</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toggle Button (Floating) -->
+    <button @click="toggle()" 
+            :class="{'scale-0 opacity-0': open && !minimized, 'scale-100 opacity-100': !open || minimized}"
+            class="bg-gray-900 hover:bg-gray-700 text-white w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center transform group border-2 border-white/20">
+        <span class="absolute inline-flex h-full w-full rounded-full bg-gray-400 opacity-20 animate-ping group-hover:hidden"></span>
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+        
+        <!-- Notification Badge if closed -->
+        <span x-show="!open" class="absolute top-0 right-0 block h-3.5 w-3.5 rounded-full ring-2 ring-white bg-red-500 transform translate-x-1 -translate-y-1"></span>
+    </button>
+</div>
+
+<style>
+    [x-cloak] { display: none !important; }
+</style>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('chatWidget', () => ({
+            open: false,
+            minimized: false,
+            message: '',
+            messages: [],
+            isTyping: false,
+
+            toggle() {
+                this.open = !this.open;
+                if (this.open) {
+                    this.minimized = false;
+                    this.$nextTick(() => this.scrollToBottom());
+                    if (this.messages.length === 0) {
+                        this.messages.push({
+                            id: Date.now(),
+                            text: 'مرحباً! أنا خبير العسل في مناحل وادي الجرفة. كيف يمكنني مساعدتك اليوم؟ 🍯',
+                            sender: 'bot',
+                            time: new Date().toLocaleTimeString('ar-SA', {hour: '2-digit', minute:'2-digit'})
+                        });
+                    }
+                }
+            },
+
+            sendMessage() {
+                if (!this.message.trim()) return;
+
+                this.messages.push({
+                    id: Date.now(),
+                    text: this.message,
+                    sender: 'user',
+                    time: new Date().toLocaleTimeString('ar-SA', {hour: '2-digit', minute:'2-digit'})
+                });
+
+                const userMsg = this.message;
+                this.message = '';
+                this.isTyping = true;
+                this.$nextTick(() => this.scrollToBottom());
+
+                fetch('{{ route('chat.send') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
+                    },
+                    body: JSON.stringify({ message: userMsg })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    this.isTyping = false;
+                    this.messages.push({
+                        id: Date.now(),
+                        text: data.reply,
+                        sender: 'bot',
+                        time: new Date().toLocaleTimeString('ar-SA', {hour: '2-digit', minute:'2-digit'})
+                    });
+                    this.$nextTick(() => this.scrollToBottom());
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    this.isTyping = false;
+                    this.messages.push({
+                        id: Date.now(),
+                        text: 'عذراً، حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.',
+                        sender: 'bot',
+                        time: new Date().toLocaleTimeString('ar-SA', {hour: '2-digit', minute:'2-digit'})
+                    });
+                });
+            },
+
+            scrollToBottom() {
+                const container = this.$refs.scrollContainer;
+                if (container) {
+                    container.scrollTop = container.scrollHeight;
+                }
+            }
+        }));
+    });
+</script>
