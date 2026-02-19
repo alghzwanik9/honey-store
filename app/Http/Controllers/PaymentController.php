@@ -10,8 +10,9 @@ class PaymentController extends Controller
     public function show(Order $order)
     {
         // Ensure order belongs to user
-        if ($order->user_id !== auth()->id()) {
-            return redirect()->route('dashboard');
+        // Ensure order belongs to user
+        if ($order->user_id != auth()->id()) {
+            die("Debug Error: Order User ID ({$order->user_id}) does not match Auth User ID (" . auth()->id() . ")");
         }
 
         // If paid, redirect to success/receipt
