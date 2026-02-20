@@ -93,24 +93,8 @@ class PaymentController extends Controller
             // 5. Send Invoice Email (Try/Catch to avoid blocking redirect if mail fails)
             try {
                 if ($order->user && $order->user->email) {
-                    // Prepare data for PDF (reusing logic from OrderController - ideally refactor to Service)
-                    $subtotal = $order->total_amount / 1.15; // Approximate if not stored
-                    $tax = $order->total_amount - $subtotal;
-                    
-                    $items = $order->items; // Relationship should be loaded or lazy loaded
-                    
-                    $data = [
-                        'order' => $order,
-                        'user' => $order->user,
-                        'items' => $items,
-                        'subtotal' => $subtotal,
-                        'tax' => $tax,
-                        'total' => $order->total_amount
-                    ];
-
-                    $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('invoices.order', $data);
-                    
-                    \Illuminate\Support\Facades\Mail::to($order->user)->send(new \App\Mail\InvoiceMail($order, $pdf));
+                    // InvoiceMail generates the PDF internally to avoid DOMDocument serialization issues with queues
+                    \Illuminate\Support\Facades\Mail::to($order->user)->queue(new \App\Mail\InvoiceMail($order));
                 }
             } catch (\Exception $e) {
                 \Log::error('Failed to send invoice email: ' . $e->getMessage());
