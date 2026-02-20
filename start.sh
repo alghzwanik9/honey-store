@@ -26,6 +26,10 @@ php artisan view:cache
 echo "Starting PHP-FPM..."
 php-fpm -D
 
+# Start Queue Worker in background
+echo "Starting Queue Worker..."
+php artisan queue:work --verbose --tries=3 --timeout=90 &
+
 # Start Nginx in foreground
 echo "Starting Nginx..."
 nginx -g "daemon off;"
