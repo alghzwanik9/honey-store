@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Order;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -15,16 +16,16 @@ class InvoiceMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    public $order;
-    public $pdf;
+    public Order $order;
 
     /**
      * Create a new message instance.
+     * Only pass the Order model (which is serializable via SerializesModels).
+     * The PDF is generated inside the mailable to avoid DOMDocument serialization issues.
      */
-    public function __construct(Order $order, $pdf)
+    public function __construct(Order $order)
     {
         $this->order = $order;
-        $this->pdf = $pdf;
     }
 
     /**
@@ -54,8 +55,11 @@ class InvoiceMail extends Mailable implements ShouldQueue
      */
     public function attachments(): array
     {
+        // Generate PDF here (inside the mailable) to avoid serialization issues with DOMDocument.
+        $pdf = Pdf::loadView('invoices.order', ['order' => $this->order]);
+
         return [
-            Attachment::fromData(fn () => $this->pdf->output(), 'invoice-' . $this->order->id . '.pdf')
+            Attachment::fromData(fn () => $pdf->output(), 'invoice-' . $this->order->id . '.pdf')
                 ->withMime('application/pdf'),
         ];
     }

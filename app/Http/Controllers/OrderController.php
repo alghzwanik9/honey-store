@@ -50,15 +50,8 @@ class OrderController extends Controller
             abort(403);
         }
 
-        // Pass the order to the view.
-        $data = [
-            'order' => $order,
-        ];
-
-        $pdf = Pdf::loadView('invoices.order', $data);
-
         try {
-            \Illuminate\Support\Facades\Mail::to($order->user)->queue(new \App\Mail\InvoiceMail($order, $pdf));
+            \Illuminate\Support\Facades\Mail::to($order->user)->queue(new \App\Mail\InvoiceMail($order));
             return back()->with('success', 'تم إرسال الفاتورة إلى بريدك الإلكتروني بنجاح (قد يستغرق بضع دقائق).');
         } catch (\Exception $e) {
             return back()->with('error', 'حدث خطأ أثناء إرسال البريد الإلكتروني: ' . $e->getMessage());
