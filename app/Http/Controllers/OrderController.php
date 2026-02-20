@@ -19,7 +19,7 @@ class OrderController extends Controller
     {
         $order->load('items.product');
         // specific user check
-        if ($order->user_id !== auth()->id()) {
+        if ((int)$order->user_id !== auth()->id()) {
             abort(403);
         }
 
@@ -28,7 +28,7 @@ class OrderController extends Controller
 
     public function downloadInvoice(Order $order)
     {
-        if ($order->user_id !== auth()->id() && !auth()->user()->is_admin) {
+        if ((int)$order->user_id !== auth()->id() && !auth()->user()->is_admin) {
             abort(403);
         }
 
@@ -46,7 +46,7 @@ class OrderController extends Controller
 
     public function emailInvoice(Order $order)
     {
-        if ($order->user_id !== auth()->id()) {
+        if ((int)$order->user_id !== auth()->id()) {
             abort(403);
         }
 
