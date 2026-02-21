@@ -264,8 +264,8 @@
 
     </section>
 
-    {{-- ===== WHY US SECTION ===== --}}
-    @if(!request('category') && !request('search'))
+    {{-- WHY US SECTION REMOVED --}}
+    @if(false)
     <section class="bg-gray-900 text-white py-16 mt-8" dir="rtl">
         <div class="container mx-auto px-4">
             <h2 class="text-2xl md:text-3xl font-black text-center mb-12">
