@@ -36,35 +36,35 @@ class OrdersTable
                 TextColumn::make('status')
                     ->label('حالة الطلب')
                     ->badge()
-                    ->color(fn(string $state): string => match ($state) {
+                    ->color(fn(?string $state): string => match ($state) {
                         'completed' => 'success',
                         'shipped' => 'info',
                         'pending' => 'warning',
                         'cancelled' => 'danger',
                         default => 'gray',
                     })
-                    ->formatStateUsing(fn(string $state): string => match ($state) {
+                    ->formatStateUsing(fn(?string $state): string => match ($state) {
                         'pending' => 'قيد الانتظار',
                         'shipped' => 'تم الشحن',
                         'completed' => 'مكتمل',
                         'cancelled' => 'ملغي',
-                        default => $state,
+                        default => $state ?? '-',
                     })
                     ->searchable(),
                 TextColumn::make('payment_status')
                     ->label('حالة الدفع')
                     ->badge()
-                    ->color(fn(string $state): string => match ($state) {
+                    ->color(fn(?string $state): string => match ($state) {
                         'paid' => 'success',
                         'pending' => 'warning',
                         'failed' => 'danger',
                         default => 'gray',
                     })
-                    ->formatStateUsing(fn(string $state): string => match ($state) {
+                    ->formatStateUsing(fn(?string $state): string => match ($state) {
                         'paid' => 'مدفوع',
                         'pending' => 'غير مدفوع',
                         'failed' => 'فشل الدفع',
-                        default => $state,
+                        default => $state ?? 'غير محدد',
                     })
                     ->searchable(),
                 TextColumn::make('created_at')
