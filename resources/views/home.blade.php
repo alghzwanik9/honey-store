@@ -37,23 +37,6 @@
                     </a>
                 </div>
 
-                {{-- Statistics row --}}
-                <div class="flex justify-center md:justify-start gap-8 mt-10 pt-8 border-t border-amber-100">
-                    <div class="text-center">
-                        <div class="text-2xl font-black text-amber-700">100%</div>
-                        <div class="text-xs text-gray-500 font-medium mt-0.5">طبيعي</div>
-                    </div>
-                    <div class="w-px bg-amber-100"></div>
-                    <div class="text-center">
-                        <div class="text-2xl font-black text-amber-700">+500</div>
-                        <div class="text-xs text-gray-500 font-medium mt-0.5">عميل راضٍ</div>
-                    </div>
-                    <div class="w-px bg-amber-100"></div>
-                    <div class="text-center">
-                        <div class="text-2xl font-black text-amber-700">7+</div>
-                        <div class="text-xs text-gray-500 font-medium mt-0.5">أنواع عسل</div>
-                    </div>
-                </div>
             </div>
 
             {{-- أيقونة العسل الرسومية --}}
