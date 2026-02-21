@@ -1,3 +1,66 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    /* Skeleton Loading */
+    .skeleton {
+        @apply bg-gray-200 rounded animate-pulse;
+    }
+
+    /* Fade in up animation */
+    .animate-fade-in-up {
+        animation: fadeInUp 0.5s ease-out both;
+    }
+
+    /* Stagger for product cards */
+    .stagger-1 {
+        animation-delay: 0.05s;
+    }
+    .stagger-2 {
+        animation-delay: 0.1s;
+    }
+    .stagger-3 {
+        animation-delay: 0.15s;
+    }
+    .stagger-4 {
+        animation-delay: 0.2s;
+    }
+
+    /* Glow effect for CTA buttons */
+    .btn-glow:hover {
+        box-shadow: 0 0 20px rgba(217, 119, 6, 0.4);
+    }
+
+    /* Navbar shrink on scroll */
+    .nav-scrolled {
+        @apply shadow-md;
+        backdrop-filter: blur(8px);
+        background: rgba(255, 255, 255, 0.95) !important;
+    }
+
+    /* Hero gradient text */
+    .text-gradient-gold {
+        background: linear-gradient(135deg, #92400e, #d97706, #f59e0b);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* Honeycomb pattern background */
+    .bg-honeycomb {
+        background-color: #fffbeb;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34L28 66zm0 66L0 116V82L28 66l28 16v34L28 132z' fill='none' stroke='%23fbbf24' stroke-opacity='0.12' stroke-width='1'/%3E%3C/svg%3E");
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
