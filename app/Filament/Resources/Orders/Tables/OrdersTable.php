@@ -19,6 +19,16 @@ class OrdersTable
                 TextColumn::make('id')
                     ->label('رقم الطلب')
                     ->sortable(),
+                TextColumn::make('customer_name')
+                    ->label('اسم العميل')
+                    ->searchable(),
+                TextColumn::make('customer_phone')
+                    ->label('جوال العميل')
+                    ->searchable(),
+                TextColumn::make('total_amount')
+                    ->label('الإجمالي')
+                    ->money('SAR')
+                    ->sortable(),
             ])
             ->filters([
                 //
