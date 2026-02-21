@@ -247,31 +247,5 @@
 
     </section>
 
-    {{-- WHY US SECTION REMOVED --}}
-    @if(false)
-    <section class="bg-gray-900 text-white py-16 mt-8" dir="rtl">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl md:text-3xl font-black text-center mb-12">
-                <span class="text-amber-400">لماذا</span> مناحل وادي الجرفة؟
-            </h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
-                @foreach([
-                    ['icon' => '🌿', 'title' => '100% طبيعي', 'desc' => 'بدون إضافات أو حافظات'],
-                    ['icon' => '🏔️', 'title' => 'من الجبل', 'desc' => 'مناحل في البيئة البكر'],
-                    ['icon' => '📦', 'title' => 'شحن سريع', 'desc' => 'توصيل لجميع مناطق المملكة'],
-                    ['icon' => '✅', 'title' => 'جودة مضمونة', 'desc' => 'نضمن لك الأصالة والجودة'],
-                ] as $feature)
-                <div class="group">
-                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300 inline-block">
-                        {{ $feature['icon'] }}
-                    </div>
-                    <h3 class="font-bold text-white mb-1 text-base">{{ $feature['title'] }}</h3>
-                    <p class="text-gray-400 text-sm">{{ $feature['desc'] }}</p>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    @endif
 
 </x-layout>
