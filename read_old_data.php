@@ -5,7 +5,7 @@ try {
 
     echo "=== Categories ===\n";
     $stm = $sqlite->query("SELECT name FROM categories");
-    $cats = $stm->fetchAll(PDO::FETCH_Column);
+    $cats = $stm->fetchAll(PDO::FETCH_COLUMN);
     foreach($cats as $c) echo "- $c\n";
 
     echo "\n=== Products ===\n";

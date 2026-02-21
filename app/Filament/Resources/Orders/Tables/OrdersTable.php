@@ -86,13 +86,8 @@ class OrdersTable
             ])
             ->recordActions([
                 EditAction::make(),
-                \Filament\Tables\Actions\Action::make('download_invoice')
-                    ->label('تحميل الفاتورة')
-                    ->icon('heroicon-o-document-arrow-down')
-                    ->url(fn (Order $record) => route('orders.invoice', $record))
-                    ->openUrlInNewTab(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
