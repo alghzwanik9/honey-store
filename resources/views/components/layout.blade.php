@@ -42,7 +42,7 @@
                         </div>
                     </button>
                     <a href="/" class="flex items-center">
-                        <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-10 w-auto object-contain">
+                        <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-12 w-auto object-contain drop-shadow-md">
                     </a>
                 </div>
 
@@ -63,14 +63,9 @@
                 {{-- Row 1: Brand & Actions --}}
                 <div class="flex justify-between items-center border-b border-gray-100 pb-4">
                     <!-- Brand (Right) -->
-                    <a href="/" class="flex items-center gap-4 group">
-                         <div class="p-1">
-                            <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-300">
-                        </div>
-                        <div class="flex flex-col">
-                            <span class="text-2xl font-black text-gray-900 leading-none group-hover:text-amber-600 transition-colors">مناحل وادي الجرفة</span>
-                            <span class="text-sm font-medium text-amber-600 mt-1">أصالة العسل البلدي</span>
-                        </div>
+                    <a href="/" class="flex items-center gap-2 group">
+                        <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-20 w-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md">
+                        <span class="text-sm font-medium text-amber-600">أصالة العسل البلدي</span>
                     </a>
 
                     <!-- Actions -->
