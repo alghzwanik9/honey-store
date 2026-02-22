@@ -12,8 +12,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     
-    <link rel="icon" href="/favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icon-v4.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icon-v4.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icon-v4.png">
+    <link rel="manifest" href="/site.webmanifest?v=4">
+    <link rel="mask-icon" href="/icon-v4.png" color="#d97706">
+    <meta name="theme-color" content="#d97706">
+
     
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
@@ -43,7 +48,7 @@
                         </div>
                     </button>
                     <a href="/" class="flex items-center">
-                        <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-12 w-auto object-contain drop-shadow-md">
+                        <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-14 w-auto object-contain drop-shadow-md mix-blend-multiply">
                     </a>
                 </div>
 
@@ -64,9 +69,10 @@
                 {{-- Row 1: Brand & Actions --}}
                 <div class="flex justify-between items-center border-b border-gray-100 pb-4">
                     <!-- Brand (Right) -->
-                    <a href="/" class="flex items-center gap-2 group">
-                        <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-20 w-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md">
-                        <span class="text-sm font-medium text-amber-600">أصالة العسل البلدي</span>
+                    <a href="/" class="flex items-center group">
+                        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-2 shadow-sm group-hover:shadow-md transition-shadow">
+                            <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-32 w-auto object-contain group-hover:scale-105 transition-transform duration-300">
+                        </div>
                     </a>
 
                     <!-- Actions -->
