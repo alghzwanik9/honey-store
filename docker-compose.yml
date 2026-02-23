@@ -15,6 +15,9 @@ services:
     environment:
       - APP_ENV=production
       - APP_DEBUG=false
+      - APP_URL=http://64.227.119.110
+      - ASSET_URL=http://64.227.119.110
+      - FORCE_HTTPS=false
     ports:
       - "8080:8080"
     networks:
