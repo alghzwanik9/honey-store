@@ -26,15 +26,15 @@
 
         <!-- Remember Me -->
         <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-amber-600 shadow-sm focus:ring-amber-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('تذكرني') }}</span>
+            <label for="remember_me" class="inline-flex items-center group cursor-pointer">
+                <input id="remember_me" type="checkbox" class="rounded-lg border-gray-200 text-brand-gold shadow-sm focus:ring-brand-gold transition-all duration-300" name="remember">
+                <span class="ms-2 text-sm text-gray-400 group-hover:text-brand-navy transition-colors font-medium">{{ __('تذكرني') }}</span>
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-end mt-6 gap-4">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500" href="{{ route('password.request') }}">
+                <a class="text-sm text-gray-400 hover:text-brand-gold transition-colors font-medium underline" href="{{ route('password.request') }}">
                     {{ __('نسيت كلمة المرور؟') }}
                 </a>
             @endif

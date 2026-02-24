@@ -4,9 +4,9 @@
             <!-- Header -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                 <div>
-                    <h1 class="text-3xl font-bold text-amber-900 flex items-center gap-3">
+                    <h1 class="text-3xl font-black text-brand-navy flex items-center gap-3">
                         <span>تفاصيل الطلب #{{ $order->id }}</span>
-                        <span class="text-sm px-3 py-1 rounded-full {{ $order->payment_status == 'paid' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700' }}">
+                        <span class="text-sm px-4 py-1.5 rounded-full {{ $order->payment_status == 'paid' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-brand-gold/10 text-brand-gold border border-brand-gold/20' }}">
                             {{ $order->payment_status == 'paid' ? 'مدفوع' : 'غير مدفوع' }}
                         </span>
                     </h1>
@@ -14,22 +14,22 @@
                 </div>
                 <div class="flex gap-3">
                     @if($order->payment_status == 'paid')
-                        <a href="{{ route('orders.invoice', $order) }}" class="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition shadow-sm font-bold">
-                            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <a href="{{ route('orders.invoice', $order) }}" class="inline-flex items-center gap-2 bg-white border-2 border-brand-gold/20 text-brand-navy px-5 py-2.5 rounded-xl hover:bg-brand-gold transition shadow-lg font-black group">
+                            <svg class="w-5 h-5 text-brand-gold group-hover:text-brand-navy transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             <span>تحميل الفاتورة</span>
                         </a>
                     @else
-                        <a href="{{ route('checkout.payment', $order) }}" class="inline-flex items-center gap-2 bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700 transition shadow-md font-bold">
+                        <a href="{{ route('checkout.payment', $order) }}" class="inline-flex items-center gap-2 bg-brand-navy text-brand-gold px-6 py-2.5 rounded-xl hover:bg-brand-gold hover:text-brand-navy transition shadow-xl font-black group">
                             <span>إتمام الدفع</span>
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                         </a>
                     @endif
                 </div>
             </div>
 
             <!-- Progress Bar -->
-            <div class="bg-white rounded-2xl shadow-sm border border-amber-100 p-8 mb-8">
-                <h3 class="text-lg font-bold text-gray-800 mb-6 border-b border-gray-100 pb-2">حالة الطلب</h3>
+            <div class="bg-white rounded-2xl shadow-xl border border-brand-gold/10 p-8 mb-8">
+                <h3 class="text-lg font-black text-brand-navy mb-8 border-b border-gray-100 pb-2">حالة الطلب</h3>
                 
                 <div class="relative">
                     <div class="absolute top-1/2 left-0 w-full h-1 bg-gray-200 -translate-y-1/2 rounded-full z-0"></div>
@@ -68,9 +68,9 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Items List -->
                 <div class="md:col-span-2 space-y-6">
-                    <div class="bg-white rounded-2xl shadow-sm border border-amber-100 overflow-hidden">
+                    <div class="bg-white rounded-2xl shadow-xl border border-brand-gold/10 overflow-hidden">
                         <table class="w-full text-sm text-right">
-                            <thead class="bg-amber-50 text-amber-900 font-bold uppercase">
+                            <thead class="bg-brand-navy text-brand-gold font-bold uppercase transition-colors">
                                 <tr>
                                     <th class="px-6 py-4">المنتج</th>
                                     <th class="px-6 py-4 text-center">الكمية</th>
@@ -94,10 +94,10 @@
                                                 </svg>
                                             </span>
                                         </td>
-                                        <td class="px-6 py-4 font-bold text-amber-700">
+                                        <td class="px-6 py-4 font-black text-brand-navy text-lg">
                                             <span class="flex items-center gap-3" style="gap: 0.75rem;">
-                                                {{ number_format($item->price * $item->quantity, 2) }} 
-                                                <svg class="w-3 h-3 text-emerald-700" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                {{ number_format($item->price * $item->quantity) }} 
+                                                <svg class="w-4 h-4 text-brand-gold" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
                                                     <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
                                                 </svg>
@@ -112,8 +112,8 @@
 
                 <!-- Summary Card -->
                 <div class="md:col-span-1">
-                    <div class="bg-white rounded-2xl shadow-sm border border-amber-100 p-6 sticky top-24">
-                        <h3 class="text-lg font-bold text-gray-900 mb-4">ملخص الطلب</h3>
+                    <div class="bg-white rounded-2xl shadow-xl border border-brand-gold/10 p-6 sticky top-24">
+                        <h3 class="text-lg font-black text-brand-navy mb-6">ملخص الطلب</h3>
                         <div class="space-y-3 text-sm border-b border-gray-100 pb-4 mb-4">
                             <div class="flex justify-between text-gray-600">
                                 <span>المجموع الفرعي</span>
@@ -136,10 +136,10 @@
                             </div>
                         </div>
                         <div class="flex justify-between items-center mb-6">
-                            <span class="font-bold text-gray-900 text-lg">الإجمالي</span>
-                            <span class="font-bold text-amber-700 text-xl flex items-center gap-3" style="gap: 1rem;">
-                                {{ number_format($order->total_amount, 2) }} 
-                                <svg class="w-8 h-8 text-emerald-600 drop-shadow-sm mr-4" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <span class="font-bold text-brand-navy text-lg">الإجمالي</span>
+                            <span class="font-black text-brand-gold text-2xl flex items-center gap-3" style="gap: 1rem;">
+                                {{ number_format($order->total_amount) }} 
+                                <svg class="w-8 h-8 text-brand-gold drop-shadow-sm mr-4" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
                                     <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
                                 </svg>

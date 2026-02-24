@@ -7,7 +7,7 @@
         {{-- Page Header when search/filter active --}}
         @if(request('category') || request('search'))
         <div class="mb-6 flex items-center gap-3">
-            <a href="{{ route('home') }}" class="text-amber-600 hover:text-amber-700 font-bold flex items-center gap-1 text-sm">
+            <a href="{{ route('home') }}" class="text-brand-gold hover:text-brand-gold-dark font-bold flex items-center gap-1 text-sm">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
@@ -41,7 +41,7 @@
 
             {{-- Sort / View toggle placeholder --}}
             <div class="hidden md:flex items-center gap-2 text-sm text-gray-500">
-                <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-4 h-4 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9 12l-4-4 1.41-1.41L9 9.17l4.59-4.58L15 6l-6 6z"/>
                 </svg>
                 جودة مضمونة
@@ -77,7 +77,7 @@
                                 @if($product->weight)
                                     @php
                                         $categoryName = $product->category ? $product->category->name : '';
-                                        $badgeClasses = 'bg-black/70 text-amber-400 border-amber-500/30';
+                                        $badgeClasses = 'bg-brand-navy/90 text-brand-gold border-brand-gold/30';
 
                                         if (Str::contains($categoryName, 'مجرى')) {
                                             $badgeClasses = 'bg-white/90 text-gray-900 border-gray-200 shadow-md';
@@ -90,7 +90,7 @@
                                         } elseif (Str::contains($categoryName, 'ضهيانة')) {
                                             $badgeClasses = 'bg-[#FBC02D]/90 text-gray-900 border-[#F9A825] shadow-md';
                                         } elseif (Str::contains($categoryName, 'مورينقا')) {
-                                            $badgeClasses = 'bg-amber-500/20 backdrop-blur-md text-amber-900 border-amber-500 shadow-sm';
+                                            $badgeClasses = 'bg-brand-gold/20 backdrop-blur-md text-brand-gold-dark border-brand-gold shadow-sm';
                                         }
                                     @endphp
                                     <span class="{{ $badgeClasses }} text-[10px] font-bold px-3 py-0.5 rounded-full border shadow-lg tracking-wide backdrop-blur-sm">
@@ -123,11 +123,11 @@
                         <div class="p-4 text-center flex flex-col items-center justify-between grow">
                             <div class="w-full">
                                 @if($product->category)
-                                    <span class="text-[10px] font-bold tracking-wider text-amber-600 bg-amber-50 px-2 py-1 rounded-full mb-2 inline-block border border-amber-100">
+                                    <span class="text-[10px] font-bold tracking-wider text-white bg-brand-gold px-2 py-1 rounded-full mb-2 inline-block shadow-sm">
                                         {{ $product->category->name }}
                                     </span>
                                 @endif
-                                <h2 class="text-base md:text-lg font-bold text-gray-900 mb-1 group-hover:text-amber-600 transition-colors line-clamp-2 leading-snug">
+                                <h2 class="text-base md:text-lg font-bold text-brand-navy mb-1 group-hover:text-brand-gold transition-colors line-clamp-2 leading-snug">
                                     {{ $product->name }}
                                 </h2>
                             </div>
@@ -149,9 +149,9 @@
                             @csrf
                             <input type="hidden" name="quantity" value="1">
                             <button type="submit"
-                                    class="w-full bg-gray-900 text-white font-bold py-3 px-4 rounded-xl hover:bg-amber-600 transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-sm hover:shadow-md btn-glow">
+                                    class="w-full bg-brand-navy text-white font-bold py-3 px-4 rounded-xl hover:bg-brand-gold hover:text-brand-navy transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-lg hover:shadow-brand-gold/20 btn-glow">
                                 <span>أضف للسلة</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform group-hover/btn:scale-110 transition-transform text-amber-400 group-hover/btn:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform group-hover/btn:scale-110 transition-transform text-brand-gold group-hover/btn:text-brand-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
                             </button>
@@ -167,7 +167,7 @@
             <div class="text-7xl mb-6">🔍</div>
             <h3 class="text-2xl font-black text-gray-800 mb-3">لم يتم العثور على منتجات</h3>
             <p class="text-gray-400 mb-6">جرب البحث بكلمة أخرى أو تصفح جميع المنتجات</p>
-            <a href="{{ route('home') }}" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-8 py-3 rounded-full transition-colors inline-block">
+            <a href="{{ route('home') }}" class="bg-brand-gold hover:bg-brand-gold-dark text-brand-navy font-bold px-8 py-3 rounded-full transition-all shadow-lg inline-block">
                 عرض كل المنتجات
             </a>
         </div>

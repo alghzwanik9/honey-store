@@ -6,29 +6,30 @@
         <title>مرحباً بك في متجر العسل</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="antialiased bg-orange-50 text-gray-800 flex items-center justify-center min-h-screen">
-        <div class="text-center p-8 bg-white rounded-2xl shadow-xl border border-amber-100 max-w-lg mx-4">
-            <div class="mb-6 flex justify-center">
-                 <div class="bg-amber-100 p-4 rounded-full">
-                    <span class="text-6xl">🍯</span>
+    <body class="antialiased bg-gray-50 text-gray-800 flex items-center justify-center min-h-screen">
+        <div class="text-center p-12 bg-white rounded-3xl shadow-2xl border border-brand-gold/10 max-w-lg mx-4 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-full h-1.5 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold"></div>
+            <div class="mb-8 flex justify-center">
+                 <div class="bg-brand-gold/10 p-5 rounded-full border border-brand-gold/20 shadow-inner">
+                    <span class="text-7xl">🍯</span>
                  </div>
             </div>
-            <h1 class="text-4xl font-bold text-amber-900 mb-4">متجر العسل الفاخر</h1>
+            <h1 class="text-4xl font-black text-brand-navy mb-4 tracking-tight">مناحل وادي الجرفة</h1>
             <p class="text-gray-600 mb-8 text-lg leading-relaxed">
                 اكتشف أجود أنواع العسل الطبيعي. سدر، طلح، والمزيد من خيرات الطبيعة.
             </p>
             
             <div class="flex flex-col gap-4">
-                <a href="{{ url('/') }}" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded-xl transition-colors shadow-md">
-                    تصفح المتجر
+                <a href="{{ url('/') }}" class="w-full bg-brand-navy hover:bg-brand-gold text-brand-gold hover:text-brand-navy font-black py-4 px-8 rounded-xl transition-all duration-300 shadow-xl transform active:scale-[0.98]">
+                    تصفح المتجر الفاخر
                 </a>
                 
                 @if (Route::has('login'))
                     <div class="flex gap-4 justify-center mt-4 text-sm font-medium text-gray-500">
                         @auth
-                            <a href="{{ url('/admin') }}" class="hover:text-amber-700">لوحة التحكم</a>
+                            <a href="{{ url('/admin') }}" class="hover:text-brand-gold transition-colors">لوحة التحكم</a>
                         @else
-                            <a href="{{ route('login') }}" class="hover:text-amber-700">دخول المشرفين</a>
+                            <a href="{{ route('login') }}" class="hover:text-brand-gold transition-colors">دخول المشرفين</a>
                         @endauth
                     </div>
                 @endif

@@ -1,25 +1,25 @@
 <x-layout title="سياسة الخصوصية | مناحل وادي الجرفة">
-    <div class="bg-amber-50 py-12">
+    <div class="bg-gray-50 py-16">
         <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-amber-100">
-                <div class="bg-gray-900 py-8 px-10 text-center relative overflow-hidden">
+            <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-brand-gold/10">
+                <div class="bg-brand-navy py-12 px-10 text-center relative overflow-hidden">
                     <div class="absolute inset-0 opacity-10">
                         <svg class="w-full h-full" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none">
                             <path d="M0 0 L100 0 L100 100 L0 100 Z" fill="url(#honey-pattern)"></path>
                         </svg>
                     </div>
-                    <h1 class="text-3xl md:text-4xl font-black text-amber-500 relative z-10">سياسة الخصوصية</h1>
-                    <p class="text-gray-400 mt-2 relative z-10">نحن نهتم بخصوصيتك وبأمان بياناتك</p>
+                    <h1 class="text-4xl md:text-5xl font-black text-brand-gold relative z-10 px-4">سياسة الخصوصية</h1>
+                    <p class="text-gray-400 mt-4 relative z-10 text-lg">نحن نهتم بخصوصيتك وبأمان بياناتك بكل فخر</p>
                 </div>
 
                 <div class="p-8 md:p-12 space-y-10 leading-relaxed text-gray-700 text-right" dir="rtl">
                     <section>
-                        <h2 class="text-2xl font-bold text-gray-900 border-r-4 border-amber-500 pr-4 mb-4">مقدمة</h2>
+                        <h2 class="text-2xl font-black text-brand-navy border-r-4 border-brand-gold pr-4 mb-5">مقدمة</h2>
                         <p>في متجر <strong>مناحل وادي الجرفة</strong>، نقدّر ثقتكم بنا ونلتزم بحماية خصوصية بياناتكم الشخصية. توضح هذه السياسة كيفية جمعنا واستخدامنا وحمايتنا للمعلومات التي تقدمونها عند استخدام موقعنا.</p>
                     </section>
 
                     <section>
-                        <h2 class="text-2xl font-bold text-gray-900 border-r-4 border-amber-500 pr-4 mb-4">البيانات التي نجمعها</h2>
+                        <h2 class="text-2xl font-black text-brand-navy border-r-4 border-brand-gold pr-4 mb-5">البيانات التي نجمعها</h2>
                         <ul class="list-disc list-inside space-y-2 pr-2">
                             <li><strong>المعلومات الشخصية:</strong> الاسم الكامل، ورقم الجوال.</li>
                             <li><strong>بيانات التوصيل:</strong> عنوان الشحن والمدينة لضمان وصول طلباتكم.</li>
@@ -28,7 +28,7 @@
                     </section>
 
                     <section>
-                        <h2 class="text-2xl font-bold text-gray-900 border-r-4 border-amber-500 pr-4 mb-4">كيفية استخدام البيانات</h2>
+                        <h2 class="text-2xl font-black text-brand-navy border-r-4 border-brand-gold pr-4 mb-5">كيفية استخدام البيانات</h2>
                         <p>نستخدم بياناتكم للأغراض التالية فقط:</p>
                         <ul class="list-disc list-inside space-y-2 pr-2 mt-3">
                             <li>معالجة وتنفيذ طلبات الشراء الخاصة بكم.</li>
@@ -38,31 +38,38 @@
                     </section>
 
                     <section>
-                        <h2 class="text-2xl font-bold text-gray-900 border-r-4 border-amber-500 pr-4 mb-4">مشاركة البيانات</h2>
-                        <div class="bg-amber-50 p-5 rounded-xl border border-amber-200">
-                             <p><strong>نحن لا نقوم ببيع أو تأجير بياناتكم لأي طرف ثالث.</strong> يتم مشاركة المعلومات الضرورية فقط (الاسم، الجوال، العنوان) مع شركات الشحن والخدمات اللوجستية لضمان إتمام عملية التوصيل بنجاح.</p>
+                        <h2 class="text-2xl font-black text-brand-navy border-r-4 border-brand-gold pr-4 mb-5">مشاركة البيانات</h2>
+                        <div class="bg-gray-50 p-6 rounded-2xl border border-brand-gold/10 relative overflow-hidden">
+                             <div class="absolute top-0 right-0 w-1 h-full bg-brand-gold"></div>
+                             <p class="relative z-10 text-brand-navy"><strong>نحن لا نقوم ببيع أو تأجير بياناتكم لأي طرف ثالث.</strong> يتم مشاركة المعلومات الضرورية فقط (الاسم، الجوال، العنوان) مع شركات الشحن والخدمات اللوجستية لضمان إتمام عملية التوصيل بنجاح.</p>
                         </div>
                     </section>
 
                     <section>
-                        <h2 class="text-2xl font-bold text-gray-900 border-r-4 border-amber-500 pr-4 mb-4">أمان المعلومات</h2>
+                        <h2 class="text-2xl font-black text-brand-navy border-r-4 border-brand-gold pr-4 mb-5">أمان المعلومات</h2>
                         <p>نحرص على استخدام أفضل التقنيات والوسائل الأمنية لحماية بياناتكم من الوصول غير المصرح به أو الفقدان أو التعديل.</p>
                     </section>
 
                     <section>
-                        <h2 class="text-2xl font-bold text-gray-900 border-r-4 border-amber-500 pr-4 mb-4">التواصل معنا</h2>
+                        <h2 class="text-2xl font-black text-brand-navy border-r-4 border-brand-gold pr-4 mb-5">التواصل معنا</h2>
                         <p>إذا كان لديكم أي استفسار حول سياسة الخصوصية، يرجى التواصل معنا عبر:</p>
-                        <div class="mt-4 bg-gray-50 p-4 rounded-xl inline-block">
-                             <p class="font-bold text-amber-600">البريد الإلكتروني: aljorfah.honey@gmail.com</p>
-                             <p class="font-bold text-amber-600">الواتساب: 0550360118</p>
+                        <div class="mt-6 bg-brand-navy rounded-2xl p-6 text-brand-gold inline-block shadow-lg border border-brand-gold/20">
+                             <p class="font-bold flex items-center gap-2 mb-2">
+                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 02 2z"></path></svg>
+                                 البريد الإلكتروني: aljorfah.honey@gmail.com
+                             </p>
+                             <p class="font-bold flex items-center gap-2">
+                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                 الواتساب: 0550360118
+                             </p>
                         </div>
                     </section>
                 </div>
                 
-                <div class="bg-gray-50 p-6 text-center border-t border-gray-100">
-                    <a href="{{ route('home') }}" class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-8 rounded-full transition shadow-lg">
+                <div class="bg-gray-50 p-8 text-center border-t border-gray-100">
+                    <a href="{{ route('home') }}" class="inline-flex items-center gap-2 bg-brand-navy hover:bg-brand-gold text-brand-gold hover:text-brand-navy font-black py-4 px-10 rounded-xl transition-all duration-300 shadow-xl group">
                         <span>العودة للرئيسية</span>
-                        <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        <svg class="w-5 h-5 rotate-180 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                     </a>
                 </div>
             </div>

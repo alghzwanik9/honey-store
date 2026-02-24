@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-amber-100">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-2xl border border-brand-gold/10">
                 <div class="p-6 text-gray-900" dir="rtl">
                     @if(session('success'))
                         <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
@@ -21,8 +21,8 @@
                     @endif
                     @if($orders->count() > 0)
                         <div class="overflow-x-auto">
-                            <table class="w-full text-sm text-right text-gray-500">
-                                <thead class="text-xs text-amber-900 uppercase bg-amber-50">
+                            <table class="w-full text-sm text-right text-gray-500 overflow-hidden rounded-xl">
+                                <thead class="text-xs text-brand-gold uppercase bg-brand-navy">
                                     <tr>
                                         <th scope="col" class="px-6 py-3 rounded-r-lg">رقم الطلب</th>
                                         <th scope="col" class="px-6 py-3">التاريخ</th>
@@ -41,10 +41,10 @@
                                             <td class="px-6 py-4">
                                                 {{ $order->created_at->format('Y-m-d') }}
                                             </td>
-                                            <td class="px-6 py-4 font-bold text-amber-700">
+                                            <td class="px-6 py-4 font-black text-brand-navy">
                                             <span class="flex items-center gap-3" style="gap: 0.75rem;">
-                                                {{ number_format($order->total_amount, 2) }} 
-                                                <svg class="w-5 h-5 text-emerald-600 drop-shadow-sm mr-2" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                {{ number_format($order->total_amount) }} 
+                                                <svg class="w-5 h-5 text-brand-gold drop-shadow-sm mr-2" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
                                                     <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
                                                 </svg>
@@ -70,7 +70,7 @@
                                                         <a href="{{ route('orders.show', $order) }}" class="font-medium text-green-600 hover:underline">عرض التفاصيل</a>
                                                         
                                                         <div class="flex gap-2 text-xs">
-                                                            <a href="{{ route('orders.invoice', $order) }}" class="flex items-center gap-1 text-amber-600 hover:text-amber-800 border border-amber-200 px-2 py-1 rounded bg-amber-50" title="تحميل الفاتورة">
+                                                            <a href="{{ route('orders.invoice', $order) }}" class="flex items-center gap-1 text-brand-gold hover:text-brand-navy border border-brand-gold/30 hover:bg-brand-gold px-2 py-1 rounded transition-all" title="تحميل الفاتورة">
                                                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                                                 تحميل
                                                             </a>
@@ -97,7 +97,7 @@
                     @else
                         <div class="text-center py-8">
                             <p class="text-gray-500 mb-4">لم تقم بأي طلبات حتى الآن.</p>
-                            <a href="/" class="text-amber-600 hover:text-amber-700 font-bold hover:underline">تصفح المنتجات وأطلب الآن</a>
+                            <a href="/" class="text-brand-gold hover:text-brand-gold-dark font-black transition-all">تصفح المنتجات وأطلب الآن</a>
                         </div>
                     @endif
                 </div>

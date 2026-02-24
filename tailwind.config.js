@@ -11,6 +11,15 @@ export default {
 
     theme: {
         extend: {
+            colors: {
+                'brand': {
+                    'navy': '#0f172a',      // الكحلي الملكي
+                    'navy-light': '#1e293b',
+                    'gold': '#c29b40',      // الذهبي الأساسي
+                    'gold-light': '#e5c16b', // ذهبي فاتح للهوفر
+                    'gold-dark': '#a47e2a',
+                }
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 cairo: ['Cairo', 'sans-serif'],

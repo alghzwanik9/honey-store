@@ -39,8 +39,8 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500" href="{{ route('login') }}">
+        <div class="flex items-center justify-end mt-6 gap-6">
+            <a class="text-sm text-gray-400 hover:text-brand-gold transition-colors font-medium underline" href="{{ route('login') }}">
                 {{ __('مسجل مسبقاً؟') }}
             </a>
 

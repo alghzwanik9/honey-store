@@ -1,18 +1,18 @@
 <x-layout title="سلة المشتريات">
-    <div class="container mx-auto px-4 py-8" dir="rtl">
-        <h1 class="text-3xl font-bold text-amber-900 mb-8 text-center">سلة المشتريات</h1>
+    <div class="container mx-auto px-4 py-12" dir="rtl">
+        <h1 class="text-3xl md:text-4xl font-black text-brand-navy mb-12 text-center">سلة المشتريات</h1>
 
         @if(empty($cart) || count($cart) == 0)
-            <div class="bg-white rounded-xl shadow-md p-12 text-center border border-amber-100">
-                <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                <p class="text-xl text-gray-600 mb-6">سلة مشترياتك فارغة حالياً.</p>
-                <a href="/" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-6 rounded-lg transition-colors">تصفح المنتجات</a>
+            <div class="bg-white rounded-2xl shadow-xl p-16 text-center border border-brand-gold/10">
+                <svg class="w-20 h-20 mx-auto text-gray-200 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                <p class="text-xl text-gray-400 mb-8">سلة مشترياتك فارغة حالياً.</p>
+                <a href="/" class="bg-brand-gold hover:bg-brand-gold-dark text-brand-navy font-bold py-3 px-10 rounded-xl transition-all shadow-lg inline-block">تصفح المنتجات</a>
             </div>
         @else
             <div class="flex flex-col lg:flex-row gap-8">
                 <!-- Cart Items -->
                 <div class="lg:w-2/3">
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden border border-amber-100">
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-brand-gold/10">
                         @foreach($cart as $id => $details)
                             <div class="flex items-center p-6 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors">
                                 <!-- Image -->
@@ -28,13 +28,13 @@
 
                                 <!-- Details -->
                                 <div class="grow mr-6">
-                                    <h3 class="text-lg font-bold text-gray-800 mb-1">
-                                        <a href="{{ route('products.show', ['product' => $details['slug']]) }}" class="hover:text-amber-600 transition-colors">
+                                    <h3 class="text-lg font-bold text-brand-navy mb-1 leading-snug">
+                                        <a href="{{ route('products.show', ['product' => $details['slug']]) }}" class="hover:text-brand-gold transition-colors">
                                             {{ $details['name'] }}
                                         </a>
                                     </h3>
-                                    <p class="text-sm text-gray-500 mb-2">الكمية: {{ $details['quantity'] }}</p>
-                                    <div class="flex items-center gap-1 font-bold text-amber-700">
+                                    <p class="text-sm text-gray-400 mb-2 font-medium">الكمية: {{ $details['quantity'] }}</p>
+                                    <div class="flex items-center gap-1 font-black text-brand-gold">
                                         <span>{{ number_format($details['price']) }}</span>
                                         <span class="text-xs">
                                         <svg class="w-6 h-6 text-emerald-600 inline-block drop-shadow-sm" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -74,8 +74,8 @@
 
                 <!-- Order Summary -->
                 <div class="lg:w-1/3">
-                    <div class="bg-white rounded-xl shadow-md p-6 border border-amber-100 sticky top-8">
-                        <h2 class="text-xl font-bold text-gray-800 mb-6 border-b border-gray-100 pb-4">ملخص الطلب</h2>
+                    <div class="bg-white rounded-2xl shadow-xl p-8 border border-brand-gold/10 sticky top-28">
+                        <h2 class="text-xl font-black text-brand-navy mb-8 border-b border-brand-gold/10 pb-4">ملخص الطلب</h2>
                         
                         <div class="space-y-4 mb-6">
                             <div class="flex justify-between text-gray-600">
@@ -98,12 +98,12 @@
                                     </svg>
                                 </span>
                             </div>
-                            <div class="flex justify-between text-xl font-black text-amber-800 border-t border-gray-200 pt-4 mt-4">
+                            <div class="flex justify-between text-xl font-black text-brand-navy border-t border-brand-gold/10 pt-6 mt-6">
                                 <span>الإجمالي</span>
-                                <div>
+                                <div class="text-brand-gold">
                                     {{ number_format($total * 1.15) }} 
                                     <span class="text-sm font-normal inline-block">
-                                        <svg class="w-6 h-6 text-emerald-600 inline-block drop-shadow-sm mr-2" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="w-6 h-6 text-brand-gold inline-block drop-shadow-sm mr-2" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
                                             <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
                                         </svg>
@@ -112,13 +112,13 @@
                             </div>
                         </div>
 
-                        <a href="{{ route('checkout.index') }}" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                        <a href="{{ route('checkout.index') }}" class="w-full bg-brand-navy text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-black py-4 rounded-xl shadow-xl transition-all transform active:scale-95 flex items-center justify-center gap-2 group">
                             <span>إتمام الطلب</span>
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                         </a>
                         
-                        <div class="mt-4 text-center">
-                            <a href="/" class="text-amber-600 hover:underline text-sm font-medium">متابعة التسوق</a>
+                        <div class="mt-6 text-center">
+                            <a href="/" class="text-brand-gold hover:text-brand-gold-dark text-sm font-bold transition-colors">متابعة التسوق</a>
                         </div>
                     </div>
                 </div>

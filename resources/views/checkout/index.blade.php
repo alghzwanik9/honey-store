@@ -1,8 +1,8 @@
 <x-layout title="إتمام الطلب">
-    <div class="container mx-auto px-4 py-8" dir="rtl">
-        <h1 class="text-3xl font-bold text-amber-900 mb-8 text-center">إتمام الطلب</h1>
+    <div class="container mx-auto px-4 py-12" dir="rtl">
+        <h1 class="text-3xl md:text-4xl font-black text-brand-navy mb-12 text-center">إتمام الطلب</h1>
 
-        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden border border-amber-100 p-8">
+        <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-brand-gold/10 p-8">
             <div class="text-center mb-8">
                 <svg class="w-16 h-16 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <h2 class="text-2xl font-bold text-gray-800">أهلاً بك، {{ Auth::user()->name }}</h2>
@@ -13,9 +13,9 @@
                 <h3 class="text-lg font-bold text-gray-800 mb-4">ملخص الطلب</h3>
                 <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
                     <span class="text-gray-600">الإجمالي النهائي:</span>
-                    <span class="text-xl font-bold text-amber-800 flex items-center gap-3" style="gap: 1rem;">
+                    <span class="text-xl font-black text-brand-gold flex items-center gap-3" style="gap: 1rem;">
                         {{ number_format($total * 1.15) }}
-                        <svg class="w-6 h-6 text-emerald-600 drop-shadow-sm mr-2" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-6 h-6 text-brand-gold drop-shadow-sm mr-2" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
                             <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
                         </svg>
@@ -29,8 +29,8 @@
                     
                     <!-- Shipping Address -->
                     <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-                            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <h3 class="text-lg font-black text-brand-navy mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                             عنوان التوصيل
                         </h3>
                         
@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-span-1 md:col-span-2">
                                 <x-input-label for="address" :value="__('العنوان التفصيلي (الحي، الشارع، المعلم)')" />
-                                <textarea name="address" id="address" rows="3" class="block mt-1 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm" required></textarea>
+                                <textarea name="address" id="address" rows="3" class="block mt-1 w-full border-gray-200 focus:border-brand-gold focus:ring-brand-gold rounded-xl shadow-sm transition-all" required></textarea>
                             </div>
                             
                             <div class="col-span-1 md:col-span-2">
@@ -55,7 +55,7 @@
                                 <input type="hidden" name="longitude" id="longitude">
                                 <div class="flex justify-between items-start mt-2">
                                     <p class="text-xs text-gray-500">اضغط على الخريطة لتحديد موقع التوصيل بدقة.</p>
-                                    <a id="google-maps-link" href="#" target="_blank" class="hidden text-xs text-amber-600 hover:text-amber-800 underline items-center gap-1">
+                                    <a id="google-maps-link" href="#" target="_blank" class="hidden text-xs text-brand-gold hover:text-brand-gold-dark underline items-center gap-1 font-bold">
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                                         تأكيد الموقع في Google Maps
                                     </a>
@@ -66,41 +66,41 @@
 
                     <!-- Payment Method -->
                     <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-                            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                        <h3 class="text-lg font-black text-brand-navy mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
                             طريقة الدفع
                         </h3>
                         
                         <div class="space-y-3">
-                            <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-white hover:border-amber-500 transition-colors bg-white">
-                                <input type="radio" name="payment_method" value="cod" class="w-4 h-4 text-amber-600 border-gray-300 focus:ring-amber-500" checked>
-                                <span class="mr-3 font-medium text-gray-900">الدفع عند الاستلام (COD)</span>
+                            <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-white hover:border-brand-gold transition-all bg-white group">
+                                <input type="radio" name="payment_method" value="cod" class="w-4 h-4 text-brand-gold border-gray-300 focus:ring-brand-gold" checked>
+                                <span class="mr-3 font-bold text-brand-navy group-hover:text-brand-gold transition-colors">الدفع عند الاستلام (COD)</span>
                             </label>
                             
-                            <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-white hover:border-amber-500 transition-colors bg-white">
-                                <input type="radio" name="payment_method" value="card" class="w-4 h-4 text-amber-600 border-gray-300 focus:ring-amber-500">
-                                <span class="mr-3 font-medium text-gray-900">بطاقة مدى / ائتمانية</span>
+                            <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-white hover:border-brand-gold transition-all bg-white group">
+                                <input type="radio" name="payment_method" value="card" class="w-4 h-4 text-brand-gold border-gray-300 focus:ring-brand-gold">
+                                <span class="mr-3 font-bold text-brand-navy group-hover:text-brand-gold transition-colors">بطاقة مدى / ائتمانية</span>
                             </label>
 
-                            <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-white hover:border-amber-500 transition-colors bg-white">
-                                <input type="radio" name="payment_method" value="tamara" class="w-4 h-4 text-amber-600 border-gray-300 focus:ring-amber-500">
+                            <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-white hover:border-brand-gold transition-all bg-white group">
+                                <input type="radio" name="payment_method" value="tamara" class="w-4 h-4 text-brand-gold border-gray-300 focus:ring-brand-gold">
                                 <div class="mr-3">
-                                    <span class="block font-medium text-gray-900">تمارا (Tamara)</span>
-                                    <span class="block text-xs text-gray-500">قسم فاتورتك على 3 دفعات بدون فوائد</span>
+                                    <span class="block font-bold text-brand-navy group-hover:text-brand-gold transition-colors">تمارا (Tamara)</span>
+                                    <span class="block text-xs text-gray-400">قسم فاتورتك على 3 دفعات بدون فوائد</span>
                                 </div>
                             </label>
 
-                            <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-white hover:border-amber-500 transition-colors bg-white">
-                                <input type="radio" name="payment_method" value="tabby" class="w-4 h-4 text-amber-600 border-gray-300 focus:ring-amber-500">
+                            <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-white hover:border-brand-gold transition-all bg-white group">
+                                <input type="radio" name="payment_method" value="tabby" class="w-4 h-4 text-brand-gold border-gray-300 focus:ring-brand-gold">
                                 <div class="mr-3">
-                                    <span class="block font-medium text-gray-900">تابي (Tabby)</span>
-                                    <span class="block text-xs text-gray-500">قسم فاتورتك على 4 دفعات بدون فوائد</span>
+                                    <span class="block font-bold text-brand-navy group-hover:text-brand-gold transition-colors">تابي (Tabby)</span>
+                                    <span class="block text-xs text-gray-400">قسم فاتورتك على 4 دفعات بدون فوائد</span>
                                 </div>
                             </label>
                         </div>
                     </div>
 
-                    <button type="submit" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-colors w-full text-lg">
+                    <button type="submit" class="bg-brand-navy text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-black py-4 px-8 rounded-xl shadow-xl transition-all w-full text-lg transform active:scale-[0.98]">
                         تأكيد الطلب والدفع
                     </button>
                 </form>            
