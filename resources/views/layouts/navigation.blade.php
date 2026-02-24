@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-amber-100">
+<nav x-data="{ open: false }" class="bg-brand-navy border-b border-brand-gold/20 shadow-lg transition-all duration-300">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -15,8 +15,8 @@
 
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('home') }}">
-                        <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="block h-10 w-auto">
+                    <a href="{{ route('home') }}" class="flex items-center">
+                        <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="block h-12 w-auto object-contain">
                     </a>
                 </div>
 
@@ -35,7 +35,7 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-3 py-2 border border-brand-gold/10 text-sm leading-4 font-bold rounded-full text-white bg-brand-navy-light hover:bg-brand-gold hover:text-brand-navy focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
@@ -47,11 +47,11 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link :href="route('profile.edit')" class="text-right">
                             {{ __('الملف الشخصي') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link :href="route('orders.index')">
+                        <x-dropdown-link :href="route('orders.index')" class="text-right">
                             {{ __('طلباتي') }}
                         </x-dropdown-link>
 
@@ -59,7 +59,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
+                            <x-dropdown-link :href="route('logout')" class="text-right text-red-400"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('تسجيل الخروج') }}

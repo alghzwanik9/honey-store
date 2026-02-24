@@ -11,8 +11,8 @@
                 <div class="absolute top-0 right-0 w-full h-2 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold"></div>
                 <div class="p-16 text-brand-navy text-center">
                     <div class="mb-10 flex justify-center">
-                        <div class="bg-white p-4 rounded-[2rem] shadow-2xl inline-block border border-brand-gold/10">
-                             <x-brand-logo class="h-32 w-auto drop-shadow-lg" />
+                        <div class="transition-all duration-500 hover:scale-110">
+                             <img src="/images/logo.png" class="h-32 w-auto object-contain" alt="Logo">
                         </div>
                     </div>
                     <h3 class="text-4xl font-black text-brand-navy mb-4">{{ __("مرحباً بك في لوحة التحكم") }}</h3>

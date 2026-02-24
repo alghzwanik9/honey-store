@@ -3,7 +3,9 @@
         <div class="max-w-2xl mx-auto bg-brand-cream-light rounded-[3rem] shadow-2xl overflow-hidden text-center p-16 border border-brand-gold/10 relative">
             <div class="absolute top-0 right-0 w-full h-2 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold"></div>
             <div class="mb-10 flex flex-col items-center justify-center">
-                <x-brand-logo class="h-32 w-auto drop-shadow-2xl" />
+                <div class="transition-all duration-500 hover:scale-105">
+                    <img src="/images/logo.png" class="h-32 w-auto object-contain" alt="مناحل وادي الجرفة">
+                </div>
             </div>
 
             <h1 class="text-4xl font-black text-brand-navy mb-4">تهانينا! تم الطلب بنجاح</h1>

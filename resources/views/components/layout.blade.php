@@ -48,7 +48,7 @@
                         </div>
                     </button>
                     <a href="/" class="flex items-center gap-2">
-                        <x-brand-logo class="h-14 w-auto drop-shadow-lg" />
+                        <img src="/images/logo.png" class="h-14 w-auto drop-shadow-lg object-contain" alt="مناحل وادي الجرفة">
                     </a>
                 </div>
 
@@ -70,8 +70,8 @@
                 <div class="flex justify-between items-center border-b border-brand-gold/10 pb-4">
                     <!-- Brand (Right) -->
                     <a href="/" class="flex items-center group">
-                        <div class="p-2 transition-transform duration-500 group-hover:scale-105">
-                            <x-brand-logo class="h-28 w-auto drop-shadow-[0_0_15px_rgba(194,155,64,0.3)]" />
+                        <div class="transition-transform duration-500 group-hover:scale-105">
+                            <img src="/images/logo.png" class="h-28 w-auto object-contain" alt="مناحل وادي الجرفة">
                         </div>
                     </a>
 
@@ -161,13 +161,13 @@
              x-transition:enter-end="translate-x-0"
              class="fixed inset-y-0 right-0 w-3/4 max-w-sm bg-brand-navy shadow-2xl z-50 md:hidden overflow-y-auto" style="display: none;">
             
-            <div class="p-6 bg-brand-navy-light border-b border-brand-gold/10 flex justify-between items-end">
+            <div class="p-8 bg-brand-navy-light border-b border-brand-gold/10 flex flex-col items-center text-center gap-4">
+                <a href="/" class="transition-transform duration-300 active:scale-95">
+                    <img src="/images/logo.png" class="h-24 w-auto object-contain" alt="Logo">
+                </a>
                 <div>
-                    <h2 class="text-2xl font-black text-white mb-1">القائمة</h2>
-                    <p class="text-brand-gold text-sm font-bold">مناحل وادي الجرفة</p>
-                </div>
-                <div class="">
-                    <img src="/images/logo.png" class="h-12 w-auto" alt="Logo">
+                    <h2 class="text-xl font-black text-white mb-1">مناحل وادي الجرفة</h2>
+                    <p class="text-brand-gold text-xs font-bold tracking-widest uppercase">أصالة التراث</p>
                 </div>
             </div>
 
@@ -235,8 +235,8 @@
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-3 gap-10 text-center md:text-right mb-12">
                 <div>
-                    <x-brand-logo class="h-16 w-auto mb-4 mx-auto md:mx-0 opacity-80 hover:opacity-100 transition duration-500 drop-shadow-[0_0_10px_rgba(194,155,64,0.2)]" />
-                    <p class="text-sm leading-relaxed text-gray-400">نقدم لكم أجود أنواع العسل البلدي الطبيعي من مناحلنا مباشرة إليكم. جودة مضمونة وطعم لا يُنسى.</p>
+                    <img src="/images/logo.png" class="h-20 w-auto mb-4 mx-auto md:mx-0 opacity-90 hover:opacity-100 transition duration-500 drop-shadow-[0_0_10px_rgba(194,155,64,0.3)] object-contain" alt="مناحل وادي الجرفة">
+                    <p class="text-sm leading-relaxed text-gray-400 font-medium">مناحل وادي الجرفة.. أصالة التراث وعذوبة المذاق في كل قطرة. نقدم لكم أجود أنواع العسل البلدي الطبيعي من مناحلنا مباشرة إليكم بكل فخر.</p>
                     {{-- Social Icons --}}
                     <div class="flex gap-4 mt-5 justify-center md:justify-start">
                         <a href="https://wa.me/966550360118" target="_blank" class="w-9 h-9 rounded-full bg-brand-navy-light hover:bg-green-600 flex items-center justify-center transition-colors duration-300 border border-brand-gold/10" title="واتساب">
@@ -251,7 +251,7 @@
                     <h3 class="text-white font-bold text-lg mb-5 border-r-4 border-brand-gold pr-3">روابط سريعة</h3>
                     <ul class="space-y-3 text-sm">
                         <li><a href="/" class="hover:text-brand-gold transition flex items-center gap-2 justify-center md:justify-start"><span class="text-brand-gold">›</span> الرئيسية</a></li>
-                        <li><a href="#" class="hover:text-brand-gold transition flex items-center gap-2 justify-center md:justify-start"><span class="text-brand-gold">›</span> عن المناحل</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition flex items-center gap-2 justify-center md:justify-start"><span class="text-brand-gold">›</span> عن مناحل وادي الجرفة</a></li>
                         <li><a href="{{ route('privacy-policy') }}" class="hover:text-brand-gold transition flex items-center gap-2 justify-center md:justify-start"><span class="text-brand-gold">›</span> سياسة الخصوصية</a></li>
                         <li><a href="{{ route('refund-policy') }}" class="hover:text-brand-gold transition flex items-center gap-2 justify-center md:justify-start"><span class="text-brand-gold">›</span> سياسة الاستبدال والاسترجاع</a></li>
                         <li><a href="{{ route('terms') }}" class="hover:text-brand-gold transition flex items-center gap-2 justify-center md:justify-start"><span class="text-brand-gold">›</span> الشروط والأحكام</a></li>
