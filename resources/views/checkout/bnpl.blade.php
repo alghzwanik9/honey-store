@@ -1,14 +1,23 @@
 <x-layout title="إتمام الدفع">
     <div class="container mx-auto px-4 py-20" dir="rtl">
-        <div class="max-w-md mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden text-center p-10 border border-brand-gold/10">
+        <div class="max-w-md mx-auto bg-brand-cream-light rounded-3xl shadow-2xl overflow-hidden text-center p-12 border border-brand-gold/10 relative">
+            <div class="absolute top-0 right-0 w-full h-1.5 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold"></div>
             
-            <div class="mb-8">
+            <div class="mb-10">
                 @if($order->payment_method == 'tamara')
-                    <h2 class="text-3xl font-bold text-gray-800" style="color: #c08d5d;">تمارا</h2>
-                    <p class="text-gray-500 mt-2">جاري تحويلك إلى بوابة دفع تمارا...</p>
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-[#c08d5d]/10 px-6 py-2 rounded-xl border border-[#c08d5d]/20">
+                            <h2 class="text-3xl font-black" style="color: #c08d5d;">TAMARA</h2>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 font-medium">جاري تحويلك إلى بوابة دفع تمارا الآمنة...</p>
                 @else
-                    <h2 class="text-3xl font-bold text-green-600">tabby</h2>
-                    <p class="text-gray-500 mt-2">جاري تحويلك إلى بوابة دفع تابي...</p>
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-emerald-50 px-6 py-2 rounded-xl border border-emerald-100">
+                            <h2 class="text-3xl font-black text-emerald-600">tabby</h2>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 font-medium">جاري تحويلك إلى بوابة دفع تابي الآمنة...</p>
                 @endif
             </div>
 
@@ -19,20 +28,17 @@
                 </svg>
             </div>
 
-            <div class="bg-gray-50 rounded-xl p-6 mb-8 text-right border border-brand-gold/10 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-1 h-full bg-brand-gold"></div>
-                <div class="flex justify-between items-center mb-3">
-                    <span class="text-gray-500 font-medium">رقم الطلب:</span>
-                    <span class="font-bold text-brand-navy">#{{ $order->id }}</span>
+            <div class="bg-brand-beige/50 rounded-2xl p-8 mb-10 text-right border border-brand-gold/5 shadow-inner relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-1.5 h-full bg-brand-gold"></div>
+                <div class="flex justify-between items-center mb-4 text-sm">
+                    <span class="text-gray-500 font-bold">رقم الطلب:</span>
+                    <span class="font-black text-brand-navy">#{{ $order->id }}</span>
                 </div>
                 <div class="flex justify-between items-center">
-                    <span class="text-gray-500 font-medium">المبلغ:</span>
-                    <span class="font-black text-brand-gold text-xl flex items-center gap-3" style="gap: 1rem;">
+                    <span class="text-gray-500 font-bold">إجمالي المبلغ:</span>
+                    <span class="font-black text-brand-gold text-2xl flex items-center gap-2">
                         {{ number_format($order->total_amount) }} 
-                        <svg class="w-6 h-6 text-brand-gold drop-shadow-sm mr-2" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                            <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                        </svg>
+                        <x-currency-symbol class="w-8 h-8" />
                     </span>
                 </div>
             </div>

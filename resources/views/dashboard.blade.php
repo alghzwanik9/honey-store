@@ -7,16 +7,16 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white shadow-2xl sm:rounded-3xl border border-brand-gold/10 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-full h-1.5 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold"></div>
-                <div class="p-12 text-gray-900 text-center">
-                    <div class="mb-8 flex justify-center">
-                        <div class="bg-white p-3 rounded-2xl shadow-xl inline-block border border-brand-gold/5">
-                             <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-32 w-auto object-contain mx-auto drop-shadow-md" style="height: 8rem; max-width: 100%;">
+            <div class="bg-brand-cream-light overflow-hidden shadow-2xl sm:rounded-[3rem] border border-brand-gold/10 relative">
+                <div class="absolute top-0 right-0 w-full h-2 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold"></div>
+                <div class="p-16 text-brand-navy text-center">
+                    <div class="mb-10 flex justify-center">
+                        <div class="bg-white p-4 rounded-[2rem] shadow-2xl inline-block border border-brand-gold/10">
+                             <x-brand-logo class="h-32 w-auto drop-shadow-lg" />
                         </div>
                     </div>
-                    <h3 class="text-3xl font-black text-brand-navy mb-4">{{ __("مرحباً بك في لوحة التحكم") }}</h3>
-                    <p class="text-gray-500 mb-10 text-lg font-medium">{{ __("من هنا يمكنك متابعة طلباتك وإدارة حسابك بكل فخر.") }}</p>
+                    <h3 class="text-4xl font-black text-brand-navy mb-4">{{ __("مرحباً بك في لوحة التحكم") }}</h3>
+                    <p class="text-gray-400 mb-12 text-xl font-medium">{{ __("من هنا يمكنك متابعة طلباتك وإدارة حسابك بكل فخر في مناحلنا.") }}</p>
                     
                     <div class="flex justify-center mt-6">
                         <a href="/" class="inline-flex items-center justify-center px-10 py-4 text-lg font-black text-brand-gold transition-all duration-300 transform rounded-xl hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-gold shadow-xl bg-brand-navy hover:bg-brand-gold hover:text-brand-navy group" style="min-width: 240px; text-decoration: none;">

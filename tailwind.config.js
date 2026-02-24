@@ -18,6 +18,9 @@ export default {
                     'gold': '#c29b40',      // الذهبي الأساسي
                     'gold-light': '#e5c16b', // ذهبي فاتح للهوفر
                     'gold-dark': '#a47e2a',
+                    'cream': '#fdfbf7',     // كريمي هادئ للخلفية
+                    'cream-light': '#fefcf9',
+                    'beige': '#f5f2ed',     // بيج ناعم للتدرج
                 }
             },
             fontFamily: {

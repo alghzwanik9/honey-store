@@ -1,10 +1,11 @@
 <x-layout title="{{ $product->name }}">
     <div class="container mx-auto px-4 py-8" dir="rtl">
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-5xl mx-auto border border-brand-gold/10">
+        <div class="bg-brand-cream-light rounded-3xl shadow-2xl overflow-hidden max-w-5xl mx-auto border border-brand-gold/10 relative">
+            <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold"></div>
             <div class="flex flex-col md:flex-row-reverse h-full"> 
                 
                 {{-- قسم الصورة --}}
-                <div class="md:w-1/2 relative bg-gray-50 h-[500px] overflow-hidden group flex items-center justify-center"> {{-- ارتفاع ثابت --}}
+                <div class="md:w-1/2 relative bg-brand-beige/30 h-[500px] overflow-hidden group flex items-center justify-center border-l border-brand-gold/5">
                      
                      {{-- Virtual Label Overlay (Bottom Center) --}}
                      <div class="absolute bottom-8 left-0 right-0 flex justify-center z-10 pointer-events-none">
@@ -56,19 +57,16 @@
                                 {{ $product->category->name }}
                             </a>
                         @endif
-                        <h1 class="text-4xl font-black text-gray-900 mb-6 leading-tight">{{ $product->name }}</h1>
+                        <h1 class="text-4xl font-black text-brand-navy mb-6 leading-tight">{{ $product->name }}</h1>
                         
-                        <div class="flex flex-wrap items-center gap-4 mb-8 bg-gray-50/50 p-4 rounded-xl w-full border border-gray-100">
+                        <div class="flex flex-wrap items-center gap-4 mb-8 bg-brand-beige/50 p-5 rounded-2xl w-full border border-brand-gold/5">
                             <div class="flex items-center gap-2 pl-4 border-l border-gray-200">
-                                <span class="text-3xl font-black text-brand-gold">{{ number_format($product->price) }}</span>
-                                <svg class="w-8 h-8 text-black" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                    <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                </svg>
+                                <span class="text-3xl font-black text-brand-navy">{{ number_format($product->price) }}</span>
+                                <x-currency-symbol class="w-8 h-8 text-brand-gold" />
                             </div>
                             
                             @if($product->weight)
-                            <div class="flex items-center gap-2 text-gray-700 bg-white px-3 py-1.5 rounded-lg border border-gray-200 shadow-sm">
+                            <div class="flex items-center gap-2 text-brand-navy bg-brand-cream-light px-4 py-2 rounded-xl border border-brand-gold/10 shadow-sm">
                                 <svg class="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1 m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2 m6 2l3-1 m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9 m-3-9l-6-2 m0-2v2 m0 16V5 m0 16H9 m3 0h3"></path></svg>
                                 <span class="font-bold text-sm">{{ $product->weight }}</span>
                             </div>
@@ -91,7 +89,7 @@
                             @csrf
                             <div class="w-32 shrink-0"> {{-- shrink-0 لضمان عدم الانكماش --}}
                                 <label for="quantity" class="sr-only">الكمية</label>
-                                <input type="number" id="quantity" name="quantity" min="1" max="{{ $product->stock }}" value="1" class="w-full border-2 border-gray-200 rounded-xl focus:ring-brand-gold focus:border-brand-gold text-center py-3 font-bold text-lg text-gray-900 transition-all">
+                                <input type="number" id="quantity" name="quantity" min="1" max="{{ $product->stock }}" value="1" class="w-full border-2 border-brand-gold/10 bg-brand-cream-light rounded-xl focus:ring-brand-gold focus:border-brand-gold text-center py-3 font-black text-lg text-brand-navy transition-all">
                             </div>
                             <button type="submit" class="flex-1 bg-brand-navy text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-bold py-3.5 px-6 rounded-xl shadow-xl transition-all duration-300 flex items-center justify-center gap-2 group">
                                 <svg class="w-6 h-6 transform group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>

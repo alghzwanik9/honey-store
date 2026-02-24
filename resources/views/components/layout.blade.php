@@ -27,7 +27,7 @@
         }
     </style>
 </head>
-<body class="antialiased bg-slate-50 text-gray-800 font-cairo">
+<body class="antialiased bg-brand-cream text-gray-800 font-cairo">
 
     {{-- Navigation Bar: scroll-aware with Alpine.js --}}
     <nav class="bg-brand-navy border-b border-brand-gold/20 shadow-lg sticky top-0 z-50 transition-all duration-300"
@@ -47,8 +47,8 @@
                             <svg x-show="mobileMenuOpen" x-cloak class="w-8 h-8 absolute" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                         </div>
                     </button>
-                    <a href="/" class="flex items-center">
-                        <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-14 w-auto object-contain drop-shadow-lg">
+                    <a href="/" class="flex items-center gap-2">
+                        <x-brand-logo class="h-14 w-auto drop-shadow-lg" />
                     </a>
                 </div>
 
@@ -71,7 +71,7 @@
                     <!-- Brand (Right) -->
                     <a href="/" class="flex items-center group">
                         <div class="p-2 transition-transform duration-500 group-hover:scale-105">
-                            <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-28 w-auto object-contain drop-shadow-[0_0_15px_rgba(194,155,64,0.3)]">
+                            <x-brand-logo class="h-28 w-auto drop-shadow-[0_0_15px_rgba(194,155,64,0.3)]" />
                         </div>
                     </a>
 
@@ -235,7 +235,7 @@
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-3 gap-10 text-center md:text-right mb-12">
                 <div>
-                    <img src="/images/logo.png" alt="Logo" class="h-16 w-auto mb-4 mx-auto md:mx-0 opacity-80 hover:opacity-100 transition duration-500 drop-shadow-[0_0_10px_rgba(194,155,64,0.2)]">
+                    <x-brand-logo class="h-16 w-auto mb-4 mx-auto md:mx-0 opacity-80 hover:opacity-100 transition duration-500 drop-shadow-[0_0_10px_rgba(194,155,64,0.2)]" />
                     <p class="text-sm leading-relaxed text-gray-400">نقدم لكم أجود أنواع العسل البلدي الطبيعي من مناحلنا مباشرة إليكم. جودة مضمونة وطعم لا يُنسى.</p>
                     {{-- Social Icons --}}
                     <div class="flex gap-4 mt-5 justify-center md:justify-start">

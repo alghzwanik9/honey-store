@@ -1,7 +1,8 @@
 <x-layout title="الشروط والأحكام | مناحل وادي الجرفة">
-    <div class="bg-gray-50 py-16">
+    <div class="bg-brand-cream py-16">
         <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-brand-gold/10">
+            <div class="max-w-4xl mx-auto bg-brand-cream-light rounded-[3rem] shadow-2xl overflow-hidden border border-brand-gold/10 relative">
+                <div class="absolute top-0 right-0 w-full h-2 bg-brand-gold"></div>
                 <div class="bg-brand-navy py-12 px-10 text-center relative overflow-hidden">
                     <h1 class="text-4xl md:text-5xl font-black text-brand-gold relative z-10 px-4">الشروط والأحكام</h1>
                     <p class="text-gray-400 mt-2 relative z-10">تنظيم العلاقة القانونية بين المتجر والعميل</p>
@@ -38,14 +39,14 @@
 
                     <section>
                         <h2 class="text-2xl font-black text-brand-navy border-r-4 border-brand-gold pr-4 mb-5">القانون الواجب التطبيق</h2>
-                        <div class="bg-gray-50 p-6 rounded-2xl border border-brand-gold/10 relative overflow-hidden">
-                             <div class="absolute top-0 right-0 w-1 h-full bg-brand-gold"></div>
-                             <p class="relative z-10 text-brand-navy">تخضع هذه الشروط والأحكام وتفسر وفقاً للأنظمة والقوانين المعمول بها في <strong>المملكة العربية السعودية</strong>، لا سيما نظام التجارة الإلكترونية ولائحته التنفيذية.</p>
+                        <div class="bg-brand-beige/30 p-8 rounded-3xl border border-brand-gold/5 relative overflow-hidden">
+                             <div class="absolute top-0 right-0 w-1.5 h-full bg-brand-gold"></div>
+                             <p class="relative z-10 text-brand-navy leading-relaxed font-bold">تخضع هذه الشروط والأحكام وتفسر وفقاً للأنظمة والقوانين المعمول بها في <strong>المملكة العربية السعودية</strong>، لا سيما نظام التجارة الإلكترونية ولائحته التنفيذية بكل فخر.</p>
                         </div>
                     </section>
                 </div>
                 
-                <div class="bg-gray-50 p-8 text-center border-t border-gray-100">
+                <div class="bg-brand-beige/10 p-10 text-center border-t border-brand-gold/5">
                     <a href="{{ route('home') }}" class="inline-flex items-center gap-2 bg-brand-navy hover:bg-brand-gold text-brand-gold hover:text-brand-navy font-black py-4 px-10 rounded-xl transition-all duration-300 shadow-xl group">
                         <span>العودة للرئيسية</span>
                         <svg class="w-5 h-5 rotate-180 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>

@@ -22,14 +22,15 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-cairo antialiased">
-        <div class="min-h-screen bg-orange-50">
+    <body class="font-cairo antialiased bg-brand-cream text-gray-800">
+        <div class="min-h-screen">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <header class="bg-brand-cream-light border-b border-brand-gold/10 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-full h-0.5 bg-brand-gold"></div>
+                    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>

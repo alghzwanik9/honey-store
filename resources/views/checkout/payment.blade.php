@@ -2,21 +2,19 @@
     <div class="container mx-auto px-4 py-12" dir="rtl">
         <h1 class="text-3xl md:text-4xl font-black text-brand-navy mb-12 text-center">بوابة الدفع الآمنة</h1>
 
-        <div class="max-w-md mx-auto bg-white rounded-2xl shadow-2xl border border-brand-gold/10 overflow-hidden">
+        <div class="max-w-md mx-auto bg-brand-cream-light rounded-3xl shadow-2xl border border-brand-gold/10 overflow-hidden relative">
+            <div class="absolute top-0 right-0 w-full h-1 bg-brand-gold"></div>
             <!-- Order Summary -->
-            <div class="bg-gray-50 px-6 py-4 border-b border-gray-100">
+            <div class="bg-brand-beige/50 px-8 py-6 border-b border-brand-gold/5">
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-gray-600">رقم الطلب:</span>
                     <span class="font-bold">#{{ $order->id }}</span>
                 </div>
                 <div class="flex justify-between items-center text-lg">
                     <span class="text-brand-navy font-bold">المبلغ المطلوب:</span>
-                    <span class="text-brand-gold font-black flex items-center gap-3" style="gap: 1rem;">
+                    <span class="text-brand-gold font-black flex items-center gap-2">
                         {{ number_format($order->total_amount) }} 
-                        <svg class="w-6 h-6 text-brand-gold drop-shadow-sm mr-2" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                            <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                        </svg>
+                        <x-currency-symbol class="w-8 h-8" />
                     </span>
                 </div>
             </div>
@@ -27,8 +25,8 @@
                 <link rel="stylesheet" href="https://cdn.moyasar.com/mpf/1.14.0/moyasar.css">
                 <div class="mysr-form"></div>
 
-                <div class="text-center mt-6">
-                    <a href="{{ route('dashboard') }}" class="text-sm text-gray-400 hover:text-brand-gold transition-colors font-medium underline">إلغاء والعودة للوحة التحكم</a>
+                <div class="text-center mt-8">
+                    <a href="{{ route('dashboard') }}" class="text-sm text-gray-400 hover:text-brand-gold transition-colors font-black underline">إلغاء والعودة للوحة التحكم</a>
                 </div>
             </div>
         </div>

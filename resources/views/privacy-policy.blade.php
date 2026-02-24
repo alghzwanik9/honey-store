@@ -1,7 +1,8 @@
 <x-layout title="سياسة الخصوصية | مناحل وادي الجرفة">
-    <div class="bg-gray-50 py-16">
+    <div class="bg-brand-cream py-16">
         <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-brand-gold/10">
+            <div class="max-w-4xl mx-auto bg-brand-cream-light rounded-[3rem] shadow-2xl overflow-hidden border border-brand-gold/10 relative">
+                <div class="absolute top-0 right-0 w-full h-2 bg-brand-gold"></div>
                 <div class="bg-brand-navy py-12 px-10 text-center relative overflow-hidden">
                     <div class="absolute inset-0 opacity-10">
                         <svg class="w-full h-full" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -39,9 +40,9 @@
 
                     <section>
                         <h2 class="text-2xl font-black text-brand-navy border-r-4 border-brand-gold pr-4 mb-5">مشاركة البيانات</h2>
-                        <div class="bg-gray-50 p-6 rounded-2xl border border-brand-gold/10 relative overflow-hidden">
-                             <div class="absolute top-0 right-0 w-1 h-full bg-brand-gold"></div>
-                             <p class="relative z-10 text-brand-navy"><strong>نحن لا نقوم ببيع أو تأجير بياناتكم لأي طرف ثالث.</strong> يتم مشاركة المعلومات الضرورية فقط (الاسم، الجوال، العنوان) مع شركات الشحن والخدمات اللوجستية لضمان إتمام عملية التوصيل بنجاح.</p>
+                        <div class="bg-brand-beige/30 p-8 rounded-3xl border border-brand-gold/5 relative overflow-hidden">
+                             <div class="absolute top-0 right-0 w-1.5 h-full bg-brand-gold"></div>
+                             <p class="relative z-10 text-brand-navy leading-relaxed"><strong>نحن لا نقوم ببيع أو تأجير بياناتكم لأي طرف ثالث.</strong> يتم مشاركة المعلومات الضرورية فقط (الاسم، الجوال، العنوان) مع شركات الشحن والخدمات اللوجستية لضمان إتمام عملية التوصيل بنجاح بكل فخر.</p>
                         </div>
                     </section>
 
@@ -53,20 +54,20 @@
                     <section>
                         <h2 class="text-2xl font-black text-brand-navy border-r-4 border-brand-gold pr-4 mb-5">التواصل معنا</h2>
                         <p>إذا كان لديكم أي استفسار حول سياسة الخصوصية، يرجى التواصل معنا عبر:</p>
-                        <div class="mt-6 bg-brand-navy rounded-2xl p-6 text-brand-gold inline-block shadow-lg border border-brand-gold/20">
-                             <p class="font-bold flex items-center gap-2 mb-2">
-                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 02 2z"></path></svg>
+                        <div class="mt-8 bg-brand-navy rounded-3xl p-8 text-brand-gold inline-block shadow-[0_20px_50px_rgba(15,23,42,0.3)] border border-brand-gold/20">
+                             <p class="font-bold flex items-center gap-3 mb-4 text-lg">
+                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                                  البريد الإلكتروني: aljorfah.honey@gmail.com
                              </p>
-                             <p class="font-bold flex items-center gap-2">
-                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                             <p class="font-bold flex items-center gap-3 text-lg">
+                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                                  الواتساب: 0550360118
                              </p>
                         </div>
                     </section>
                 </div>
                 
-                <div class="bg-gray-50 p-8 text-center border-t border-gray-100">
+                <div class="bg-brand-beige/10 p-10 text-center border-t border-brand-gold/5">
                     <a href="{{ route('home') }}" class="inline-flex items-center gap-2 bg-brand-navy hover:bg-brand-gold text-brand-gold hover:text-brand-navy font-black py-4 px-10 rounded-xl transition-all duration-300 shadow-xl group">
                         <span>العودة للرئيسية</span>
                         <svg class="w-5 h-5 rotate-180 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>

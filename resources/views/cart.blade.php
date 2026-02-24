@@ -3,18 +3,22 @@
         <h1 class="text-3xl md:text-4xl font-black text-brand-navy mb-12 text-center">سلة المشتريات</h1>
 
         @if(empty($cart) || count($cart) == 0)
-            <div class="bg-white rounded-2xl shadow-xl p-16 text-center border border-brand-gold/10">
-                <svg class="w-20 h-20 mx-auto text-gray-200 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                <p class="text-xl text-gray-400 mb-8">سلة مشترياتك فارغة حالياً.</p>
-                <a href="/" class="bg-brand-gold hover:bg-brand-gold-dark text-brand-navy font-bold py-3 px-10 rounded-xl transition-all shadow-lg inline-block">تصفح المنتجات</a>
+            <div class="bg-brand-cream-light rounded-3xl shadow-2xl p-20 text-center border border-brand-gold/10 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-full h-1.5 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold"></div>
+                <div class="mb-8">
+                    <svg class="w-24 h-24 mx-auto text-brand-gold/20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                </div>
+                <h2 class="text-2xl font-black text-brand-navy mb-4">سلتك بانتظار عسلنا الفاخر</h2>
+                <p class="text-lg text-gray-400 mb-10">تبدو سلة مشترياتك خالية حالياً، ما رأيك باكتشاف تشكيلتنا؟</p>
+                <a href="/" class="bg-brand-navy text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-black py-4 px-12 rounded-xl transition-all shadow-xl inline-block">ابدأ التسوق الآن</a>
             </div>
         @else
             <div class="flex flex-col lg:flex-row gap-8">
                 <!-- Cart Items -->
                 <div class="lg:w-2/3">
-                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-brand-gold/10">
+                    <div class="bg-brand-cream-light rounded-3xl shadow-xl overflow-hidden border border-brand-gold/10">
                         @foreach($cart as $id => $details)
-                            <div class="flex items-center p-6 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors">
+                            <div class="flex items-center p-6 border-b border-brand-gold/5 last:border-b-0 hover:bg-brand-beige/30 transition-colors">
                                 <!-- Image -->
                                 <div class="w-24 h-24 shrink-0 bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
                                     @if($details['image_url'])
@@ -34,27 +38,17 @@
                                         </a>
                                     </h3>
                                     <p class="text-sm text-gray-400 mb-2 font-medium">الكمية: {{ $details['quantity'] }}</p>
-                                    <div class="flex items-center gap-1 font-black text-brand-gold">
+                                    <div class="flex items-center gap-1 font-black text-brand-navy">
                                         <span>{{ number_format($details['price']) }}</span>
-                                        <span class="text-xs">
-                                        <svg class="w-6 h-6 text-emerald-600 inline-block drop-shadow-sm" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                            <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                        </svg>
-                                    </span>
+                                        <x-currency-symbol class="w-6 h-6 text-brand-gold" />
                                     </div>
                                 </div>
 
                                 <!-- Actions -->
                                 <div class="flex flex-col items-end justify-between self-stretch">
-                                    <div class="text-lg font-black text-gray-900 mb-2">
+                                    <div class="text-xl font-black text-brand-navy mb-2 flex items-center gap-1 leading-none">
                                         {{ number_format($details['price'] * $details['quantity']) }} 
-                                        <span class="text-xs font-normal text-gray-500 inline-block align-middle">
-                                            <svg class="w-6 h-6 text-emerald-600 inline-block drop-shadow-sm" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                                <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                            </svg>
-                                        </span>
+                                        <x-currency-symbol class="w-6 h-6 text-brand-gold" />
                                     </div>
                                     
                                     <form action="{{ route('cart.remove') }}" method="POST">
@@ -74,40 +68,30 @@
 
                 <!-- Order Summary -->
                 <div class="lg:w-1/3">
-                    <div class="bg-white rounded-2xl shadow-xl p-8 border border-brand-gold/10 sticky top-28">
+                    <div class="bg-brand-cream-light rounded-3xl shadow-xl p-8 border border-brand-gold/10 sticky top-28 overflow-hidden">
+                        <div class="absolute top-0 right-0 w-full h-1 bg-brand-gold"></div>
                         <h2 class="text-xl font-black text-brand-navy mb-8 border-b border-brand-gold/10 pb-4">ملخص الطلب</h2>
                         
-                        <div class="space-y-4 mb-6">
-                            <div class="flex justify-between text-gray-600">
+                        <div class="space-y-4 mb-8">
+                            <div class="flex justify-between text-gray-500 font-medium">
                                 <span>المجموع الفرعي</span>
-                                <span class="font-medium flex items-center gap-3" style="gap: 0.75rem;">
+                                <span class="flex items-center gap-1 text-brand-navy">
                                     {{ number_format($total) }} 
-                                    <svg class="w-3 h-3 text-emerald-700 mr-2" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                        <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                    </svg>
+                                    <x-currency-symbol class="w-5 h-5 text-brand-gold/50" />
                                 </span>
                             </div>
-                            <div class="flex justify-between text-gray-600">
+                            <div class="flex justify-between text-gray-500 font-medium">
                                 <span>الضريبة (15%)</span>
-                                <span class="font-medium flex items-center gap-3" style="gap: 0.75rem;">
+                                <span class="flex items-center gap-1 text-brand-navy">
                                     {{ number_format($total * 0.15) }} 
-                                    <svg class="w-3 h-3 text-emerald-700 mr-2" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                        <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                    </svg>
+                                    <x-currency-symbol class="w-5 h-5 text-brand-gold/50" />
                                 </span>
                             </div>
                             <div class="flex justify-between text-xl font-black text-brand-navy border-t border-brand-gold/10 pt-6 mt-6">
                                 <span>الإجمالي</span>
-                                <div class="text-brand-gold">
+                                <div class="flex items-center gap-1 text-brand-gold">
                                     {{ number_format($total * 1.15) }} 
-                                    <span class="text-sm font-normal inline-block">
-                                        <svg class="w-6 h-6 text-brand-gold inline-block drop-shadow-sm mr-2" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                            <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                        </svg>
-                                    </span>
+                                    <x-currency-symbol class="w-7 h-7" />
                                 </div>
                             </div>
                         </div>

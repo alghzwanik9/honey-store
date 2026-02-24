@@ -1,15 +1,16 @@
 <x-layout title="تم الطلب بنجاح">
     <div class="container mx-auto px-4 py-20" dir="rtl">
-        <div class="max-w-2xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden text-center p-12 border border-brand-gold/10">
-            <div class="mb-6 flex flex-col items-center justify-center text-green-500">
-                <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="w-48 h-auto mb-6 drop-shadow-md" style="max-width: 200px;">
+        <div class="max-w-2xl mx-auto bg-brand-cream-light rounded-[3rem] shadow-2xl overflow-hidden text-center p-16 border border-brand-gold/10 relative">
+            <div class="absolute top-0 right-0 w-full h-2 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold"></div>
+            <div class="mb-10 flex flex-col items-center justify-center">
+                <x-brand-logo class="h-32 w-auto drop-shadow-2xl" />
             </div>
 
             <h1 class="text-4xl font-black text-brand-navy mb-4">تهانينا! تم الطلب بنجاح</h1>
             <p class="text-xl text-gray-500 mb-10 leading-relaxed">نشكرك على ثقتك في مناحل وادي الجرفة. طلبك قيد التجهيز الآن بكل فخر.</p>
 
-            <div class="bg-gray-50 rounded-2xl p-8 mb-10 text-right border border-brand-gold/10 shadow-sm relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-1 h-full bg-brand-gold"></div>
+            <div class="bg-brand-beige/50 rounded-3xl p-10 mb-12 text-right border border-brand-gold/5 shadow-inner relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-1.5 h-full bg-brand-gold"></div>
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-gray-600">رقم الطلب:</span>
                     <span class="font-bold text-gray-900 text-lg">#{{ $order->id }}</span>
@@ -21,13 +22,10 @@
                     </span>
                 </div>
                 <div class="flex justify-between items-center">
-                    <span class="text-gray-500 font-medium">الإجمالي:</span>
-                    <span class="font-black text-brand-navy text-2xl flex items-center gap-3" style="gap: 1rem;">
+                    <span class="text-gray-500 font-bold">الإجمالي النهائي:</span>
+                    <span class="font-black text-brand-navy text-3xl flex items-center gap-2">
                         {{ number_format($order->total_amount) }} 
-                        <svg class="w-8 h-8 text-brand-gold drop-shadow-sm mr-4" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                            <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                        </svg>
+                        <x-currency-symbol class="w-10 h-10 text-brand-gold" />
                     </span>
                 </div>
             </div>

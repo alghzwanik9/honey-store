@@ -7,8 +7,8 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-2xl border border-brand-gold/10">
-                <div class="p-6 text-gray-900" dir="rtl">
+            <div class="bg-brand-cream-light overflow-hidden shadow-2xl sm:rounded-3xl border border-brand-gold/10">
+                <div class="p-8 text-brand-navy" dir="rtl">
                     @if(session('success'))
                         <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
                             <span class="block sm:inline">{{ session('success') }}</span>
@@ -20,8 +20,8 @@
                         </div>
                     @endif
                     @if($orders->count() > 0)
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-sm text-right text-gray-500 overflow-hidden rounded-xl">
+                        <div class="overflow-hidden rounded-2xl border border-brand-gold/10 shadow-sm">
+                            <table class="w-full text-sm text-right text-gray-600">
                                 <thead class="text-xs text-brand-gold uppercase bg-brand-navy">
                                     <tr>
                                         <th scope="col" class="px-6 py-3 rounded-r-lg">رقم الطلب</th>
@@ -34,21 +34,18 @@
                                 </thead>
                                 <tbody>
                                     @foreach($orders as $order)
-                                        <tr class="bg-white border-b hover:bg-gray-50">
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                        <tr class="bg-brand-cream-light border-b border-brand-gold/5 hover:bg-brand-beige/30 transition-colors">
+                                            <th scope="row" class="px-6 py-5 font-black text-brand-navy whitespace-nowrap">
                                                 #{{ $order->id }}
                                             </th>
                                             <td class="px-6 py-4">
                                                 {{ $order->created_at->format('Y-m-d') }}
                                             </td>
-                                            <td class="px-6 py-4 font-black text-brand-navy">
-                                            <span class="flex items-center gap-3" style="gap: 0.75rem;">
-                                                {{ number_format($order->total_amount) }} 
-                                                <svg class="w-5 h-5 text-brand-gold drop-shadow-sm mr-2" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                                    <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                                </svg>
-                                            </span>
+                                            <td class="px-6 py-5 font-black text-brand-navy">
+                                                <div class="flex items-center gap-1">
+                                                    {{ number_format($order->total_amount) }} 
+                                                    <x-currency-symbol class="w-5 h-5 text-brand-gold/70" />
+                                                </div>
                                             </td>
                                             <td class="px-6 py-4">
                                                 @if($order->payment_status == 'paid')
@@ -57,9 +54,9 @@
                                                     <span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-yellow-300">غير مدفوع</span>
                                                 @endif
                                             </td>
-                                             <td class="px-6 py-4">
-                                                <span class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-gray-500">
-                                                    {{ $order->status == 'pending' ? 'قيد التجهيز' : ($order->status == 'shipped' ? 'تم الشحن' : $order->status) }}
+                                             <td class="px-6 py-5">
+                                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-brand-navy/5 text-brand-navy border border-brand-navy/10">
+                                                    {{ $order->status == 'pending' ? 'جاري التحضير' : ($order->status == 'shipped' ? 'تم الشحن' : $order->status) }}
                                                 </span>
                                             </td>
                                             <td class="px-6 py-4 flex gap-3 text-center">

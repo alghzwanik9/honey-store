@@ -14,11 +14,15 @@
                 الرئيسية
             </a>
             <span class="text-gray-300">/</span>
-            <span class="text-gray-600 font-medium">
+            <span class="text-gray-600 font-black">
                 @if(request('search'))
                     نتائج البحث عن: "{{ request('search') }}"
                 @elseif(request('category'))
-                    تصفية: {{ request('category') }}
+                    @php
+                        $foundCat = collect($honeyCategories ?? [])->firstWhere('slug', request('category'));
+                        $catName = $foundCat ? $foundCat->name : request('category');
+                    @endphp
+                    تصفية: {{ $catName }}
                 @endif
             </span>
         </div>
@@ -57,7 +61,7 @@
                     $isLowStock = $product->stock > 0 && $product->stock <= 5;
                 @endphp
 
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col h-full hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group animate-fade-in-up {{ $staggerClass }}">
+                <div class="bg-brand-cream-light rounded-2xl shadow-sm border border-brand-gold/5 overflow-hidden flex flex-col h-full hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group animate-fade-in-up {{ $staggerClass }}">
                     <a href="{{ route('products.show', $product) }}" class="flex flex-col grow">
 
                         {{-- صورة المنتج --}}
@@ -120,31 +124,28 @@
                         </div>
 
                         {{-- معلومات المنتج --}}
-                        <div class="p-4 text-center flex flex-col items-center justify-between grow">
+                        <div class="p-4 text-center flex flex-col items-center justify-between grow bg-brand-cream/50">
                             <div class="w-full">
                                 @if($product->category)
-                                    <span class="text-[10px] font-bold tracking-wider text-white bg-brand-gold px-2 py-1 rounded-full mb-2 inline-block shadow-sm">
+                                    <span class="text-[10px] font-bold tracking-wider text-brand-navy bg-brand-gold/10 border border-brand-gold/20 px-2.5 py-1 rounded-full mb-2 inline-block">
                                         {{ $product->category->name }}
                                     </span>
                                 @endif
-                                <h2 class="text-base md:text-lg font-bold text-brand-navy mb-1 group-hover:text-brand-gold transition-colors line-clamp-2 leading-snug">
+                                <h2 class="text-base md:text-lg font-black text-brand-navy mb-1 group-hover:text-brand-gold transition-colors line-clamp-2 leading-snug">
                                     {{ $product->name }}
                                 </h2>
                             </div>
 
                             {{-- السعر --}}
-                            <div class="flex items-center justify-center gap-1.5 mt-3">
-                                <span class="text-gray-900 font-extrabold text-2xl tabular-nums">{{ number_format($product->price) }}</span>
-                                <svg class="w-7 h-7 text-gray-800" viewBox="0 0 1125 1257" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                    <path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/>
-                                </svg>
+                            <div class="flex items-center justify-center gap-1.5 mt-3 bg-brand-beige/50 px-4 py-1 rounded-full border border-brand-gold/5">
+                                <span class="text-brand-navy font-black text-2xl tabular-nums">{{ number_format($product->price) }}</span>
+                                <x-currency-symbol class="w-6 h-6 text-brand-gold" />
                             </div>
                         </div>
                     </a>
 
                     {{-- زر الإضافة للسلة --}}
-                    <div class="px-4 pb-4">
+                    <div class="px-4 pb-4 bg-brand-cream/50">
                         <form action="{{ route('cart.add', $product) }}" method="POST">
                             @csrf
                             <input type="hidden" name="quantity" value="1">
