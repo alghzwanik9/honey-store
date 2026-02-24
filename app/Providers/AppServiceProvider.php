@@ -19,9 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // if (app()->environment('production') && env('FORCE_HTTPS', true)) {
-        //     \Illuminate\Support\Facades\URL::forceScheme('https');
-        // }
+        if (app()->environment('production') && env('FORCE_HTTPS', true)) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
 
         \Illuminate\Database\Eloquent\Model::shouldBeStrict(!app()->isProduction());
 

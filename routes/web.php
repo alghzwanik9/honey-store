@@ -77,5 +77,10 @@ Route::post('/checkout/webhook', [\App\Http\Controllers\PaymentController::class
 
 
 
+// --- Legal Pages ---
+Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
+Route::view('/refund-policy', 'refund-policy')->name('refund-policy');
+Route::view('/terms', 'terms')->name('terms');
+
 // --- Auth Routes (Breeze) ---
 require __DIR__ . '/auth.php';

@@ -258,8 +258,9 @@
                     <ul class="space-y-3 text-sm">
                         <li><a href="/" class="hover:text-amber-400 transition flex items-center gap-2 justify-center md:justify-start"><span class="text-amber-600">›</span> الرئيسية</a></li>
                         <li><a href="#" class="hover:text-amber-400 transition flex items-center gap-2 justify-center md:justify-start"><span class="text-amber-600">›</span> عن المناحل</a></li>
-                        <li><a href="{{ route('cart.index') }}" class="hover:text-amber-400 transition flex items-center gap-2 justify-center md:justify-start"><span class="text-amber-600">›</span> السلة</a></li>
-                        <li><a href="#" class="hover:text-amber-400 transition flex items-center gap-2 justify-center md:justify-start"><span class="text-amber-600">›</span> الشروط والأحكام</a></li>
+                        <li><a href="{{ route('privacy-policy') }}" class="hover:text-amber-400 transition flex items-center gap-2 justify-center md:justify-start"><span class="text-amber-600">›</span> سياسة الخصوصية</a></li>
+                        <li><a href="{{ route('refund-policy') }}" class="hover:text-amber-400 transition flex items-center gap-2 justify-center md:justify-start"><span class="text-amber-600">›</span> سياسة الاستبدال والاسترجاع</a></li>
+                        <li><a href="{{ route('terms') }}" class="hover:text-amber-400 transition flex items-center gap-2 justify-center md:justify-start"><span class="text-amber-600">›</span> الشروط والأحكام</a></li>
                     </ul>
                 </div>
                 <div>
