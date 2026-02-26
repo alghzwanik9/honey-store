@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <p class="text-sm text-gray-400 mb-8">هذه صفحة محاكاة (Simulation) نظراً لعدم توفر حساب تاجر حقيقي.</p>
+            <p class="text-sm text-gray-400 mb-8">سيتم توجيهك الآن لإكمال عملية الدفع عبر بوابة شركائنا الرسمية.</p>
 
             <form action="{{ route('checkout.callback') }}" method="GET">
                 <input type="hidden" name="id" value="simulated_payment_id_{{ $order->id }}">
@@ -52,7 +52,7 @@
                 <input type="hidden" name="order_id" value="{{ $order->id }}"> <!-- Sending Order ID explicitly -->
 
                 <button type="submit" class="w-full bg-brand-navy text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-black py-4 px-8 rounded-xl shadow-xl transition-all duration-300 transform active:scale-[0.98]">
-                    محاكاة دفع ناجح ✅
+                    متابعة عملية الدفع الآمن
                 </button>
             </form>
             

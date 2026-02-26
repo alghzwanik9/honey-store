@@ -41,7 +41,7 @@
     <!-- Main Navigation -->
     <nav x-data="{ mobileMenuOpen: false, scrolled: false }" 
          x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 40 })"
-         class="sticky top-0 w-full z-50 transition-all duration-500 bg-brand-navy/95 backdrop-blur-md border-b border-brand-gold/10"
+         class="sticky top-0 w-full z-[100] transition-all duration-500 bg-brand-navy/95 backdrop-blur-md border-b border-brand-gold/10"
          :class="{ 'py-1 shadow-2xl border-brand-gold/40': scrolled }">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -95,7 +95,7 @@
                                  <span>المنتجات</span>
                                  <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                              </button>
-                             <div x-show="open" x-transition class="absolute right-0 top-full mt-2 w-48 bg-brand-navy-light rounded-2xl shadow-2xl z-50 overflow-hidden border border-brand-gold/20 py-1" style="display: none;">
+                             <div x-show="open" x-transition class="absolute right-0 top-full mt-2 w-48 bg-brand-navy-light rounded-2xl shadow-2xl z-[110] overflow-hidden border border-brand-gold/20 py-1" style="display: none;">
                                  <a href="/" class="block px-4 py-2.5 text-sm text-white font-bold hover:bg-brand-gold hover:text-brand-navy">الكل</a>
                                   @if(isset($honeyCategories))
                                      @foreach($honeyCategories as $category)
@@ -146,7 +146,7 @@
                                 <span class="truncate max-w-[80px] font-medium">{{ explode(' ', Auth::user()->name)[0] }}</span>
                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </button>
-                            <div x-show="userOpen" x-transition class="absolute left-0 mt-2 w-48 bg-brand-navy-light rounded-2xl shadow-2xl z-50 overflow-hidden border border-brand-gold/20 py-1" style="display: none;">
+                            <div x-show="userOpen" x-transition class="absolute left-0 mt-2 w-48 bg-brand-navy-light rounded-2xl shadow-2xl z-[110] overflow-hidden border border-brand-gold/20 py-1" style="display: none;">
                                 <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-200 hover:bg-brand-gold hover:text-brand-navy transition-colors">الملف الشخصي</a>
                                 <a href="{{ route('orders.index') }}" class="block px-4 py-2 text-sm text-gray-200 hover:bg-brand-gold hover:text-brand-navy transition-colors">طلباتي</a>
                                 <div class="border-t border-brand-gold/10 my-1"></div>
@@ -169,7 +169,7 @@
         </div>
         
         <!-- Mobile Menu Overlay & Drawer -->
-        <div x-show="mobileMenuOpen" class="fixed inset-0 bg-brand-navy/90 z-[70] md:hidden backdrop-blur-md" @click="mobileMenuOpen = false" style="display: none;" x-transition.opacity duration.300ms></div>
+        <div x-show="mobileMenuOpen" class="fixed inset-0 bg-brand-navy/90 z-[120] md:hidden backdrop-blur-md" @click="mobileMenuOpen = false" style="display: none;" x-transition.opacity duration.300ms></div>
         <div x-show="mobileMenuOpen" 
              x-transition:enter="transition transform ease-out duration-300"
              x-transition:enter-start="translate-x-full"
@@ -177,7 +177,7 @@
              x-transition:leave="transition transform ease-in duration-300"
              x-transition:leave-start="translate-x-0"
              x-transition:leave-end="translate-x-full"
-             class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-brand-navy shadow-2xl z-[80] md:hidden overflow-y-auto flex flex-col" style="display: none;">
+             class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-brand-navy shadow-2xl z-[130] md:hidden overflow-y-auto flex flex-col" style="display: none;">
             
             <div class="px-6 py-8 bg-brand-navy-light border-b border-brand-gold/10 flex flex-col items-center text-center gap-4 relative">
                 <button @click="mobileMenuOpen = false" class="absolute top-4 left-4 p-2 text-gray-400 hover:text-white transition-colors bg-brand-navy rounded-full">
@@ -322,7 +322,7 @@
     <x-chat-widget />
 
     <!-- Cart Sidebar Drawer (Modern UI) -->
-    <div x-show="cartOpen" class="fixed inset-0 z-[100] overflow-hidden" style="display: none;" x-cloak>
+    <div x-show="cartOpen" class="fixed inset-0 z-[140] overflow-hidden" style="display: none;" x-cloak>
         <div class="absolute inset-0 bg-brand-navy/60 backdrop-blur-sm transition-opacity" @click="cartOpen = false" x-show="cartOpen" x-transition.opacity></div>
         
         <div class="absolute inset-y-0 left-0 max-w-full flex">
@@ -333,7 +333,7 @@
                  x-transition:leave="transform transition ease-in-out duration-500" 
                  x-transition:leave-start="translate-x-0" 
                  x-transition:leave-end="-translate-x-full"
-                 class="w-screen max-w-md bg-white shadow-2xl flex flex-col pt-6 pointer-events-auto">
+                 class="w-screen max-w-md bg-white shadow-2xl flex flex-col pt-6 pointer-events-auto z-[150]">
                 
                 <div class="px-6 pb-6 border-b border-gray-100 flex items-center justify-between">
                     <h2 class="text-2xl font-black text-brand-navy flex items-center gap-2">
