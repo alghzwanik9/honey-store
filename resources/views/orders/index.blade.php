@@ -61,7 +61,11 @@
                                             </td>
                                             <td class="px-6 py-4 flex gap-3 text-center">
                                                 @if($order->payment_status != 'paid')
-                                                    <a href="{{ route('checkout.payment', $order) }}" class="font-medium text-blue-600 hover:underline">إتمام الدفع</a>
+                                                    @if(in_array($order->payment_method, ['tamara', 'tabby']))
+                                                        <a href="{{ route('checkout.bnpl', $order) }}" class="font-medium text-blue-600 hover:underline">إتمام الدفع ({{ $order->payment_method == 'tamara' ? 'تمارا' : 'تابي' }})</a>
+                                                    @else
+                                                        <a href="{{ route('checkout.payment', $order) }}" class="font-medium text-blue-600 hover:underline">إتمام الدفع</a>
+                                                    @endif
                                                 @else
                                                     <div class="flex flex-col gap-2">
                                                         <a href="{{ route('orders.show', $order) }}" class="font-medium text-green-600 hover:underline">عرض التفاصيل</a>

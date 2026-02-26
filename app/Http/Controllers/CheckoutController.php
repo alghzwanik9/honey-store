@@ -76,8 +76,6 @@ class CheckoutController extends Controller
             ]);
         }
 
-        session()->forget('cart');
-
         // Redirect based on payment method
         if ($order->payment_method === 'card') {
             return redirect()->route('checkout.payment', $order->id);
@@ -86,6 +84,9 @@ class CheckoutController extends Controller
         if (in_array($order->payment_method, ['tamara', 'tabby'])) {
             return redirect()->route('checkout.bnpl', $order->id);
         }
+
+        // For COD, we can clear the cart immediately
+        session()->forget('cart');
 
         return redirect()->route('checkout.success', $order->id);
     }
