@@ -164,12 +164,15 @@
 
         @else
         {{-- حالة عدم وجود منتجات --}}
-        <div class="text-center py-24" dir="rtl">
-            <div class="text-7xl mb-6">🔍</div>
-            <h3 class="text-2xl font-black text-gray-800 mb-3">لم يتم العثور على منتجات</h3>
-            <p class="text-gray-400 mb-6">جرب البحث بكلمة أخرى أو تصفح جميع المنتجات</p>
-            <a href="{{ route('home') }}" class="bg-brand-gold hover:bg-brand-gold-dark text-brand-navy font-bold px-8 py-3 rounded-full transition-all shadow-lg inline-block">
-                عرض كل المنتجات
+        <div class="flex flex-col items-center justify-center text-center py-20 md:py-32 my-10 bg-brand-cream-light rounded-[3rem] border border-brand-gold/10 shadow-sm" dir="rtl">
+            <div class="bg-white w-24 h-24 rounded-full flex items-center justify-center shadow-md mb-6 border border-gray-100">
+                <span class="text-5xl">🔍</span>
+            </div>
+            <h3 class="text-3xl font-black text-brand-navy mb-4">لم يتم العثور على منتجات</h3>
+            <p class="text-gray-500 mb-8 text-lg max-w-md mx-auto leading-relaxed">عذراً، لم نتمكن من العثور على أي منتجات تطابق بحثك الحالي. جرب استخدام كلمات مختلفة أو عرض جميع المنتجات.</p>
+            <a href="{{ route('home') }}" class="group inline-flex items-center gap-2 bg-brand-navy hover:bg-brand-gold text-brand-gold hover:text-brand-navy font-black text-lg px-8 py-4 rounded-xl transition-all duration-300 shadow-xl hover:-translate-y-1">
+                <span>إزالة الفلاتر وعرض الكل</span>
+                <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
             </a>
         </div>
         @endif
