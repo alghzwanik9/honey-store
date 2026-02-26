@@ -45,7 +45,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             {{-- MOBILE LAYOUT --}}
-            <div class="flex justify-between items-center px-5 py-4 md:hidden relative z-[60]">
+            <div class="flex justify-between items-center px-4 py-4 lg:hidden relative z-[60]">
                  {{-- RIGHT: Hamburger + Logo --}}
                 <div class="flex items-center gap-4">
                     <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-white hover:text-brand-gold focus:outline-none transition-colors duration-300 p-2 -mr-2 relative z-[65]">
@@ -71,7 +71,7 @@
             </div>
 
             {{-- DESKTOP LAYOUT (Single Horizontal Line) --}}
-            <div class="hidden md:flex justify-between items-center py-2 px-6 lg:px-8">
+            <div class="hidden lg:flex justify-between items-center py-2 px-6 xl:px-8">
                 
                 {{-- Left Side: Brand & Navigation --}}
                 <div class="flex items-center gap-6 lg:gap-10">
@@ -85,7 +85,7 @@
                     </a>
 
                     <!-- Navigation Links -->
-                    <div class="hidden lg:flex items-center gap-6 text-sm font-black text-gray-200 tracking-wide">
+                    <div class="flex items-center gap-6 text-sm font-black text-gray-200 tracking-wide">
                         <a href="/" class="hover:text-brand-gold py-1 border-b-2 border-transparent hover:border-brand-gold transition-all duration-300 {{ request()->routeIs('home') ? 'text-brand-gold border-brand-gold' : '' }}">الرئيسية</a>
                         
                         <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
@@ -109,7 +109,7 @@
                 </div>
 
                 {{-- Center/Right: Search Integrated --}}
-                <div class="flex-grow max-w-md mx-8 hidden md:block">
+                <div class="flex-grow max-w-md mx-8 block">
                     <form action="{{ route('home') }}" method="GET" class="relative group">
                         <input type="text" name="search" value="{{ request('search') }}" 
                                placeholder="ابحث عن جودة العسل..." 
@@ -121,7 +121,7 @@
                 </div>
 
                 <div class="flex items-center gap-5">
-                    <div class="h-6 w-px bg-brand-gold/20 hidden md:block"></div>
+                    <div class="h-6 w-px bg-brand-gold/20 block"></div>
 
                      <!-- Cart -->
                      <button @click="cartOpen = true" class="relative group flex items-center gap-1.5 bg-brand-gold px-4 py-1.5 rounded-full hover:bg-brand-gold-light transition-all shadow-md hover:shadow-brand-gold/20 duration-300 pointer-events-auto">
@@ -167,7 +167,7 @@
         </div>
         
         <!-- Mobile Menu Overlay & Drawer -->
-        <div x-show="mobileMenuOpen" class="fixed inset-0 bg-brand-navy/90 z-[120] md:hidden backdrop-blur-md" @click="mobileMenuOpen = false" style="display: none;" x-transition.opacity duration.300ms></div>
+        <div x-show="mobileMenuOpen" class="fixed inset-0 bg-brand-navy/90 z-[120] lg:hidden backdrop-blur-md" @click="mobileMenuOpen = false" style="display: none;" x-transition.opacity duration.300ms></div>
         <div x-show="mobileMenuOpen" 
              x-transition:enter="transition transform ease-out duration-300"
              x-transition:enter-start="translate-x-full"
@@ -175,7 +175,7 @@
              x-transition:leave="transition transform ease-in duration-300"
              x-transition:leave-start="translate-x-0"
              x-transition:leave-end="translate-x-full"
-             class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-brand-navy shadow-2xl z-[130] md:hidden overflow-y-auto flex flex-col" style="display: none;">
+             class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-brand-navy shadow-2xl z-[130] lg:hidden overflow-y-auto flex flex-col" style="display: none;">
             
             <div class="px-6 py-8 bg-brand-navy-light border-b border-brand-gold/10 flex flex-col items-center text-center gap-4 relative">
                 <button @click="mobileMenuOpen = false" class="absolute top-4 left-4 p-2 text-gray-400 hover:text-white transition-colors bg-brand-navy rounded-full">
