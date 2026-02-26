@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             'checkout/webhook', // Exclude Moyasar Webhook
             'checkout/callback', // Exclude Callback in case of POST
+            'tamara/notification', // Exclude Tamara Webhooks
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

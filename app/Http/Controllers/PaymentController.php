@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class PaymentController extends Controller
 {
@@ -35,7 +36,107 @@ class PaymentController extends Controller
             return redirect()->route('payment.success', $order);
         }
 
+        if ($order->payment_method === 'tamara') {
+            return $this->processTamaraCheckout($order);
+        }
+
+        // Keep simulated view for Tabby until implemented
         return view('checkout.bnpl', compact('order'));
+    }
+
+    private function processTamaraCheckout(Order $order)
+    {
+        $apiUrl = config('services.tamara.api_url');
+        $merchantToken = config('services.tamara.merchant_token');
+
+        if (!$merchantToken) {
+            \Log::error('Tamara Merchant Token is missing.');
+            return redirect()->route('checkout.payment', $order)->with('error', 'خدمة دفع تمارا غير متوفرة حالياً.');
+        }
+
+        // Prepare order items
+        $items = $order->items->map(function ($item) {
+            return [
+                'reference_id' => (string) $item->product_id,
+                'type' => 'physical',
+                'name' => $item->product->name,
+                'sku' => 'SKU-' . $item->product_id,
+                'quantity' => $item->quantity,
+                'unit_price' => [
+                    'amount' => $item->price,
+                    'currency' => 'SAR',
+                ],
+                'total_amount' => [
+                    'amount' => $item->price * $item->quantity,
+                    'currency' => 'SAR',
+                ],
+            ];
+        })->toArray();
+
+        // Split name for Tamara requirements
+        $nameParts = explode(' ', $order->customer_name ?? 'العميل');
+        $firstName = $nameParts[0];
+        $lastName = count($nameParts) > 1 ? end($nameParts) : $firstName;
+
+        $payload = [
+            'order_reference_id' => (string) $order->id,
+            'total_amount' => [
+                'amount' => $order->total_amount,
+                'currency' => 'SAR',
+            ],
+            'description' => 'طلب رقم #' . $order->id . ' من مناحل وادي الجرفة',
+            'country_code' => 'SA',
+            'payment_type' => 'PAY_BY_INSTALMENTS',
+            'locale' => 'ar_SA',
+            'items' => $items,
+            'consumer' => [
+                'first_name' => collect(str_split($firstName))->take(64)->join(''),
+                'last_name' => collect(str_split($lastName))->take(64)->join(''),
+                'phone_number' => $order->customer_phone ?? '0500000000',
+                'email' => $order->user->email ?? 'customer@example.com',
+            ],
+            'shipping_address' => [
+                'first_name' => collect(str_split($firstName))->take(64)->join(''),
+                'last_name' => collect(str_split($lastName))->take(64)->join(''),
+                'line1' => collect(str_split($order->address ?? 'Riyadh'))->take(128)->join(''),
+                'city' => collect(str_split($order->city ?? 'Riyadh'))->take(128)->join(''),
+                'country_code' => 'SA',
+            ],
+            'merchant_url' => [
+                'success' => route('tamara.success', ['order' => $order->id]),
+                'failure' => route('tamara.failure', ['order' => $order->id]),
+                'cancel' => route('tamara.cancel', ['order' => $order->id]),
+                'notification' => route('tamara.notification', ['order' => $order->id]),
+            ],
+        ];
+
+        try {
+            $response = Http::withToken($merchantToken)
+                ->post($apiUrl . '/checkout', $payload);
+
+            if ($response->successful()) {
+                $data = $response->json();
+                
+                // Store Tamara Order ID if needed for future operations
+                $order->update([
+                    'payment_id' => $data['order_id'] ?? null
+                ]);
+
+                return redirect()->away($data['checkout_url']);
+            }
+
+            \Log::error('Tamara Checkout API Error: ', [
+                'status' => $response->status(),
+                'response' => $response->json(),
+                'payload' => $payload
+            ]);
+
+            return redirect()->route('checkout.payment', $order)->with('error', 'تعذر تهيئة الدفع عبر تمارا حالياً.');
+
+        } catch (\Exception $e) {
+            \Log::error('Tamara Exception: ' . $e->getMessage());
+            return redirect()->route('checkout.payment', $order)->with('error', 'حدث خطأ في الاتصال بخدمة تمارا.');
+        }
     }
 
     public function callback(Request $request)
@@ -186,15 +287,93 @@ class PaymentController extends Controller
         }
     }
 
-    /**
-     * Placeholder: Tamara Checkout
-     * To be implemented based on Tamara Documentation
-     */
-    public function tamaraCheckout(Order $order)
+    public function tamaraSuccess(Request $request, Order $order)
     {
-        // TODO: Implement Tamara Checkout Session creation
-        // 1. Call Tamara API to create checkout session
-        // 2. Redirect user to Tamara payment URL
-        return response()->json(['message' => 'Tamara integration coming soon...']);
+        // 1. Verify Payment Status via Tamara API
+        $apiUrl = config('services.tamara.api_url');
+        $merchantToken = config('services.tamara.merchant_token');
+        $paymentId = $request->query('paymentId') ?? $order->payment_id;
+
+        if ($paymentId) {
+            try {
+                // Determine order status from Tamara
+                $response = Http::withToken($merchantToken)
+                    ->get($apiUrl . '/orders/' . $paymentId);
+
+                if ($response->successful()) {
+                    $tamaraOrder = $response->json();
+                    
+                    // Possible statuses: NEW, APPROVED, AUTHORIZED, CANCELED, DECLINED...
+                    $status = $tamaraOrder['status'] ?? '';
+                    
+                    if (in_array($status, ['APPROVED', 'AUTHORIZED', 'FULLY_CAPTURED'])) {
+                        $order->update([
+                            'payment_status' => 'paid',
+                            'payment_id' => $paymentId
+                        ]);
+
+                        // Clear Cart
+                        try {
+                            session()->forget('cart');
+                        } catch (\Exception $e) {
+                            \Log::error('Failed to clear cart: ' . $e->getMessage());
+                        }
+
+                        // Send Invoice Email
+                        try {
+                            if ($order->user && $order->user->email) {
+                                \Illuminate\Support\Facades\Mail::to($order->user)->queue(new \App\Mail\InvoiceMail($order));
+                            }
+                        } catch (\Exception $e) {
+                            \Log::error('Failed to send invoice email: ' . $e->getMessage());
+                        }
+
+                        return redirect()->route('payment.success', ['order' => $order->id]);
+                    }
+                }
+            } catch (\Exception $e) {
+                \Log::error('Tamara Verification Error: ' . $e->getMessage());
+            }
+        }
+
+        // Fallback if verification fails but user is redirected here
+        return redirect()->route('payment.success', ['order' => $order->id])
+                         ->with('message', 'تم استلام طلبك، وجاري تأكيد الدفع مع تمارا.');
+    }
+
+    public function tamaraFailure(Request $request, Order $order)
+    {
+        \Log::warning('Tamara Payment Failed', ['order_id' => $order->id, 'request' => $request->all()]);
+        return redirect()->route('checkout.payment', $order)->with('error', 'فشلت عملية الدفع عبر تمارا. يرجى المحاولة مرة أخرى أو اختيار طريقة دفع أخرى.');
+    }
+
+    public function tamaraCancel(Request $request, Order $order)
+    {
+        \Log::info('Tamara Payment Canceled by User', ['order_id' => $order->id]);
+        return redirect()->route('checkout.payment', $order)->with('error', 'تم إلغاء عملية الدفع. يمكنك إعادة المحاولة حينما تكون مستعداً.');
+    }
+
+    public function tamaraNotification(Request $request)
+    {
+        // Tamara sends a webhook notification here when status changes
+        $payload = $request->all();
+        \Log::info('Tamara Webhook Received: ', $payload);
+        
+        $orderId = $payload['order_reference_id'] ?? null;
+        $status = $payload['order_status'] ?? null;
+
+        if ($orderId && $status) {
+            $order = Order::find($orderId);
+            if ($order && in_array($status, ['APPROVED', 'AUTHORIZED', 'FULLY_CAPTURED'])) {
+                if ($order->payment_status !== 'paid') {
+                    $order->update([
+                        'payment_status' => 'paid',
+                        'payment_id' => $payload['order_id'] ?? $order->payment_id,
+                    ]);
+                }
+            }
+        }
+
+        return response()->json(['status' => 'success']);
     }
 }

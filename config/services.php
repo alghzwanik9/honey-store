@@ -40,4 +40,10 @@ return [
         'publishable_key' => env('MOYASAR_PUBLISHABLE_API_KEY'),
     ],
 
+    'tamara' => [
+        'merchant_token' => env('TAMARA_MERCHANT_TOKEN'),
+        'public_key' => env('TAMARA_PUBLIC_KEY'),
+        'api_url' => env('TAMARA_API_URL', 'https://api-sandbox.tamara.co'),
+    ],
+
 ];

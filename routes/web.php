@@ -48,6 +48,12 @@ Route::get('/checkout/callback', [\App\Http\Controllers\PaymentController::class
 Route::get('/checkout/{order}/success', [\App\Http\Controllers\PaymentController::class, 'success'])->name('checkout.success');
 Route::get('/payment/success/{order}', [\App\Http\Controllers\PaymentController::class, 'success'])->name('payment.success');
 
+// Tamara Callbacks
+Route::get('/tamara/{order}/success', [\App\Http\Controllers\PaymentController::class, 'tamaraSuccess'])->name('tamara.success');
+Route::get('/tamara/{order}/failure', [\App\Http\Controllers\PaymentController::class, 'tamaraFailure'])->name('tamara.failure');
+Route::get('/tamara/{order}/cancel', [\App\Http\Controllers\PaymentController::class, 'tamaraCancel'])->name('tamara.cancel');
+Route::post('/tamara/notification', [\App\Http\Controllers\PaymentController::class, 'tamaraNotification'])->name('tamara.notification');
+
 // --- Authenticated Customer Routes ---
 
 Route::get('/dashboard', function () {
