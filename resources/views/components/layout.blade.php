@@ -12,8 +12,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/icon-v4.png">
+    <link rel="apple-touch-icon" href="/icon-v4.png">
     <link rel="manifest" href="/site.webmanifest?v=4">
     <meta name="theme-color" content="#d97706">
 
@@ -55,7 +55,7 @@
                         </div>
                     </button>
                     <a href="/" class="flex items-center gap-2">
-                        <img src="/images/logo.png" class="h-14 w-auto drop-shadow-lg object-contain" alt="مناحل وادي الجرفة">
+                        <img src="/images/logo.png" class="h-14 md:h-16 w-auto drop-shadow-lg object-contain" alt="مناحل وادي الجرفة">
                     </a>
                 </div>
 
@@ -79,7 +79,7 @@
                     <a href="/" class="flex items-center group shrink-0">
                         <div class="transition-transform duration-500 group-hover:scale-105">
                             <img src="/images/logo.png" 
-                                 class="h-16 md:h-20 w-auto object-contain filter drop-shadow-[0_0_15px_rgba(194,155,64,0.4)] brightness-110" 
+                                 class="h-20 md:h-24 w-auto object-contain filter drop-shadow-[0_0_15px_rgba(194,155,64,0.4)] brightness-110" 
                                  alt="مناحل وادي الجرفة">
                         </div>
                     </a>
@@ -181,9 +181,9 @@
                 <button @click="mobileMenuOpen = false" class="absolute top-4 left-4 p-2 text-gray-400 hover:text-white transition-colors bg-brand-navy rounded-full">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
-                <a href="/" class="transition-transform duration-300 active:scale-95 mt-2">
+                <a href="/" class="transition-transform duration-300 active:scale-95 mt-4">
                     <img src="/images/logo.png" 
-                         class="h-24 w-auto object-contain filter drop-shadow-[0_0_15px_rgba(194,155,64,0.4)] brightness-110" 
+                         class="h-28 w-auto object-contain filter drop-shadow-[0_0_15px_rgba(194,155,64,0.4)] brightness-110" 
                          alt="Logo">
                 </a>
                 <div>
@@ -274,7 +274,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-3 gap-10 text-center md:text-right mb-12">
                 <div>
-                    <img src="/images/logo.png" class="h-16 md:h-20 w-auto mb-6 mx-auto md:mx-0 opacity-100 transition duration-500 drop-shadow-[0_0_15px_rgba(194,155,64,0.4)] object-contain filter brightness-110" alt="مناحل وادي الجرفة">
+                    <img src="/images/logo.png" class="h-20 md:h-28 w-auto mb-6 mx-auto md:mx-0 opacity-100 transition duration-500 drop-shadow-[0_0_15px_rgba(194,155,64,0.4)] object-contain filter brightness-110" alt="مناحل وادي الجرفة">
                     <p class="text-sm leading-relaxed text-gray-200 font-bold">مناحل وادي الجرفة.. أصالة التراث وعذوبة المذاق في كل قطرة. نقدم لكم أجود أنواع العسل البلدي الطبيعي من مناحلنا مباشرة إليكم بكل فخر.</p>
                     {{-- Social Icons --}}
                     <div class="flex gap-4 mt-5 justify-center md:justify-start">

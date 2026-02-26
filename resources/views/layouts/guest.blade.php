@@ -13,8 +13,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
 
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="/favicon.png">
-        <link rel="apple-touch-icon" href="/favicon.png">
+        <link rel="icon" type="image/png" href="/icon-v4.png">
+        <link rel="apple-touch-icon" href="/icon-v4.png">
         <link rel="manifest" href="/site.webmanifest?v=4">
         <meta name="theme-color" content="#d97706">
 
@@ -27,9 +27,9 @@
             <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl"></div>
             <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-brand-navy/5 rounded-full blur-3xl"></div>
 
-            <div class="relative z-10 transition-transform duration-500 hover:scale-105 mb-4">
+            <div class="relative z-10 transition-transform duration-500 hover:scale-105 mb-6">
                 <a href="/" class="flex flex-col items-center gap-2">
-                    <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-28 md:h-40 w-auto object-contain filter drop-shadow-[0_0_25px_rgba(194,155,64,0.5)] brightness-110">
+                    <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-32 md:h-48 w-auto object-contain filter drop-shadow-[0_0_25px_rgba(194,155,64,0.5)] brightness-110">
                 </a>
             </div>
 

@@ -12,8 +12,8 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="/favicon.png">
-        <link rel="apple-touch-icon" href="/favicon.png">
+        <link rel="icon" type="image/png" href="/icon-v4.png">
+        <link rel="apple-touch-icon" href="/icon-v4.png">
         <link rel="manifest" href="/site.webmanifest?v=4">
         <meta name="theme-color" content="#d97706">
 
