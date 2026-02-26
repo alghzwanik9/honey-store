@@ -27,14 +27,22 @@
 </head>
 <body class="antialiased bg-brand-cream text-gray-800 font-cairo" x-data="{ cartOpen: false }">
 
-    <!-- Announcement Bar -->
-    <div class="bg-brand-gold text-brand-navy py-1.5 px-4 text-center text-[11px] md:text-xs font-black tracking-widest uppercase overflow-hidden relative">
-        <div class="flex items-center justify-center gap-4 animate-pulse">
-            <span>✨ شحن مجاني للطلبات فوق 300 ريال</span>
-            <span class="hidden sm:inline-block">/</span>
-            <span class="hidden sm:inline-block">قطفة الشتاء وصلت الآن 🍯</span>
+    @php
+        $announcementSetting = \App\Models\Setting::where('key', 'announcement_text')->first();
+        $announcementText = $announcementSetting ? $announcementSetting->value : '✨ شحن مجاني للطلبات فوق 300 ريال / قطفة الشتاء وصلت الآن 🍯';
+        
+        $activeSetting = \App\Models\Setting::where('key', 'announcement_active')->first();
+        $isActive = $activeSetting ? filter_var($activeSetting->value, FILTER_VALIDATE_BOOLEAN) : true;
+    @endphp
+
+    @if($isActive && !empty($announcementText))
+        <!-- Announcement Bar -->
+        <div class="bg-brand-gold text-brand-navy py-1.5 px-4 text-center text-[11px] md:text-xs font-black tracking-widest uppercase overflow-hidden relative">
+            <div class="flex items-center justify-center gap-4 animate-pulse">
+                <span>{{ $announcementText }}</span>
+            </div>
         </div>
-    </div>
+    @endif
 
     <!-- Main Navigation -->
     <nav x-data="{ mobileMenuOpen: false, scrolled: false }" 
