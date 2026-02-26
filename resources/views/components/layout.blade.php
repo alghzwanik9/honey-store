@@ -26,24 +26,7 @@
         }
     </style>
 </head>
-<body class="antialiased bg-brand-cream text-gray-800 font-cairo" x-data="{ cartOpen: false, mobileMenuOpen: false }">
-
-    @php
-        $announcementSetting = \App\Models\Setting::where('key', 'announcement_text')->first();
-        $announcementText = $announcementSetting ? $announcementSetting->value : '✨ شحن مجاني للطلبات فوق 300 ريال / قطفة الشتاء وصلت الآن 🍯';
-        
-        $activeSetting = \App\Models\Setting::where('key', 'announcement_active')->first();
-        $isActive = $activeSetting ? filter_var($activeSetting->value, FILTER_VALIDATE_BOOLEAN) : true;
-    @endphp
-
-    @if($isActive && !empty($announcementText))
-        <!-- Announcement Bar -->
-        <div class="bg-brand-gold text-brand-navy py-1.5 px-4 text-center text-[11px] md:text-xs font-black tracking-widest uppercase overflow-hidden relative">
-            <div class="flex items-center justify-center gap-4 animate-pulse">
-                <span>{{ $announcementText }}</span>
-            </div>
-        </div>
-    @endif
+<body class="antialiased bg-brand-cream text-gray-800 font-cairo" x-data="{ cartOpen: false, mobileMenuOpen: false, aboutModalOpen: false }">
 
     <!-- Main Navigation -->
     <nav x-data="{ scrolled: false }" 
@@ -198,7 +181,6 @@
                 </a>
                 <div>
                     <h2 class="text-xl font-black text-white mb-1">مناحل وادي الجرفة</h2>
-                    <p class="text-brand-gold text-xs font-bold tracking-widest uppercase">أصالة التراث</p>
                 </div>
             </div>
 
@@ -299,7 +281,7 @@
                     <h3 class="text-white font-bold text-lg mb-5 border-r-4 border-brand-gold pr-3">روابط سريعة</h3>
                     <ul class="space-y-3 text-sm">
                         <li><a href="/" class="hover:text-brand-gold transition flex items-center gap-2 justify-center md:justify-start"><span class="text-brand-gold">›</span> الرئيسية</a></li>
-                        <li><a href="#" class="hover:text-brand-gold transition flex items-center gap-2 justify-center md:justify-start"><span class="text-brand-gold">›</span> عن مناحل وادي الجرفة</a></li>
+                        <li><a href="#" @click.prevent="aboutModalOpen = true" class="hover:text-brand-gold transition flex items-center gap-2 justify-center md:justify-start"><span class="text-brand-gold">›</span> عن مناحل وادي الجرفة</a></li>
                         <li><a href="{{ route('privacy-policy') }}" class="hover:text-brand-gold transition flex items-center gap-2 justify-center md:justify-start"><span class="text-brand-gold">›</span> سياسة الخصوصية</a></li>
                         <li><a href="{{ route('refund-policy') }}" class="hover:text-brand-gold transition flex items-center gap-2 justify-center md:justify-start"><span class="text-brand-gold">›</span> سياسة الاستبدال والاسترجاع</a></li>
                         <li><a href="{{ route('terms') }}" class="hover:text-brand-gold transition flex items-center gap-2 justify-center md:justify-start"><span class="text-brand-gold">›</span> الشروط والأحكام</a></li>
@@ -325,6 +307,45 @@
             </div>
         </div>
     </footer>
+
+    <!-- About Modal -->
+    <div x-show="aboutModalOpen" class="fixed inset-0 z-[200] overflow-y-auto" style="display: none;" x-cloak>
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div x-show="aboutModalOpen" x-transition.opacity class="fixed inset-0 bg-brand-navy/80 backdrop-blur-sm transition-opacity" @click="aboutModalOpen = false"></div>
+            
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            
+            <div x-show="aboutModalOpen" x-transition.scale.origin.bottom class="inline-block align-bottom bg-brand-cream rounded-3xl text-right overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md w-full border border-brand-gold/20" @click.away="aboutModalOpen = false">
+                <div class="px-6 py-6 pb-8">
+                    <div class="flex justify-between items-center mb-5 border-b border-brand-gold/10 pb-4">
+                        <button @click="aboutModalOpen = false" class="text-gray-400 hover:text-red-500 transition-colors bg-white rounded-full p-1 shadow-sm focus:outline-none">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        <h3 class="text-xl leading-6 font-black text-brand-navy flex items-center gap-2" id="modal-title">
+                            عن مناحل وادي الجرفة <span class="text-2xl">🍯</span>
+                        </h3>
+                    </div>
+                    
+                    <div class="mt-2 space-y-4">
+                        <p class="text-sm text-gray-700 leading-relaxed font-bold">
+                            نحن في مناحل وادي الجرفة نضع الجودة والأصالة على رأس أولوياتنا. نفخر بتقديم أعسال بلدية طبيعية 100% قطفت بعناية فائقة وتعبأ وفق أعلى معايير الجودة لتصل إليكم محتفظة بكامل فوائدها وخصائصها الطبيعية.
+                        </p>
+                        <p class="text-sm text-gray-700 leading-relaxed font-bold">
+                            كل قطرة عسل لدينا هي نتاج جهود مستمرة واهتمام دقيق بكل التفاصيل لنقدم لكم ما يليق بثقتكم.
+                        </p>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <button @click="aboutModalOpen = false" class="w-full inline-flex justify-center rounded-xl bg-brand-gold pt-3 pb-2.5 px-4 text-brand-navy hover:bg-brand-gold-light hover:text-brand-navy font-black text-sm transition shadow-lg shadow-brand-gold/20 focus:outline-none">
+                            حسناً، فهمت
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <x-chat-widget />
 
