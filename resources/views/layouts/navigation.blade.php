@@ -16,7 +16,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}" class="flex items-center">
-                        <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="block h-12 w-auto object-contain">
+                        <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="block h-10 md:h-14 w-auto object-contain">
                     </a>
                 </div>
 

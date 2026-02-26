@@ -1,31 +1,31 @@
 <x-layout title="تم الطلب بنجاح">
     <div class="container mx-auto px-4 py-20" dir="rtl">
-        <div class="max-w-2xl mx-auto bg-brand-cream-light rounded-[3rem] shadow-2xl overflow-hidden text-center p-16 border border-brand-gold/10 relative">
+        <div class="max-w-2xl mx-auto bg-brand-navy-light rounded-[3rem] shadow-2xl overflow-hidden text-center p-16 border border-brand-gold/10 relative">
             <div class="absolute top-0 right-0 w-full h-2 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold"></div>
             <div class="mb-10 flex flex-col items-center justify-center">
                 <div class="transition-all duration-500 hover:scale-105">
-                    <img src="/images/logo.png" class="h-32 w-auto object-contain" alt="مناحل وادي الجرفة">
+                    <img src="/images/logo.png" class="h-10 md:h-14 w-auto object-contain" alt="مناحل وادي الجرفة">
                 </div>
             </div>
 
-            <h1 class="text-4xl font-black text-brand-navy mb-4">تهانينا! تم الطلب بنجاح</h1>
-            <p class="text-xl text-gray-500 mb-10 leading-relaxed">نشكرك على ثقتك في مناحل وادي الجرفة. طلبك قيد التجهيز الآن بكل فخر.</p>
+            <h1 class="text-4xl font-black text-white mb-4">تهانينا! تم الطلب بنجاح</h1>
+            <p class="text-xl text-gray-400 mb-10 leading-relaxed">نشكرك على ثقتك في مناحل وادي الجرفة. طلبك قيد التجهيز الآن بكل فخر.</p>
 
-            <div class="bg-brand-beige/50 rounded-3xl p-10 mb-12 text-right border border-brand-gold/5 shadow-inner relative overflow-hidden">
+            <div class="bg-brand-navy rounded-3xl p-10 mb-12 text-right border border-gray-800 shadow-inner relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-1.5 h-full bg-brand-gold"></div>
                 <div class="flex justify-between items-center mb-2">
-                    <span class="text-gray-600">رقم الطلب:</span>
-                    <span class="font-bold text-gray-900 text-lg">#{{ $order->id }}</span>
+                    <span class="text-gray-400">رقم الطلب:</span>
+                    <span class="font-bold text-gray-200 text-lg">#{{ $order->id }}</span>
                 </div>
                 <div class="flex justify-between items-center mb-3">
-                    <span class="text-gray-500 font-medium">حالة الدفع:</span>
-                    <span class="font-bold {{ $order->payment_status === 'paid' ? 'text-emerald-600' : 'text-brand-gold' }}">
+                    <span class="text-gray-400 font-medium">حالة الدفع:</span>
+                    <span class="font-bold {{ $order->payment_status === 'paid' ? 'text-emerald-400' : 'text-brand-gold' }}">
                         {{ $order->payment_status === 'paid' ? 'مدفوع بنجاح' : 'بانتظار الدفع / عند الاستلام' }}
                     </span>
                 </div>
                 <div class="flex justify-between items-center">
-                    <span class="text-gray-500 font-bold">الإجمالي النهائي:</span>
-                    <span class="font-black text-brand-navy text-3xl flex items-center gap-2">
+                    <span class="text-gray-400 font-bold">الإجمالي النهائي:</span>
+                    <span class="font-black text-white text-3xl flex items-center gap-2">
                         {{ number_format($order->total_amount) }} 
                         <x-currency-symbol class="w-10 h-10 text-brand-gold" />
                     </span>

@@ -48,7 +48,7 @@
                         </div>
                     </button>
                     <a href="/" class="flex items-center gap-2">
-                        <img src="/images/logo.png" class="h-14 w-auto drop-shadow-lg object-contain" alt="مناحل وادي الجرفة">
+                        <img src="/images/logo.png" class="h-10 md:h-14 w-auto drop-shadow-lg object-contain" alt="مناحل وادي الجرفة">
                     </a>
                 </div>
 
@@ -71,7 +71,7 @@
                     <!-- Brand (Right) -->
                     <a href="/" class="flex items-center group">
                         <div class="transition-transform duration-500 group-hover:scale-105">
-                            <img src="/images/logo.png" class="h-28 w-auto object-contain" alt="مناحل وادي الجرفة">
+                            <img src="/images/logo.png" class="h-10 md:h-14 w-auto object-contain" alt="مناحل وادي الجرفة">
                         </div>
                     </a>
 
@@ -163,7 +163,7 @@
             
             <div class="p-8 bg-brand-navy-light border-b border-brand-gold/10 flex flex-col items-center text-center gap-4">
                 <a href="/" class="transition-transform duration-300 active:scale-95">
-                    <img src="/images/logo.png" class="h-24 w-auto object-contain" alt="Logo">
+                    <img src="/images/logo.png" class="h-10 md:h-14 w-auto object-contain" alt="Logo">
                 </a>
                 <div>
                     <h2 class="text-xl font-black text-white mb-1">مناحل وادي الجرفة</h2>
@@ -235,7 +235,7 @@
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-3 gap-10 text-center md:text-right mb-12">
                 <div>
-                    <img src="/images/logo.png" class="h-20 w-auto mb-4 mx-auto md:mx-0 opacity-90 hover:opacity-100 transition duration-500 drop-shadow-[0_0_10px_rgba(194,155,64,0.3)] object-contain" alt="مناحل وادي الجرفة">
+                    <img src="/images/logo.png" class="h-10 md:h-14 w-auto mb-4 mx-auto md:mx-0 opacity-90 hover:opacity-100 transition duration-500 drop-shadow-[0_0_10px_rgba(194,155,64,0.3)] object-contain" alt="مناحل وادي الجرفة">
                     <p class="text-sm leading-relaxed text-gray-400 font-medium">مناحل وادي الجرفة.. أصالة التراث وعذوبة المذاق في كل قطرة. نقدم لكم أجود أنواع العسل البلدي الطبيعي من مناحلنا مباشرة إليكم بكل فخر.</p>
                     {{-- Social Icons --}}
                     <div class="flex gap-4 mt-5 justify-center md:justify-start">

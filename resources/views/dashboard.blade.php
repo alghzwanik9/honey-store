@@ -7,15 +7,15 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-brand-cream-light overflow-hidden shadow-2xl sm:rounded-[3rem] border border-brand-gold/10 relative">
+            <div class="bg-brand-navy-light overflow-hidden shadow-2xl sm:rounded-[3rem] border border-brand-gold/10 relative">
                 <div class="absolute top-0 right-0 w-full h-2 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold"></div>
-                <div class="p-16 text-brand-navy text-center">
+                <div class="p-16 text-gray-200 text-center">
                     <div class="mb-10 flex justify-center">
                         <div class="transition-all duration-500 hover:scale-110">
-                             <img src="/images/logo.png" class="h-32 w-auto object-contain" alt="Logo">
+                             <img src="/images/logo.png" class="h-10 md:h-14 w-auto object-contain" alt="Logo">
                         </div>
                     </div>
-                    <h3 class="text-4xl font-black text-brand-navy mb-4">{{ __("مرحباً بك في لوحة التحكم") }}</h3>
+                    <h3 class="text-4xl font-black text-white mb-4">{{ __("مرحباً بك في لوحة التحكم") }}</h3>
                     <p class="text-gray-400 mb-12 text-xl font-medium">{{ __("من هنا يمكنك متابعة طلباتك وإدارة حسابك بكل فخر في مناحلنا.") }}</p>
                     
                     <div class="flex justify-center mt-6">
