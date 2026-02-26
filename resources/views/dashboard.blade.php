@@ -12,11 +12,11 @@
                 <div class="p-16 text-gray-200 text-center">
                     <div class="mb-10 flex justify-center">
                         <div class="transition-all duration-500 hover:scale-110">
-                             <img src="/images/logo.png" class="h-10 md:h-14 w-auto object-contain" alt="Logo">
+                             <img src="/images/logo.png" class="h-20 md:h-28 w-auto object-contain filter drop-shadow-[0_0_15px_rgba(194,155,64,0.3)]" alt="Logo">
                         </div>
                     </div>
-                    <h3 class="text-4xl font-black text-white mb-4">{{ __("مرحباً بك في لوحة التحكم") }}</h3>
-                    <p class="text-gray-400 mb-12 text-xl font-medium">{{ __("من هنا يمكنك متابعة طلباتك وإدارة حسابك بكل فخر في مناحلنا.") }}</p>
+                    <h3 class="text-4xl md:text-5xl font-black text-white mb-6">{{ __("مرحباً بك في لوحة التحكم") }}</h3>
+                    <p class="text-gray-200 mb-12 text-xl font-bold leading-relaxed">{{ __("من هنا يمكنك متابعة طلباتك وإدارة حسابك بكل فخر في مناحلنا.") }}</p>
                     
                     <div class="flex justify-center mt-6">
                         <a href="/" class="inline-flex items-center justify-center px-10 py-4 text-lg font-black text-brand-gold transition-all duration-300 transform rounded-xl hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-gold shadow-xl bg-brand-navy hover:bg-brand-gold hover:text-brand-navy group" style="min-width: 240px; text-decoration: none;">

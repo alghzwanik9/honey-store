@@ -57,7 +57,7 @@
                         </div>
                     </button>
                     <a href="/" class="flex items-center gap-2">
-                        <img src="/images/logo.png" class="h-11 w-auto drop-shadow-lg object-contain" alt="مناحل وادي الجرفة">
+                        <img src="/images/logo.png" class="h-14 w-auto drop-shadow-lg object-contain" alt="مناحل وادي الجرفة">
                     </a>
                 </div>
 
@@ -81,13 +81,13 @@
                     <a href="/" class="flex items-center group shrink-0">
                         <div class="transition-transform duration-500 group-hover:scale-105">
                             <img src="/images/logo.png" 
-                                 class="h-14 md:h-16 w-auto object-contain filter drop-shadow-[0_0_12px_rgba(194,155,64,0.4)] brightness-110" 
+                                 class="h-16 md:h-20 w-auto object-contain filter drop-shadow-[0_0_15px_rgba(194,155,64,0.4)] brightness-110" 
                                  alt="مناحل وادي الجرفة">
                         </div>
                     </a>
 
                     <!-- Navigation Links -->
-                    <div class="hidden lg:flex items-center gap-6 text-sm font-bold text-gray-300">
+                    <div class="hidden lg:flex items-center gap-6 text-sm font-black text-gray-200 tracking-wide">
                         <a href="/" class="hover:text-brand-gold py-1 border-b-2 border-transparent hover:border-brand-gold transition-all duration-300 {{ request()->routeIs('home') ? 'text-brand-gold border-brand-gold' : '' }}">الرئيسية</a>
                         
                         <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
@@ -139,11 +139,11 @@
                     @auth
                         <!-- User Menu -->
                         <div class="relative group" x-data="{ userOpen: false }" @mouseenter="userOpen = true" @mouseleave="userOpen = false">
-                            <button class="flex items-center gap-1.5 text-white bg-brand-navy-light px-3 py-1.5 rounded-full hover:bg-brand-gold hover:text-brand-navy transition border border-brand-gold/10 text-sm">
+                            <button class="flex items-center gap-1.5 text-white bg-brand-navy-light px-3 py-1.5 rounded-full hover:bg-brand-gold hover:text-brand-navy transition border border-brand-gold/10 text-sm font-black">
                                 <div class="w-6 h-6 bg-brand-gold/20 rounded-full flex items-center justify-center text-brand-gold group-hover:text-brand-navy group-hover:bg-transparent">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                                 </div>
-                                <span class="truncate max-w-[80px] font-medium">{{ explode(' ', Auth::user()->name)[0] }}</span>
+                                <span class="truncate max-w-[80px]">{{ explode(' ', Auth::user()->name)[0] }}</span>
                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </button>
                             <div x-show="userOpen" x-transition class="absolute left-0 mt-2 w-48 bg-brand-navy-light rounded-2xl shadow-2xl z-[110] overflow-hidden border border-brand-gold/20 py-1" style="display: none;">
@@ -276,8 +276,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-3 gap-10 text-center md:text-right mb-12">
                 <div>
-                    <img src="/images/logo.png" class="h-10 md:h-14 w-auto mb-4 mx-auto md:mx-0 opacity-90 hover:opacity-100 transition duration-500 drop-shadow-[0_0_10px_rgba(194,155,64,0.3)] object-contain" alt="مناحل وادي الجرفة">
-                    <p class="text-sm leading-relaxed text-gray-400 font-medium">مناحل وادي الجرفة.. أصالة التراث وعذوبة المذاق في كل قطرة. نقدم لكم أجود أنواع العسل البلدي الطبيعي من مناحلنا مباشرة إليكم بكل فخر.</p>
+                    <img src="/images/logo.png" class="h-16 md:h-20 w-auto mb-6 mx-auto md:mx-0 opacity-100 transition duration-500 drop-shadow-[0_0_15px_rgba(194,155,64,0.4)] object-contain filter brightness-110" alt="مناحل وادي الجرفة">
+                    <p class="text-sm leading-relaxed text-gray-200 font-bold">مناحل وادي الجرفة.. أصالة التراث وعذوبة المذاق في كل قطرة. نقدم لكم أجود أنواع العسل البلدي الطبيعي من مناحلنا مباشرة إليكم بكل فخر.</p>
                     {{-- Social Icons --}}
                     <div class="flex gap-4 mt-5 justify-center md:justify-start">
                         <a href="https://wa.me/966550360118" target="_blank" class="w-9 h-9 rounded-full bg-brand-navy-light hover:bg-green-600 flex items-center justify-center transition-colors duration-300 border border-brand-gold/10" title="واتساب">

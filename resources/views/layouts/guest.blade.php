@@ -31,7 +31,7 @@
 
             <div class="relative z-10 transition-transform duration-500 hover:scale-105">
                 <a href="/" class="flex flex-col items-center gap-2">
-                    <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-10 md:h-14 w-auto object-contain drop-shadow-[0_0_15px_rgba(194,155,64,0.3)]">
+                    <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-20 md:h-32 w-auto object-contain filter drop-shadow-[0_0_20px_rgba(194,155,64,0.4)] brightness-110">
                 </a>
             </div>
 
