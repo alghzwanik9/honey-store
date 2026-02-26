@@ -63,91 +63,94 @@
                 </a>
             </div>
 
-            {{-- DESKTOP LAYOUT --}}
-            <div class="hidden md:flex flex-col gap-4 py-4 px-6 lg:px-8">
+            {{-- DESKTOP LAYOUT (Single Horizontal Line) --}}
+            <div class="hidden md:flex justify-between items-center py-2 px-6 lg:px-8">
                 
-                {{-- Row 1: Brand & Actions --}}
-                <div class="flex justify-between items-center border-b border-brand-gold/10 pb-4">
-                    <!-- Brand (Right) -->
-                    <a href="/" class="flex items-center group">
+                {{-- Left Side: Brand & Navigation --}}
+                <div class="flex items-center gap-8">
+                    <!-- Brand -->
+                    <a href="/" class="flex items-center group shrink-0">
                         <div class="transition-transform duration-500 group-hover:scale-105">
-                            <img src="/images/logo.png" class="h-10 md:h-14 w-auto object-contain" alt="مناحل وادي الجرفة">
+                            <img src="/images/logo.png" class="h-10 md:h-12 w-auto object-contain" alt="مناحل وادي الجرفة">
                         </div>
                     </a>
 
-                    <!-- Actions -->
-                    <div class="flex items-center gap-6">
-                        <!-- Search: Clean Gray Input -->
-                        <div class="relative group">
-                            <form action="{{ route('home') }}" method="GET">
-                                <input type="text" name="search" value="{{ request('search') }}" placeholder="ابحث عن منتج..." class="bg-brand-navy-light/50 border border-brand-gold/20 text-white placeholder-gray-400 rounded-full px-5 py-2.5 w-72 focus:ring-2 focus:ring-brand-gold focus:bg-brand-navy-light focus:border-transparent transition-all shadow-sm group-hover:shadow-md">
-                                <button type="submit" class="absolute left-3 top-2.5 text-gray-400 hover:text-brand-gold transition-colors">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                                </button>
-                            </form>
-                        </div>
+                    <!-- Navigation Links -->
+                    <div class="hidden lg:flex items-center gap-6 text-sm font-bold text-gray-300">
+                        <a href="/" class="hover:text-brand-gold py-1 border-b-2 border-transparent hover:border-brand-gold transition-all duration-300 {{ request()->routeIs('home') ? 'text-brand-gold border-brand-gold' : '' }}">الرئيسية</a>
                         
-                        <div class="h-8 w-px bg-brand-gold/20"></div>
-
-                         <!-- Cart: Premium button shape preserved -->
-                         <a href="{{ route('cart.index') }}" class="relative group flex items-center gap-2 bg-brand-gold px-5 py-2.5 rounded-full hover:bg-brand-gold-light transition-all shadow-lg hover:shadow-brand-gold/20 duration-300">
-                            <span class="text-brand-navy font-bold">السلة</span>
-                            <div class="relative">
-                                <svg class="w-5 h-5 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                                @if(session('cart') && count(session('cart')) > 0)
-                                    <span class="absolute -top-3 -right-3 bg-brand-navy text-white text-[10px] font-bold h-5 w-5 flex items-center justify-center rounded-full border-2 border-brand-gold">{{ count(session('cart')) }}</span>
+                        <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                             <button class="flex items-center gap-1 hover:text-brand-gold py-1 border-b-2 border-transparent hover:border-brand-gold transition-all duration-300">
+                                <span>المنتجات</span>
+                                <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div x-show="open" x-transition class="absolute right-0 top-full mt-2 w-48 bg-brand-navy-light rounded-2xl shadow-2xl z-50 overflow-hidden border border-brand-gold/20 py-1" style="display: none;">
+                                <a href="/" class="block px-4 py-2.5 text-sm text-white font-bold hover:bg-brand-gold hover:text-brand-navy">الكل</a>
+                                 @if(isset($honeyCategories))
+                                    @foreach($honeyCategories as $category)
+                                        <a href="/?category={{ $category->slug }}" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors">{{ $category->name }}</a>
+                                    @endforeach
                                 @endif
+                                <div class="border-t border-brand-gold/10 my-1"></div>
+                                <a href="/?category=offers" class="block px-4 py-2.5 text-sm text-brand-gold hover:bg-brand-gold hover:text-brand-navy transition-colors">العروض</a>
+                                <a href="/?category=beeswax" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors">شمع العسل</a>
                             </div>
-                        </a>
-                        
-                        @auth
-                            <!-- User Menu -->
-                            <div class="relative group" x-data="{ userOpen: false }" @mouseenter="userOpen = true" @mouseleave="userOpen = false">
-                                <button class="flex items-center gap-2 text-white font-bold bg-brand-navy-light px-4 py-2 rounded-full hover:bg-brand-gold hover:text-brand-navy transition border border-brand-gold/10">
-                                    <span>{{ Auth::user()->name }}</span>
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </button>
-                                <div x-show="userOpen" x-transition class="absolute left-0 mt-2 w-48 bg-brand-navy-light rounded-2xl shadow-2xl z-50 overflow-hidden border border-brand-gold/20 py-1" style="display: none;">
-                                    <a href="{{ route('profile.edit') }}" class="block px-4 py-2.5 text-sm text-gray-200 hover:bg-brand-gold hover:text-brand-navy transition-colors">الملف الشخصي</a>
-                                    <a href="{{ route('orders.index') }}" class="block px-4 py-2.5 text-sm text-gray-200 hover:bg-brand-gold hover:text-brand-navy transition-colors">طلباتي</a>
-                                    <div class="border-t border-brand-gold/10 my-1"></div>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <button type="submit" class="block w-full text-right px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 transition-colors">تسجيل الخروج</button>
-                                    </form>
-                                </div>
-                            </div>
-                        @else
-                            <div class="flex items-center gap-1 font-bold text-sm">
-                                <a href="{{ route('login') }}" class="text-white hover:text-brand-gold px-3 py-2 rounded-lg transition">دخول</a>
-                                <span class="text-brand-gold/30">|</span>
-                                <a href="{{ route('register') }}" class="text-brand-gold hover:text-brand-gold-light px-3 py-2 rounded-lg transition border border-brand-gold/20 hover:border-brand-gold">تسجيل</a>
-                            </div>
-                        @endauth
+                        </div>
                     </div>
                 </div>
 
-                {{-- Row 2: Navigation Links --}}
-                <div class="flex justify-center items-center gap-10 text-base font-bold text-gray-300">
-                    <a href="/" class="hover:text-brand-gold py-2 border-b-2 border-transparent hover:border-brand-gold transition-all duration-300 {{ request()->routeIs('home') ? 'text-brand-gold border-brand-gold' : '' }}">الرئيسية</a>
+                {{-- Right Side: Actions (Search, Cart, User) --}}
+                <div class="flex items-center gap-4">
+                    <!-- Search -->
+                    <div class="relative group hidden xl:block">
+                        <form action="{{ route('home') }}" method="GET">
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="ابحث..." class="bg-brand-navy-light/50 border border-brand-gold/20 text-white placeholder-gray-400 rounded-full px-4 py-1.5 w-48 lg:w-64 focus:ring-2 focus:ring-brand-gold focus:bg-brand-navy-light focus:border-transparent transition-all shadow-sm text-sm">
+                            <button type="submit" class="absolute left-2.5 top-1.5 text-gray-400 hover:text-brand-gold transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            </button>
+                        </form>
+                    </div>
                     
-                    <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-                         <button class="flex items-center gap-1 hover:text-brand-gold py-2 border-b-2 border-transparent hover:border-brand-gold transition-all duration-300">
-                            <span>جميع أنواع العسل</span>
-                            <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </button>
-                        <div x-show="open" x-transition class="absolute right-0 top-full mt-0 w-64 bg-brand-navy-light rounded-2xl shadow-2xl z-50 overflow-hidden border border-brand-gold/20 py-2" style="display: none;">
-                            <a href="/" class="block px-5 py-3 text-white font-bold hover:bg-brand-gold hover:text-brand-navy">عرض الكل</a>
-                             @if(isset($honeyCategories))
-                                @foreach($honeyCategories as $category)
-                                    <a href="/?category={{ $category->slug }}" class="block px-5 py-3 text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors">{{ $category->name }}</a>
-                                @endforeach
+                    <div class="h-6 w-px bg-brand-gold/20 hidden xl:block"></div>
+
+                     <!-- Cart -->
+                     <a href="{{ route('cart.index') }}" class="relative group flex items-center gap-1.5 bg-brand-gold px-4 py-1.5 rounded-full hover:bg-brand-gold-light transition-all shadow-md hover:shadow-brand-gold/20 duration-300">
+                        <span class="text-brand-navy font-bold text-sm hidden sm:inline-block">السلة</span>
+                        <div class="relative">
+                            <svg class="w-4 h-4 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            @if(session('cart') && count(session('cart')) > 0)
+                                <span class="absolute -top-2 -right-2 bg-brand-navy text-white text-[9px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-brand-gold">{{ count(session('cart')) }}</span>
                             @endif
                         </div>
-                    </div>
-
-                    <a href="/?category=offers" class="hover:text-brand-gold py-2 border-b-2 border-transparent hover:border-brand-gold transition-all duration-300">العروض</a>
-                    <a href="/?category=beeswax" class="hover:text-brand-gold py-2 border-b-2 border-transparent hover:border-brand-gold transition-all duration-300">شمع العسل</a>
+                    </a>
+                    
+                    @auth
+                        <!-- User Menu -->
+                        <div class="relative group" x-data="{ userOpen: false }" @mouseenter="userOpen = true" @mouseleave="userOpen = false">
+                            <button class="flex items-center gap-1.5 text-white bg-brand-navy-light px-3 py-1.5 rounded-full hover:bg-brand-gold hover:text-brand-navy transition border border-brand-gold/10 text-sm">
+                                <div class="w-6 h-6 bg-brand-gold/20 rounded-full flex items-center justify-center text-brand-gold group-hover:text-brand-navy group-hover:bg-transparent">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                </div>
+                                <span class="truncate max-w-[80px] font-medium">{{ explode(' ', Auth::user()->name)[0] }}</span>
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div x-show="userOpen" x-transition class="absolute left-0 mt-2 w-48 bg-brand-navy-light rounded-2xl shadow-2xl z-50 overflow-hidden border border-brand-gold/20 py-1" style="display: none;">
+                                <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-200 hover:bg-brand-gold hover:text-brand-navy transition-colors">الملف الشخصي</a>
+                                <a href="{{ route('orders.index') }}" class="block px-4 py-2 text-sm text-gray-200 hover:bg-brand-gold hover:text-brand-navy transition-colors">طلباتي</a>
+                                <div class="border-t border-brand-gold/10 my-1"></div>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="block w-full text-right px-4 py-2 text-sm text-red-400 hover:bg-red-500/10 transition-colors">تسجيل الخروج</button>
+                                </form>
+                            </div>
+                        </div>
+                    @else
+                        <div class="flex items-center gap-1 font-bold text-sm">
+                            <a href="{{ route('login') }}" class="text-white hover:text-brand-gold px-2 py-1.5 rounded-lg transition">دخول</a>
+                            <span class="text-brand-gold/30">|</span>
+                            <a href="{{ route('register') }}" class="text-brand-gold hover:text-brand-gold-light px-2 py-1.5 rounded-lg transition border border-brand-gold/20 hover:border-brand-gold">تسجيل</a>
+                        </div>
+                    @endauth
                 </div>
             </div>
 
