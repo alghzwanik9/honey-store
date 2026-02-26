@@ -101,7 +101,7 @@
                                  <span>المنتجات</span>
                                  <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                              </button>
-                             <div x-show="open" x-transition class="absolute right-0 top-full mt-2 w-48 bg-brand-navy-light rounded-2xl shadow-2xl z-[110] overflow-hidden border border-brand-gold/20 py-1" style="display: none;">
+                             <div x-show="open" x-transition class="absolute right-0 top-full mt-2 w-48 bg-brand-navy-light rounded-2xl shadow-2xl z-[999] overflow-hidden border border-brand-gold/20 py-1" style="display: none;">
                                  <a href="/" class="block px-4 py-2.5 text-sm text-white font-bold hover:bg-brand-gold hover:text-brand-navy">الكل</a>
                                   @if(isset($honeyCategories))
                                      @foreach($honeyCategories as $category)
