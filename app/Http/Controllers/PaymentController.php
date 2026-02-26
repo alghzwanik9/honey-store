@@ -54,20 +54,29 @@ class PaymentController extends Controller
             return redirect()->route('checkout.payment', $order)->with('error', 'خدمة دفع تمارا غير متوفرة حالياً.');
         }
 
+        // Format phone number (Tamara usually needs 9665xxxxxxxx format)
+        $phone = $order->customer_phone ?? '0500000000';
+        $phone = preg_replace('/[^0-9]/', '', $phone); // Remove any non-numeric
+        if (str_starts_with($phone, '0')) {
+            $phone = '966' . substr($phone, 1);
+        } elseif (!str_starts_with($phone, '966')) {
+            $phone = '966' . $phone;
+        }
+
         // Prepare order items
         $items = $order->items->map(function ($item) {
             return [
                 'reference_id' => (string) $item->product_id,
                 'type' => 'physical',
-                'name' => $item->product->name,
+                'name' => collect(str_split($item->product->name))->take(128)->join(''),
                 'sku' => 'SKU-' . $item->product_id,
-                'quantity' => $item->quantity,
+                'quantity' => (int) $item->quantity,
                 'unit_price' => [
-                    'amount' => $item->price,
+                    'amount' => (float) $item->price,
                     'currency' => 'SAR',
                 ],
                 'total_amount' => [
-                    'amount' => $item->price * $item->quantity,
+                    'amount' => (float) ($item->price * $item->quantity),
                     'currency' => 'SAR',
                 ],
             ];
@@ -81,7 +90,7 @@ class PaymentController extends Controller
         $payload = [
             'order_reference_id' => (string) $order->id,
             'total_amount' => [
-                'amount' => $order->total_amount,
+                'amount' => (float) $order->total_amount,
                 'currency' => 'SAR',
             ],
             'description' => 'طلب رقم #' . $order->id . ' من مناحل وادي الجرفة',
@@ -92,7 +101,7 @@ class PaymentController extends Controller
             'consumer' => [
                 'first_name' => collect(str_split($firstName))->take(64)->join(''),
                 'last_name' => collect(str_split($lastName))->take(64)->join(''),
-                'phone_number' => $order->customer_phone ?? '0500000000',
+                'phone_number' => $phone,
                 'email' => $order->user->email ?? 'customer@example.com',
             ],
             'shipping_address' => [
@@ -111,13 +120,15 @@ class PaymentController extends Controller
         ];
 
         try {
+            \Log::info('Initiating Tamara Checkout', ['order_id' => $order->id, 'url' => $apiUrl]);
+            
             $response = Http::withToken($merchantToken)
+                ->timeout(15)
                 ->post($apiUrl . '/checkout', $payload);
 
             if ($response->successful()) {
                 $data = $response->json();
                 
-                // Store Tamara Order ID if needed for future operations
                 $order->update([
                     'payment_id' => $data['order_id'] ?? null
                 ]);
@@ -125,17 +136,23 @@ class PaymentController extends Controller
                 return redirect()->away($data['checkout_url']);
             }
 
+            $errorData = $response->json();
             \Log::error('Tamara Checkout API Error: ', [
                 'status' => $response->status(),
-                'response' => $response->json(),
+                'response' => $errorData,
                 'payload' => $payload
             ]);
 
-            return redirect()->route('checkout.payment', $order)->with('error', 'تعذر تهيئة الدفع عبر تمارا حالياً.');
+            $errorMsg = 'تعذر تهيئة الدفع عبر تمارا حالياً. ';
+            if (isset($errorData['errors'][0]['message'])) {
+                $errorMsg .= '(' . $errorData['errors'][0]['message'] . ')';
+            }
+
+            return redirect()->route('checkout.payment', $order)->with('error', $errorMsg);
 
         } catch (\Exception $e) {
             \Log::error('Tamara Exception: ' . $e->getMessage());
-            return redirect()->route('checkout.payment', $order)->with('error', 'حدث خطأ في الاتصال بخدمة تمارا.');
+            return redirect()->route('checkout.payment', $order)->with('error', 'حدث خطأ في الاتصال بخدمة تمارا: ' . $e->getMessage());
         }
     }
 
