@@ -32,6 +32,7 @@ class CheckoutController extends Controller
         $validated = $request->validate([
             'address' => 'required|string|max:500',
             'city' => 'required|string|max:100',
+            'customer_phone' => 'required|string|max:20',
             'postal_code' => 'nullable|string|max:20',
             'payment_method' => 'required|in:cod,card,tamara,tabby',
             'latitude' => 'nullable|numeric|between:-90,90',
@@ -52,7 +53,7 @@ class CheckoutController extends Controller
         // Create Order
         $order = \App\Models\Order::create([
             'customer_name' => auth()->user()->name,
-            'customer_phone' => '0500000000', // Placeholder or get from user profile if exists
+            'customer_phone' => $validated['customer_phone'],
             'user_id' => auth()->id(),
             'total_amount' => $total,
             'status' => 'pending',

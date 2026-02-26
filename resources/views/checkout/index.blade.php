@@ -35,6 +35,11 @@
                         </h3>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="col-span-1 md:col-span-2">
+                                <x-input-label for="customer_phone" :value="__('رقم الجوال (للتواصل عند التوصيل)')" />
+                                <x-text-input id="customer_phone" class="block mt-1 w-full" type="tel" name="customer_phone" placeholder="05xxxxxxxx" required />
+                                <p class="text-[10px] text-gray-400 mt-1 mr-1">يرجى إدخال رقم الجوال لضمان وصول المندوب إليك.</p>
+                            </div>
                             <div>
                                 <x-input-label for="city" :value="__('المدينة')" />
                                 <x-text-input id="city" class="block mt-1 w-full" type="text" name="city" required />
