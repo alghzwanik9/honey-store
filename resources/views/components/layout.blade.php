@@ -38,22 +38,22 @@
         <div class="container mx-auto">
             
             {{-- MOBILE LAYOUT --}}
-            <div class="flex justify-between items-center px-4 py-3 md:hidden">
+            <div class="flex justify-between items-center px-5 py-4 md:hidden relative z-[60]">
                  {{-- RIGHT: Hamburger + Logo --}}
-                <div class="flex items-center gap-3">
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-white hover:text-brand-gold focus:outline-none transition-colors duration-300">
-                         <div class="relative w-8 h-8 flex justify-center items-center">
-                            <svg x-show="!mobileMenuOpen" class="w-8 h-8 absolute" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                            <svg x-show="mobileMenuOpen" x-cloak class="w-8 h-8 absolute" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <div class="flex items-center gap-4">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-white hover:text-brand-gold focus:outline-none transition-colors duration-300 p-2 -mr-2 relative z-[65]">
+                         <div class="relative w-7 h-7 flex justify-center items-center">
+                            <svg x-show="!mobileMenuOpen" class="w-7 h-7 absolute" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                            <svg x-show="mobileMenuOpen" x-cloak class="w-7 h-7 absolute" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                         </div>
                     </button>
                     <a href="/" class="flex items-center gap-2">
-                        <img src="/images/logo.png" class="h-10 md:h-14 w-auto drop-shadow-lg object-contain" alt="مناحل وادي الجرفة">
+                        <img src="/images/logo.png" class="h-11 w-auto drop-shadow-lg object-contain" alt="مناحل وادي الجرفة">
                     </a>
                 </div>
 
                 {{-- LEFT: Cart --}}
-                <a href="{{ route('cart.index') }}" class="relative group p-2 bg-brand-navy-light rounded-full hover:bg-brand-gold transition-colors">
+                <a href="{{ route('cart.index') }}" class="relative group p-2.5 bg-brand-navy-light rounded-full hover:bg-brand-gold transition-colors z-[65]">
                     <span class="text-white group-hover:text-brand-navy transition">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     </span>
@@ -157,26 +157,32 @@
         </div>
         
         <!-- Mobile Menu Overlay & Drawer -->
-        <div x-show="mobileMenuOpen" class="fixed inset-0 bg-brand-navy/80 z-40 md:hidden backdrop-blur-sm" @click="mobileMenuOpen = false" style="display: none;"></div>
+        <div x-show="mobileMenuOpen" class="fixed inset-0 bg-brand-navy/90 z-[70] md:hidden backdrop-blur-md" @click="mobileMenuOpen = false" style="display: none;" x-transition.opacity duration.300ms></div>
         <div x-show="mobileMenuOpen" 
              x-transition:enter="transition transform ease-out duration-300"
              x-transition:enter-start="translate-x-full"
              x-transition:enter-end="translate-x-0"
-             class="fixed inset-y-0 right-0 w-3/4 max-w-sm bg-brand-navy shadow-2xl z-50 md:hidden overflow-y-auto" style="display: none;">
+             x-transition:leave="transition transform ease-in duration-300"
+             x-transition:leave-start="translate-x-0"
+             x-transition:leave-end="translate-x-full"
+             class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-brand-navy shadow-2xl z-[80] md:hidden overflow-y-auto flex flex-col" style="display: none;">
             
-            <div class="p-8 bg-brand-navy-light border-b border-brand-gold/10 flex flex-col items-center text-center gap-4">
-                <a href="/" class="transition-transform duration-300 active:scale-95">
-                    <img src="/images/logo.png" class="h-10 md:h-14 w-auto object-contain" alt="Logo">
+            <div class="px-6 py-8 bg-brand-navy-light border-b border-brand-gold/10 flex flex-col items-center text-center gap-4 relative">
+                <button @click="mobileMenuOpen = false" class="absolute top-4 left-4 p-2 text-gray-400 hover:text-white transition-colors bg-brand-navy rounded-full">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                <a href="/" class="transition-transform duration-300 active:scale-95 mt-2">
+                    <img src="/images/logo.png" class="h-20 w-auto object-contain" alt="Logo">
                 </a>
                 <div>
-                    <h2 class="text-xl font-black text-white mb-1">مناحل وادي الجرفة</h2>
-                    <p class="text-brand-gold text-xs font-bold tracking-widest uppercase">أصالة التراث</p>
+                    <h2 class="text-lg font-black text-white mb-1">مناحل وادي الجرفة</h2>
+                    <p class="text-brand-gold text-[10px] font-bold tracking-widest uppercase">أصالة التراث</p>
                 </div>
             </div>
 
-            <div class="p-4 space-y-1">
-                <a href="/" class="block px-4 py-3 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition">الرئيسية</a>
-                 <a href="{{ route('cart.index') }}" class="px-4 py-3 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition flex justify-between items-center">
+            <div class="p-5 space-y-2 flex-grow">
+                <a href="/" class="block px-4 py-3.5 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition">الرئيسية</a>
+                 <a href="{{ route('cart.index') }}" class="px-4 py-3.5 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition flex justify-between items-center">
                     <span>السلة</span>
                     @if(session('cart') && count(session('cart')) > 0)
                         <span class="bg-brand-gold text-brand-navy text-xs font-bold px-2 py-1 rounded-full">{{ count(session('cart')) }}</span>
@@ -184,16 +190,16 @@
                 </a>
 
                 {{-- Honey Accordion --}}
-                <div x-data="{ honeyOpen: false }">
-                    <button @click="honeyOpen = !honeyOpen" class="w-full flex justify-between items-center px-4 py-3 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition">
-                        <span>أنواع العسل</span>
+                <div x-data="{ honeyOpen: false }" class="mt-2">
+                    <button @click="honeyOpen = !honeyOpen" class="w-full flex justify-between items-center px-4 py-3.5 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition">
+                        <span>المنتجات</span>
                         <svg class="w-4 h-4 transition-transform" :class="{'rotate-180': honeyOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    <div x-show="honeyOpen" class="bg-brand-navy-light rounded-lg mx-2 space-y-1 p-2">
-                        <a href="/" class="block px-4 py-2 text-sm text-gray-400 hover:text-brand-gold">عرض الكل</a>
+                    <div x-show="honeyOpen" x-transition class="bg-brand-navy-light rounded-2xl mt-1 overflow-hidden">
+                        <a href="/" class="block px-6 py-3 border-b border-brand-gold/5 text-sm font-bold text-white hover:text-brand-gold hover:bg-brand-navy">عرض الكل</a>
                         @if(isset($honeyCategories))
                             @foreach($honeyCategories as $category)
-                                <a href="/?category={{ $category->slug }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-brand-gold">
+                                <a href="/?category={{ $category->slug }}" class="block px-6 py-3 border-b border-brand-gold/5 text-sm text-gray-300 hover:text-brand-gold hover:bg-brand-navy">
                                     {{ $category->name }}
                                 </a>
                             @endforeach
@@ -201,28 +207,32 @@
                     </div>
                 </div>
 
-                <a href="/?category=offers" class="block px-4 py-3 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition">العروض</a>
-                <a href="/?category=beeswax" class="block px-4 py-3 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition">شمع العسل</a>
+                <a href="/?category=offers" class="block px-4 py-3.5 rounded-xl text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-bold transition mt-2">العروض</a>
+                <a href="/?category=beeswax" class="block px-4 py-3.5 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition">شمع العسل</a>
 
-                <div class="border-t border-brand-gold/10 my-4 pt-4">
+                <div class="border-t border-brand-gold/10 mt-6 pt-6">
                      @if (Route::has('login'))
                         @auth
-                            <div class="px-4 mb-2 text-sm text-gray-500">مرحباً، {{ Auth::user()->name }}</div>
-                            <a href="{{ route('profile.edit') }}" class="block px-4 py-3 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition">الملف الشخصي</a>
-                            <a href="{{ route('orders.index') }}" class="block px-4 py-3 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition">طلباتي</a>
+                            <div class="px-4 mb-3 text-sm text-gray-400 font-medium">مرحباً، <span class="text-white">{{ Auth::user()->name }}</span></div>
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <a href="{{ route('profile.edit') }}" class="block px-4 py-3 rounded-xl bg-brand-navy-light text-center text-sm text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition">الملف الشخصي</a>
+                                <a href="{{ route('orders.index') }}" class="block px-4 py-3 rounded-xl bg-brand-navy-light text-center text-sm text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition">طلباتي</a>
+                            </div>
                             @if(Auth::user()->is_admin)
-                                <a href="{{ url('/admin') }}" class="block px-4 py-3 rounded-xl text-brand-navy bg-brand-gold hover:bg-brand-gold-light font-bold transition">الإدارة</a>
+                                <a href="{{ url('/admin') }}" class="block px-4 py-3.5 mb-3 rounded-xl text-center text-brand-navy bg-brand-gold hover:bg-brand-gold-light font-black transition">لوحة الإدارة</a>
                             @endif
                             
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="block w-full text-right px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 font-bold transition">تسجيل الخروج</button>
+                                <button type="submit" class="block w-full text-center px-4 py-3.5 rounded-xl text-red-400 bg-red-400/10 hover:bg-red-400 hover:text-white font-bold transition">تسجيل الخروج</button>
                             </form>
                         @else
-                            <a href="{{ route('login') }}" class="block px-4 py-3 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition">تسجيل الدخول</a>
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="block px-4 py-3 rounded-xl text-brand-navy bg-brand-gold hover:bg-brand-gold-light font-bold transition mt-2 text-center">إنشاء حساب جديد</a>
-                            @endif
+                            <div class="space-y-3">
+                                <a href="{{ route('login') }}" class="block px-4 py-3.5 rounded-xl text-center text-white bg-brand-navy-light hover:bg-brand-gold hover:text-brand-navy font-bold transition">تسجيل الدخول</a>
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="block px-4 py-3.5 rounded-xl text-center text-brand-navy bg-brand-gold hover:bg-brand-gold-light font-black transition shadow-lg shadow-brand-gold/20">إنشاء حساب جديد</a>
+                                @endif
+                            </div>
                         @endauth
                     @endif
                 </div>

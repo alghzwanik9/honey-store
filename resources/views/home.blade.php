@@ -2,7 +2,7 @@
 
 
     {{-- ===== PRODUCTS SECTION ===== --}}
-    <section id="products" class="container mx-auto px-4 py-10 md:py-14" dir="rtl">
+    <section id="products" class="container mx-auto px-5 sm:px-6 lg:px-8 py-10 md:py-14" dir="rtl">
 
         {{-- Page Header when search/filter active --}}
         @if(request('category') || request('search'))
@@ -54,7 +54,7 @@
 
         {{-- Products Grid --}}
         @if($products->count())
-        <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-7">
+        <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-7">
             @foreach($products as $index => $product)
                 @php
                     $staggerClass = 'stagger-' . (($index % 4) + 1);
@@ -124,7 +124,7 @@
                         </div>
 
                         {{-- معلومات المنتج --}}
-                        <div class="p-4 text-center flex flex-col items-center justify-between grow bg-brand-cream/50">
+                        <div class="p-3 sm:p-4 text-center flex flex-col items-center justify-between grow bg-brand-cream/50">
                             <div class="w-full">
                                 @if($product->category)
                                     <span class="text-[10px] font-bold tracking-wider text-brand-navy bg-brand-gold/10 border border-brand-gold/20 px-2.5 py-1 rounded-full mb-2 inline-block">
@@ -145,7 +145,7 @@
                     </a>
 
                     {{-- زر الإضافة للسلة --}}
-                    <div class="px-4 pb-4 bg-brand-cream/50">
+                    <div class="px-3 sm:px-4 pb-4 bg-brand-cream/50">
                         <form action="{{ route('cart.add', $product) }}" method="POST">
                             @csrf
                             <input type="hidden" name="quantity" value="1">
