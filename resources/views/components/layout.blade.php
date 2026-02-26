@@ -27,13 +27,22 @@
         }
     </style>
 </head>
-<body class="antialiased bg-brand-cream text-gray-800 font-cairo">
+<body class="antialiased bg-brand-cream text-gray-800 font-cairo" x-data="{ cartOpen: false }">
 
-    {{-- Navigation Bar: scroll-aware with Alpine.js --}}
-    <nav class="bg-brand-navy border-b border-brand-gold/20 shadow-lg sticky top-0 z-50 transition-all duration-300"
-         x-data="{ mobileMenuOpen: false, scrolled: false }"
+    <!-- Announcement Bar -->
+    <div class="bg-brand-gold text-brand-navy py-1.5 px-4 text-center text-[11px] md:text-xs font-black tracking-widest uppercase overflow-hidden relative">
+        <div class="flex items-center justify-center gap-4 animate-pulse">
+            <span>✨ شحن مجاني للطلبات فوق 300 ريال</span>
+            <span class="hidden sm:inline-block">/</span>
+            <span class="hidden sm:inline-block">قطفة الشتاء وصلت الآن 🍯</span>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav x-data="{ mobileMenuOpen: false, scrolled: false }" 
          x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 40 })"
-         :class="{ 'py-1 shadow-xl border-brand-gold/40': scrolled }">
+         class="sticky top-0 w-full z-50 transition-all duration-500 bg-brand-navy/95 backdrop-blur-md border-b border-brand-gold/10"
+         :class="{ 'py-1 shadow-2xl border-brand-gold/40': scrolled }">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
@@ -53,25 +62,27 @@
                 </div>
 
                 {{-- LEFT: Cart --}}
-                <a href="{{ route('cart.index') }}" class="relative group p-2.5 bg-brand-navy-light rounded-full hover:bg-brand-gold transition-colors z-[65]">
+                <button @click="cartOpen = true" class="relative group p-2.5 bg-brand-navy-light rounded-full hover:bg-brand-gold transition-colors z-[65]">
                     <span class="text-white group-hover:text-brand-navy transition">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     </span>
                     @if(session('cart') && count(session('cart')) > 0)
                         <span class="absolute -top-1 -right-1 bg-brand-gold text-brand-navy text-[10px] font-bold h-5 w-5 flex items-center justify-center rounded-full shadow-sm">{{ count(session('cart')) }}</span>
                     @endif
-                </a>
+                </button>
             </div>
 
             {{-- DESKTOP LAYOUT (Single Horizontal Line) --}}
             <div class="hidden md:flex justify-between items-center py-2 px-6 lg:px-8">
                 
                 {{-- Left Side: Brand & Navigation --}}
-                <div class="flex items-center gap-8">
+                <div class="flex items-center gap-6 lg:gap-10">
                     <!-- Brand -->
                     <a href="/" class="flex items-center group shrink-0">
                         <div class="transition-transform duration-500 group-hover:scale-105">
-                            <img src="/images/logo.png" class="h-10 md:h-12 w-auto object-contain" alt="مناحل وادي الجرفة">
+                            <img src="/images/logo.png" 
+                                 class="h-14 md:h-16 w-auto object-contain filter drop-shadow-[0_0_12px_rgba(194,155,64,0.4)] brightness-110" 
+                                 alt="مناحل وادي الجرفة">
                         </div>
                     </a>
 
@@ -81,40 +92,41 @@
                         
                         <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
                              <button class="flex items-center gap-1 hover:text-brand-gold py-1 border-b-2 border-transparent hover:border-brand-gold transition-all duration-300">
-                                <span>المنتجات</span>
-                                <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                            </button>
-                            <div x-show="open" x-transition class="absolute right-0 top-full mt-2 w-48 bg-brand-navy-light rounded-2xl shadow-2xl z-50 overflow-hidden border border-brand-gold/20 py-1" style="display: none;">
-                                <a href="/" class="block px-4 py-2.5 text-sm text-white font-bold hover:bg-brand-gold hover:text-brand-navy">الكل</a>
-                                 @if(isset($honeyCategories))
-                                    @foreach($honeyCategories as $category)
-                                        <a href="/?category={{ $category->slug }}" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors">{{ $category->name }}</a>
-                                    @endforeach
-                                @endif
-                                <div class="border-t border-brand-gold/10 my-1"></div>
-                                <a href="/?category=offers" class="block px-4 py-2.5 text-sm text-brand-gold hover:bg-brand-gold hover:text-brand-navy transition-colors">العروض</a>
-                                <a href="/?category=beeswax" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors">شمع العسل</a>
-                            </div>
+                                 <span>المنتجات</span>
+                                 <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                             </button>
+                             <div x-show="open" x-transition class="absolute right-0 top-full mt-2 w-48 bg-brand-navy-light rounded-2xl shadow-2xl z-50 overflow-hidden border border-brand-gold/20 py-1" style="display: none;">
+                                 <a href="/" class="block px-4 py-2.5 text-sm text-white font-bold hover:bg-brand-gold hover:text-brand-navy">الكل</a>
+                                  @if(isset($honeyCategories))
+                                     @foreach($honeyCategories as $category)
+                                         <a href="/?category={{ $category->slug }}" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors">{{ $category->name }}</a>
+                                     @endforeach
+                                 @endif
+                                 <div class="border-t border-brand-gold/10 my-1"></div>
+                                 <a href="/?category=offers" class="block px-4 py-2.5 text-sm text-brand-gold hover:bg-brand-gold hover:text-brand-navy transition-colors">العروض</a>
+                                 <a href="/?category=beeswax" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-brand-gold hover:text-brand-navy transition-colors">شمع العسل</a>
+                             </div>
                         </div>
                     </div>
                 </div>
 
-                {{-- Right Side: Actions (Search, Cart, User) --}}
-                <div class="flex items-center gap-4">
-                    <!-- Search -->
-                    <div class="relative group hidden xl:block">
-                        <form action="{{ route('home') }}" method="GET">
-                            <input type="text" name="search" value="{{ request('search') }}" placeholder="ابحث..." class="bg-brand-navy-light/50 border border-brand-gold/20 text-white placeholder-gray-400 rounded-full px-4 py-1.5 w-48 lg:w-64 focus:ring-2 focus:ring-brand-gold focus:bg-brand-navy-light focus:border-transparent transition-all shadow-sm text-sm">
-                            <button type="submit" class="absolute left-2.5 top-1.5 text-gray-400 hover:text-brand-gold transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                            </button>
-                        </form>
-                    </div>
-                    
-                    <div class="h-6 w-px bg-brand-gold/20 hidden xl:block"></div>
+                {{-- Center/Right: Search Integrated --}}
+                <div class="flex-grow max-w-md mx-8 hidden md:block">
+                    <form action="{{ route('home') }}" method="GET" class="relative group">
+                        <input type="text" name="search" value="{{ request('search') }}" 
+                               placeholder="ابحث عن جودة العسل..." 
+                               class="bg-brand-navy-light/40 border border-brand-gold/10 text-white placeholder-gray-500 rounded-xl px-5 py-2.5 w-full focus:ring-2 focus:ring-brand-gold/30 focus:bg-brand-navy-light focus:border-brand-gold/50 transition-all shadow-inner text-sm outline-none">
+                        <button type="submit" class="absolute left-3 top-2.5 text-gray-400 group-hover:text-brand-gold transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="flex items-center gap-5">
+                    <div class="h-6 w-px bg-brand-gold/20 hidden md:block"></div>
 
                      <!-- Cart -->
-                     <a href="{{ route('cart.index') }}" class="relative group flex items-center gap-1.5 bg-brand-gold px-4 py-1.5 rounded-full hover:bg-brand-gold-light transition-all shadow-md hover:shadow-brand-gold/20 duration-300">
+                     <button @click="cartOpen = true" class="relative group flex items-center gap-1.5 bg-brand-gold px-4 py-1.5 rounded-full hover:bg-brand-gold-light transition-all shadow-md hover:shadow-brand-gold/20 duration-300 pointer-events-auto">
                         <span class="text-brand-navy font-bold text-sm hidden sm:inline-block">السلة</span>
                         <div class="relative">
                             <svg class="w-4 h-4 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
@@ -122,7 +134,7 @@
                                 <span class="absolute -top-2 -right-2 bg-brand-navy text-white text-[9px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-brand-gold">{{ count(session('cart')) }}</span>
                             @endif
                         </div>
-                    </a>
+                    </button>
                     
                     @auth
                         <!-- User Menu -->
@@ -172,22 +184,38 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
                 <a href="/" class="transition-transform duration-300 active:scale-95 mt-2">
-                    <img src="/images/logo.png" class="h-20 w-auto object-contain" alt="Logo">
+                    <img src="/images/logo.png" 
+                         class="h-24 w-auto object-contain filter drop-shadow-[0_0_15px_rgba(194,155,64,0.4)] brightness-110" 
+                         alt="Logo">
                 </a>
                 <div>
-                    <h2 class="text-lg font-black text-white mb-1">مناحل وادي الجرفة</h2>
-                    <p class="text-brand-gold text-[10px] font-bold tracking-widest uppercase">أصالة التراث</p>
+                    <h2 class="text-xl font-black text-white mb-1">مناحل وادي الجرفة</h2>
+                    <p class="text-brand-gold text-xs font-bold tracking-widest uppercase">أصالة التراث</p>
                 </div>
             </div>
 
-            <div class="p-5 space-y-2 flex-grow">
-                <a href="/" class="block px-4 py-3.5 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition">الرئيسية</a>
-                 <a href="{{ route('cart.index') }}" class="px-4 py-3.5 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition flex justify-between items-center">
-                    <span>السلة</span>
-                    @if(session('cart') && count(session('cart')) > 0)
-                        <span class="bg-brand-gold text-brand-navy text-xs font-bold px-2 py-1 rounded-full">{{ count(session('cart')) }}</span>
-                    @endif
-                </a>
+            <div class="p-5 space-y-4 flex-grow">
+                <!-- Mobile Search -->
+                <div class="px-2">
+                    <form action="{{ route('home') }}" method="GET" class="relative group">
+                        <input type="text" name="search" value="{{ request('search') }}" 
+                               placeholder="ابحث عن منتجك المفضل..." 
+                               class="bg-brand-navy-light border border-brand-gold/20 text-white placeholder-gray-500 rounded-xl px-4 py-3 w-full focus:ring-2 focus:ring-brand-gold/30 focus:border-brand-gold/50 transition-all text-sm outline-none">
+                        <button type="submit" class="absolute left-3 top-3 text-gray-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="space-y-2">
+                    <a href="/" class="block px-4 py-3.5 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition">الرئيسية</a>
+                    <a href="{{ route('cart.index') }}" class="px-4 py-3.5 rounded-xl text-gray-200 hover:bg-brand-gold hover:text-brand-navy font-bold transition flex justify-between items-center">
+                        <span>السلة</span>
+                        @if(session('cart') && count(session('cart')) > 0)
+                            <span class="bg-brand-gold text-brand-navy text-xs font-bold px-2 py-1 rounded-full">{{ count(session('cart')) }}</span>
+                        @endif
+                    </a>
+                </div>
 
                 {{-- Honey Accordion --}}
                 <div x-data="{ honeyOpen: false }" class="mt-2">
@@ -292,5 +320,78 @@
     </footer>
 
     <x-chat-widget />
+
+    <!-- Cart Sidebar Drawer (Modern UI) -->
+    <div x-show="cartOpen" class="fixed inset-0 z-[100] overflow-hidden" style="display: none;" x-cloak>
+        <div class="absolute inset-0 bg-brand-navy/60 backdrop-blur-sm transition-opacity" @click="cartOpen = false" x-show="cartOpen" x-transition.opacity></div>
+        
+        <div class="absolute inset-y-0 left-0 max-w-full flex">
+            <div x-show="cartOpen" 
+                 x-transition:enter="transform transition ease-in-out duration-500" 
+                 x-transition:enter-start="-translate-x-full" 
+                 x-transition:enter-end="translate-x-0" 
+                 x-transition:leave="transform transition ease-in-out duration-500" 
+                 x-transition:leave-start="translate-x-0" 
+                 x-transition:leave-end="-translate-x-full"
+                 class="w-screen max-w-md bg-white shadow-2xl flex flex-col pt-6 pointer-events-auto">
+                
+                <div class="px-6 pb-6 border-b border-gray-100 flex items-center justify-between">
+                    <h2 class="text-2xl font-black text-brand-navy flex items-center gap-2">
+                        <svg class="w-6 h-6 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                        سلة التسوق
+                    </h2>
+                    <button @click="cartOpen = false" class="p-2 text-gray-400 hover:text-brand-navy transition-colors bg-brand-cream rounded-full">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+
+                <div class="flex-grow overflow-y-auto p-6 space-y-6 scrollbar-hide">
+                    @if(session('cart') && count(session('cart')) > 0)
+                        @foreach(session('cart') as $id => $details)
+                            <div class="flex gap-4 group animate-fade-in-up">
+                                <div class="w-20 h-20 bg-brand-cream rounded-2xl overflow-hidden shrink-0 border border-brand-gold/5">
+                                    <img src="{{ isset($details['image']) ? Storage::url($details['image']) : '/images/placeholder.png' }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                </div>
+                                <div class="flex-grow">
+                                    <h3 class="font-bold text-brand-navy text-sm mb-1">{{ $details['name'] }}</h3>
+                                    <p class="text-xs text-brand-gold font-bold mb-2">{{ $details['quantity'] }} × {{ number_format($details['price']) }} ر.س</p>
+                                    <div class="flex items-center gap-2 text-xs">
+                                        <form action="{{ route('cart.remove', $id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="text-red-400 hover:text-red-600 transition-colors">إزالة</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="h-full flex flex-col items-center justify-center text-center">
+                            <div class="w-24 h-24 bg-brand-cream rounded-full flex items-center justify-center mb-4">
+                                <span class="text-5xl">🛍️</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-brand-navy mb-2">سلتك فارغة حالياً</h3>
+                            <p class="text-gray-400 text-sm mb-6">اكتشف أجود أنواع العسل وأضف ما يعجبك هنا</p>
+                            <a href="/" class="bg-brand-navy text-brand-gold px-8 py-3 rounded-xl font-bold hover:bg-brand-gold hover:text-brand-navy transition-all" @click="cartOpen = false">ابدأ التسوق</a>
+                        </div>
+                    @endif
+                </div>
+
+                @if(session('cart') && count(session('cart')) > 0)
+                    <div class="p-6 bg-brand-cream border-t border-brand-gold/10">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-gray-500 font-bold">الإجمالي التقريبي:</span>
+                            @php $total = 0; foreach((array) session('cart') as $id => $details) { $total += $details['price'] * $details['quantity']; } @endphp
+                            <span class="text-2xl font-black text-brand-navy">{{ number_format($total) }} ر.س</span>
+                        </div>
+                        <div class="grid grid-cols-1 gap-3">
+                            <a href="{{ route('checkout.index') }}" class="w-full bg-brand-navy text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-black py-4 rounded-xl shadow-xl transition-all text-center">إتمام الطلب</a>
+                            <a href="{{ route('cart.index') }}" class="w-full bg-white text-brand-navy border border-brand-navy/10 hover:bg-brand-cream font-bold py-3 rounded-xl transition-all text-center text-sm">عرض السلة بالتفصيل</a>
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

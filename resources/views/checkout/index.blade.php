@@ -71,31 +71,41 @@
                             طريقة الدفع
                         </h3>
                         
-                        <div class="space-y-3">
-                            <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-white hover:border-brand-gold transition-all bg-white group">
-                                <input type="radio" name="payment_method" value="cod" class="w-4 h-4 text-brand-gold border-gray-300 focus:ring-brand-gold" checked>
-                                <span class="mr-3 font-bold text-brand-navy group-hover:text-brand-gold transition-colors">الدفع عند الاستلام (COD)</span>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <label class="relative flex flex-col p-5 border-2 border-gray-100 rounded-[2rem] cursor-pointer hover:border-brand-gold/30 hover:bg-brand-cream/30 transition-all bg-white group select-none has-[:checked]:border-brand-gold has-[:checked]:bg-brand-gold/5 has-[:checked]:shadow-lg has-[:checked]:shadow-brand-gold/10">
+                                <input type="radio" name="payment_method" value="cod" class="absolute left-6 top-6 w-5 h-5 text-brand-gold border-gray-300 focus:ring-brand-gold" checked>
+                                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-gold/20 transition-colors">
+                                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                </div>
+                                <span class="font-black text-brand-navy text-lg block mb-1">الدفع عند الاستلام</span>
+                                <span class="text-xs text-gray-400 font-medium">ادفع كاش عند وصول المنتج لبابك</span>
                             </label>
                             
-                            <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-white hover:border-brand-gold transition-all bg-white group">
-                                <input type="radio" name="payment_method" value="card" class="w-4 h-4 text-brand-gold border-gray-300 focus:ring-brand-gold">
-                                <span class="mr-3 font-bold text-brand-navy group-hover:text-brand-gold transition-colors">بطاقة مدى / ائتمانية</span>
+                            <label class="relative flex flex-col p-5 border-2 border-gray-100 rounded-[2rem] cursor-pointer hover:border-brand-gold/30 hover:bg-brand-cream/30 transition-all bg-white group select-none has-[:checked]:border-brand-gold has-[:checked]:bg-brand-gold/5 has-[:checked]:shadow-lg has-[:checked]:shadow-brand-gold/10">
+                                <input type="radio" name="payment_method" value="card" class="absolute left-6 top-6 w-5 h-5 text-brand-gold border-gray-300 focus:ring-brand-gold">
+                                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-gold/20 transition-colors">
+                                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                                </div>
+                                <span class="font-black text-brand-navy text-lg block mb-1">بطاقة مدى / ائتمان</span>
+                                <span class="text-xs text-gray-400 font-medium">دفع آمن وسريع عبر البطاقة</span>
                             </label>
 
-                            <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-white hover:border-brand-gold transition-all bg-white group">
-                                <input type="radio" name="payment_method" value="tamara" class="w-4 h-4 text-brand-gold border-gray-300 focus:ring-brand-gold">
-                                <div class="mr-3">
-                                    <span class="block font-bold text-brand-navy group-hover:text-brand-gold transition-colors">تمارا (Tamara)</span>
-                                    <span class="block text-xs text-gray-400">قسم فاتورتك على 3 دفعات بدون فوائد</span>
+                            <label class="relative flex flex-col p-5 border-2 border-gray-100 rounded-[2rem] cursor-pointer hover:border-brand-gold/30 hover:bg-brand-cream/30 transition-all bg-white group select-none has-[:checked]:border-brand-gold has-[:checked]:bg-brand-gold/5 has-[:checked]:shadow-lg has-[:checked]:shadow-brand-gold/10">
+                                <input type="radio" name="payment_method" value="tamara" class="absolute left-6 top-6 w-5 h-5 text-brand-gold border-gray-300 focus:ring-brand-gold">
+                                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-gold/20 transition-colors">
+                                    <img src="https://tamara.co/assets/logos/tamara-logo-short-en.svg" class="w-8 h-8 opacity-60">
                                 </div>
+                                <span class="font-black text-brand-navy text-lg block mb-1">تمارا (3 دفعات)</span>
+                                <span class="text-xs text-gray-400 font-medium">قسم فاتورتك على 3 دفعات بدون فوائد</span>
                             </label>
 
-                            <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-white hover:border-brand-gold transition-all bg-white group">
-                                <input type="radio" name="payment_method" value="tabby" class="w-4 h-4 text-brand-gold border-gray-300 focus:ring-brand-gold">
-                                <div class="mr-3">
-                                    <span class="block font-bold text-brand-navy group-hover:text-brand-gold transition-colors">تابي (Tabby)</span>
-                                    <span class="block text-xs text-gray-400">قسم فاتورتك على 4 دفعات بدون فوائد</span>
+                            <label class="relative flex flex-col p-5 border-2 border-gray-100 rounded-[2rem] cursor-pointer hover:border-brand-gold/30 hover:bg-brand-cream/30 transition-all bg-white group select-none has-[:checked]:border-brand-gold has-[:checked]:bg-brand-gold/5 has-[:checked]:shadow-lg has-[:checked]:shadow-brand-gold/10">
+                                <input type="radio" name="payment_method" value="tabby" class="absolute left-6 top-6 w-5 h-5 text-brand-gold border-gray-300 focus:ring-brand-gold">
+                                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-gold/20 transition-colors">
+                                    <img src="https://cdn.tabby.ai/assets/logo.svg" class="w-8 h-8 opacity-60">
                                 </div>
+                                <span class="font-black text-brand-navy text-lg block mb-1">تابي (4 دفعات)</span>
+                                <span class="text-xs text-gray-400 font-medium">قسّمها على 4، بدون فوائد ولا رسوم</span>
                             </label>
                         </div>
                     </div>
