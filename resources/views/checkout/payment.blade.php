@@ -4,6 +4,12 @@
 
         <div class="max-w-md mx-auto bg-brand-cream-light rounded-3xl shadow-2xl border border-brand-gold/10 overflow-hidden relative">
             <div class="absolute top-0 right-0 w-full h-1 bg-brand-gold"></div>
+            
+            @if(session('error'))
+                <div class="bg-red-50 border-b border-red-100 p-4 text-red-600 text-sm font-bold text-center animate-pulse">
+                    {{ session('error') }}
+                </div>
+            @endif
             <!-- Order Summary -->
             <div class="bg-brand-beige/50 px-8 py-6 border-b border-brand-gold/5">
                 <div class="flex justify-between items-center mb-2">
