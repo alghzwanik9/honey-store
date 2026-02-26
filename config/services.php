@@ -42,6 +42,7 @@ return [
 
     'tamara' => [
         'merchant_token' => env('TAMARA_MERCHANT_TOKEN'),
+        'notification_token' => env('TAMARA_NOTIFICATION_TOKEN'),
         'public_key' => env('TAMARA_PUBLIC_KEY'),
         'api_url' => env('TAMARA_API_URL', 'https://api-sandbox.tamara.co'),
     ],
