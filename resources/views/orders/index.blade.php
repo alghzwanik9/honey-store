@@ -20,8 +20,8 @@
                         </div>
                     @endif
                     @if($orders->count() > 0)
-                        <div class="overflow-hidden rounded-2xl border border-brand-gold/10 shadow-sm">
-                            <table class="w-full text-sm text-right text-gray-600">
+                        <div class="overflow-x-auto rounded-2xl border border-brand-gold/10 shadow-sm">
+                            <table class="w-full text-sm text-right text-gray-600 whitespace-nowrap min-w-max">
                                 <thead class="text-xs text-brand-gold uppercase bg-brand-navy">
                                     <tr>
                                         <th scope="col" class="px-6 py-3 rounded-r-lg">رقم الطلب</th>
