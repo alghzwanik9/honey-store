@@ -12,11 +12,9 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
         <!-- Favicon -->
-        <link rel="icon" type="image/png" sizes="32x32" href="/icon-v4.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/icon-v4.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="/icon-v4.png">
+        <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+        <link rel="apple-touch-icon" href="{{ asset('favicon.png') }}">
         <link rel="manifest" href="/site.webmanifest?v=4">
-        <link rel="mask-icon" href="/icon-v4.png" color="#d97706">
         <meta name="theme-color" content="#d97706">
 
         <!-- Scripts -->
