@@ -25,7 +25,7 @@
         }
     </style>
 </head>
-<body class="antialiased bg-brand-cream text-gray-800 font-cairo" x-data="{ cartOpen: false }">
+<body class="antialiased bg-brand-cream text-gray-800 font-cairo" x-data="{ cartOpen: false, mobileMenuOpen: false }">
 
     @php
         $announcementSetting = \App\Models\Setting::where('key', 'announcement_text')->first();
@@ -45,7 +45,7 @@
     @endif
 
     <!-- Main Navigation -->
-    <nav x-data="{ mobileMenuOpen: false, scrolled: false }" 
+    <nav x-data="{ scrolled: false }" 
          x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 40 })"
          class="sticky top-0 w-full z-[100] transition-all duration-500 bg-brand-navy/95 backdrop-blur-md border-b border-brand-gold/10"
          :class="{ 'py-1 shadow-2xl border-brand-gold/40': scrolled }">
@@ -173,10 +173,11 @@
             </div>
 
         </div>
+    </nav>
         
-        <!-- Mobile Menu Overlay & Drawer -->
-        <div x-show="mobileMenuOpen" class="fixed inset-0 bg-brand-navy/90 z-[120] lg:hidden backdrop-blur-md" @click="mobileMenuOpen = false" style="display: none;" x-transition.opacity duration.300ms></div>
-        <div x-show="mobileMenuOpen" 
+    <!-- Mobile Menu Overlay & Drawer -->
+    <div x-show="mobileMenuOpen" class="fixed inset-0 bg-brand-navy/90 z-[120] lg:hidden backdrop-blur-md" @click="mobileMenuOpen = false" style="display: none;" x-transition.opacity duration.300ms></div>
+    <div x-show="mobileMenuOpen" 
              x-transition:enter="transition transform ease-out duration-300"
              x-transition:enter-start="translate-x-full"
              x-transition:enter-end="translate-x-0"
@@ -272,7 +273,6 @@
                 </div>
             </div>
         </div>
-    </nav>
 
     <main class="min-h-screen">
         {{ $slot }}
