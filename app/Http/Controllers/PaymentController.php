@@ -120,6 +120,8 @@ class PaymentController extends Controller
         ];
 
         try {
+            $merchantToken = trim($merchantToken); // Ensure no spaces
+            
             \Log::info('Initiating Tamara Checkout', ['order_id' => $order->id, 'url' => $apiUrl]);
             
             $response = Http::withToken($merchantToken)
@@ -137,22 +139,30 @@ class PaymentController extends Controller
             }
 
             $errorData = $response->json();
+            $statusCode = $response->status();
+            
             \Log::error('Tamara Checkout API Error: ', [
-                'status' => $response->status(),
+                'status' => $statusCode,
                 'response' => $errorData,
+                'body' => $response->body(),
                 'payload' => $payload
             ]);
 
-            $errorMsg = 'تعذر تهيئة الدفع عبر تمارا حالياً. ';
+            $errorMsg = "فشل الربط مع تمارا (كود: $statusCode). ";
+            
             if (isset($errorData['errors'][0]['message'])) {
-                $errorMsg .= '(' . $errorData['errors'][0]['message'] . ')';
+                $errorMsg .= $errorData['errors'][0]['message'];
+            } elseif (isset($errorData['message'])) {
+                $errorMsg .= $errorData['message'];
+            } else {
+                $errorMsg .= 'يرجى مراجعة إعدادات المفاتيح في لوحة التحكم.';
             }
 
             return redirect()->route('checkout.payment', $order)->with('error', $errorMsg);
 
         } catch (\Exception $e) {
             \Log::error('Tamara Exception: ' . $e->getMessage());
-            return redirect()->route('checkout.payment', $order)->with('error', 'حدث خطأ في الاتصال بخدمة تمارا: ' . $e->getMessage());
+            return redirect()->route('checkout.payment', $order)->with('error', 'خطأ تقني في تمارا: ' . $e->getMessage());
         }
     }
 
