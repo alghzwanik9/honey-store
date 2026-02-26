@@ -35,7 +35,7 @@
          x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 40 })"
          :class="{ 'py-1 shadow-xl border-brand-gold/40': scrolled }">
 
-        <div class="container mx-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             {{-- MOBILE LAYOUT --}}
             <div class="flex justify-between items-center px-5 py-4 md:hidden relative z-[60]">
@@ -245,7 +245,7 @@
     </main>
 
     <footer class="bg-brand-navy text-gray-300 pt-16 pb-8 border-t-4 border-brand-gold mt-0" dir="rtl">
-        <div class="container mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-3 gap-10 text-center md:text-right mb-12">
                 <div>
                     <img src="/images/logo.png" class="h-10 md:h-14 w-auto mb-4 mx-auto md:mx-0 opacity-90 hover:opacity-100 transition duration-500 drop-shadow-[0_0_10px_rgba(194,155,64,0.3)] object-contain" alt="مناحل وادي الجرفة">

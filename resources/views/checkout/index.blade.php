@@ -1,5 +1,5 @@
 <x-layout title="إتمام الطلب">
-    <div class="container mx-auto px-4 py-12" dir="rtl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" dir="rtl">
         <h1 class="text-3xl md:text-4xl font-black text-brand-navy mb-12 text-center">إتمام الطلب</h1>
 
         <div class="max-w-4xl mx-auto bg-brand-cream-light rounded-3xl shadow-2xl overflow-hidden border border-brand-gold/10 p-10 relative">
