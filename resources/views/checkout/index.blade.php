@@ -15,9 +15,9 @@
             <div class="border-t border-brand-gold/10 pt-8">
                 <h3 class="text-xl font-black text-brand-navy mb-6">ملخص الطلب</h3>
                 <div class="flex justify-between items-center bg-brand-beige/50 p-6 rounded-2xl border border-brand-gold/5">
-                    <span class="text-gray-500 font-bold text-lg">الإجمالي النهائي (شامل الضريبة):</span>
+                    <span class="text-gray-500 font-bold text-lg">الإجمالي النهائي (شامل ضريبة القيمة المضافة):</span>
                     <span class="text-3xl font-black text-brand-gold flex items-center gap-2">
-                        {{ number_format($total * 1.15) }}
+                        {{ number_format($total) }}
                         <x-currency-symbol class="w-8 h-8" />
                     </span>
                 </div>
