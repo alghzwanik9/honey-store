@@ -310,7 +310,7 @@
 
         <div class="footer">
             <div style="font-weight: bold; color: #0f172a; margin-bottom: 5px;">{{ $fix('شكراً لاختياركم مناحل وادي الجرفة') }}</div>
-            <div style="direction: ltr;">www.honey-store.com | Support@honey-store.com</div>
+            <div style="direction: ltr;">www.honey-store.com | aljorfah.honey@gmail.com</div>
             <div style="margin-top: 8px; font-size: 9px;">{{ $fix('تم إصدار هذه الفاتورة إلكترونياً من متجر مناحل وادي الجرفة') }}</div>
         </div>
     </div>
