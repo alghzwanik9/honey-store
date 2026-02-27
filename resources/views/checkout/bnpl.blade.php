@@ -4,28 +4,27 @@
             <div class="absolute top-0 right-0 w-full h-1.5 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold"></div>
             
             <div class="mb-10">
-                @if($order->payment_method == 'tamara')
-                    <div class="flex justify-center mb-4">
-                        <div class="bg-[#c08d5d]/10 px-6 py-2 rounded-xl border border-[#c08d5d]/20">
-                            <h2 class="text-3xl font-black" style="color: #c08d5d;">TAMARA</h2>
-                        </div>
+                <div class="flex justify-center mb-4">
+                    <div class="bg-[#c08d5d]/10 px-6 py-2 rounded-xl border border-[#c08d5d]/20">
+                        <h2 class="text-3xl font-black" style="color: #c08d5d;">TAMARA</h2>
                     </div>
-                    <p class="text-gray-400 font-medium">جاري تحويلك إلى بوابة دفع تمارا الآمنة...</p>
-                @else
-                    <div class="flex justify-center mb-4">
-                        <div class="bg-emerald-50 px-6 py-2 rounded-xl border border-emerald-100">
-                            <h2 class="text-3xl font-black text-emerald-600">tabby</h2>
-                        </div>
-                    </div>
-                    <p class="text-gray-400 font-medium">جاري تحويلك إلى بوابة دفع تابي الآمنة...</p>
-                @endif
+                </div>
+                <p id="status-text" class="text-gray-400 font-medium font-black">جاري تحويلك إلى بوابة دفع تمارا الآمنة...</p>
             </div>
 
-            <div class="flex justify-center mb-8">
+            <div id="loader" class="flex justify-center mb-8">
                 <svg class="animate-spin h-12 w-12 text-brand-gold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
+            </div>
+
+            <div id="error-container" class="hidden bg-red-50 text-red-700 p-4 rounded-xl mb-6 text-sm font-bold border border-red-100">
+                <p id="error-message"></p>
+                <div class="mt-4 flex gap-2 justify-center">
+                     <a href="{{ route('checkout.payment', $order) }}" class="bg-red-600 text-white px-4 py-2 rounded-lg text-xs">إعادة المحاولة</a>
+                     <a href="{{ route('dashboard') }}" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-xs">العودة للوحة التحكم</a>
+                </div>
             </div>
 
             <div class="bg-brand-beige/50 rounded-2xl p-8 mb-10 text-right border border-brand-gold/5 shadow-inner relative overflow-hidden">
@@ -43,22 +42,43 @@
                 </div>
             </div>
 
-            <p class="text-sm text-gray-400 mb-8">سيتم توجيهك الآن لإكمال عملية الدفع عبر بوابة شركائنا الرسمية.</p>
+            <p class="text-sm text-gray-400 mb-4 font-medium">سيتم توجيهك الآن لإكمال عملية الدفع عبر بوابة شركائنا الرسمية.</p>
 
-            <form action="{{ route('checkout.callback') }}" method="GET">
-                <input type="hidden" name="id" value="simulated_payment_id_{{ $order->id }}">
-                <input type="hidden" name="status" value="paid">
-                <input type="hidden" name="message" value="Simulated Success">
-                <input type="hidden" name="order_id" value="{{ $order->id }}"> <!-- Sending Order ID explicitly -->
-
-                <button type="submit" class="w-full bg-brand-navy text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-black py-4 px-8 rounded-xl shadow-xl transition-all duration-300 transform active:scale-[0.98]">
-                    متابعة عملية الدفع الآمن
-                </button>
-            </form>
-            
-            <div class="mt-4">
-                  <a href="{{ route('dashboard') }}" class="text-sm text-gray-400 hover:text-brand-gold font-bold transition-colors underline">إلغاء</a>
-            </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusText = document.getElementById('status-text');
+            const errorContainer = document.getElementById('error-container');
+            const errorMessage = document.getElementById('error-message');
+            const loader = document.getElementById('loader');
+
+            // Trigger Tamara Initialization via AJAX
+            fetch('{{ route('tamara.init', $order) }}', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json().then(data => ({ status: response.status, body: data })))
+            .then(res => {
+                if (res.status === 200 && res.body.checkout_url) {
+                    statusText.innerText = 'تم التجهيز، جاري التوجيه...';
+                    window.location.href = res.body.checkout_url;
+                } else {
+                    throw new Error(res.body.error || 'فشل الاتصال بتمارا، يرجى المحاولة لاحقاً.');
+                }
+            })
+            .catch(error => {
+                console.error('Tamara Error:', error);
+                loader.classList.add('hidden');
+                statusText.classList.add('hidden');
+                errorContainer.classList.remove('hidden');
+                errorMessage.innerText = error.message;
+            });
+        });
+    </script>
 </x-layout>

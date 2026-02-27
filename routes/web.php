@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/checkout/{order}/payment', [\App\Http\Controllers\PaymentController::class, 'show'])->name('checkout.payment');
     Route::get('/checkout/{order}/bnpl', [\App\Http\Controllers\PaymentController::class, 'bnpl'])->name('checkout.bnpl');
+    Route::post('/checkout/{order}/tamara-init', [\App\Http\Controllers\PaymentController::class, 'initTamara'])->name('tamara.init');
 
     Route::get('/orders/{order}', [\App\Http\Controllers\OrderController::class, 'show'])->name('orders.show');
     Route::get('/orders/{order}/invoice', [\App\Http\Controllers\OrderController::class, 'downloadInvoice'])->name('orders.invoice');

@@ -36,22 +36,36 @@ class PaymentController extends Controller
             return redirect()->route('payment.success', $order);
         }
 
-        if ($order->payment_method === 'tamara') {
-            return $this->processTamaraCheckout($order);
-        }
-
-        // Keep simulated view for Tabby until implemented
+        // Return a loading/dispatch page for BNPL methods
         return view('checkout.bnpl', compact('order'));
     }
 
-    private function processTamaraCheckout(Order $order)
+    /**
+     * Non-blocking Tamara Initialization for AJAX
+     */
+    public function initTamara(Order $order)
+    {
+        if ($order->user_id != auth()->id()) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        try {
+            return $this->processTamaraCheckout($order, true);
+        } catch (\Throwable $e) {
+            \Log::error('Tamara AJAX Init Error: ' . $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    private function processTamaraCheckout(Order $order, $isJson = false)
     {
         $apiUrl = config('services.tamara.api_url');
         $merchantToken = config('services.tamara.merchant_token');
 
         if (!$merchantToken) {
             \Log::error('Tamara Merchant Token is missing.');
-            return redirect()->route('checkout.payment', $order)->with('error', 'خدمة دفع تمارا غير متوفرة حالياً.');
+            $error = 'خدمة دفع تمارا غير متوفرة حالياً.';
+            return $isJson ? response()->json(['error' => $error], 500) : redirect()->route('checkout.payment', $order)->with('error', $error);
         }
 
         // Format phone number (Tamara usually needs 9665xxxxxxxx format)
@@ -156,7 +170,7 @@ class PaymentController extends Controller
                     'payment_id' => $data['order_id'] ?? null
                 ]);
 
-                return redirect()->away($data['checkout_url']);
+                return $isJson ? response()->json(['checkout_url' => $data['checkout_url']]) : redirect()->away($data['checkout_url']);
             }
 
             $errorData = $response->json();
@@ -165,21 +179,13 @@ class PaymentController extends Controller
             \Log::error('Tamara Checkout API Error: ', [
                 'status' => $statusCode,
                 'response' => $errorData,
-                'body' => $response->body(),
                 'payload' => $payload
             ]);
 
             $errorMsg = "فشل الربط مع تمارا (كود: $statusCode). ";
-            
-            if (isset($errorData['errors'][0]['message'])) {
-                $errorMsg .= $errorData['errors'][0]['message'];
-            } elseif (isset($errorData['message'])) {
-                $errorMsg .= $errorData['message'];
-            } else {
-                $errorMsg .= 'يرجى مراجعة إعدادات المفاتيح في لوحة التحكم.';
-            }
+            $errorMsg .= $errorData['errors'][0]['message'] ?? $errorData['message'] ?? 'يرجى مراجعة الإعدادات.';
 
-            return redirect()->route('checkout.payment', $order)->with('error', $errorMsg);
+            return $isJson ? response()->json(['error' => $errorMsg], 400) : redirect()->route('checkout.payment', $order)->with('error', $errorMsg);
 
         } catch (\Throwable $e) {
             \Log::error('Tamara Exception: ' . $e->getMessage(), [
@@ -359,28 +365,30 @@ class PaymentController extends Controller
 
                 if ($response->successful()) {
                     $tamaraOrder = $response->json();
-                    $status = $tamaraOrder['status'] ?? '';
+                    $status = strtoupper($tamaraOrder['status'] ?? '');
 
                     \Log::info('Tamara Order Status Verified', [
                         'order_id' => $order->id,
                         'tamara_status' => $status
                     ]);
 
-                    if (in_array($status, ['APPROVED', 'AUTHORIZED', 'FULLY_CAPTURED', 'captured', 'authorized'])) {
-                        $order->update([
-                            'payment_status' => 'paid',
-                            'payment_id' => $paymentId
-                        ]);
+                    if (in_array($status, ['APPROVED', 'AUTHORIZED', 'FULLY_CAPTURED', 'CAPTURED'])) {
+                        if ($order->payment_status !== 'paid') {
+                            $order->update([
+                                'payment_status' => 'paid',
+                                'payment_id' => $paymentId
+                            ]);
 
-                        session()->forget('cart');
+                            session()->forget('cart');
 
-                        // Send Invoice Email
-                        try {
-                            if ($order->user && $order->user->email) {
-                                \Illuminate\Support\Facades\Mail::to($order->user)->queue(new \App\Mail\InvoiceMail($order));
+                            // Send Invoice Email (Silent error)
+                            try {
+                                if ($order->user && $order->user->email) {
+                                    \Illuminate\Support\Facades\Mail::to($order->user)->queue(new \App\Mail\InvoiceMail($order));
+                                }
+                            } catch (\Exception $e) {
+                                \Log::error('Invoice Email Error in Callback: ' . $e->getMessage());
                             }
-                        } catch (\Exception $e) {
-                            \Log::error('Invoice Email Error: ' . $e->getMessage());
                         }
 
                         return redirect()->route('payment.success', ['order' => $order->id]);
@@ -420,11 +428,11 @@ class PaymentController extends Controller
         \Log::info('Tamara Webhook Received: ', $payload);
         
         $orderId = $payload['order_reference_id'] ?? null;
-        $status = $payload['order_status'] ?? null;
+        $status = strtoupper($payload['order_status'] ?? '');
 
         if ($orderId && $status) {
             $order = Order::find($orderId);
-            if ($order && in_array($status, ['APPROVED', 'AUTHORIZED', 'FULLY_CAPTURED'])) {
+            if ($order && in_array($status, ['APPROVED', 'AUTHORIZED', 'FULLY_CAPTURED', 'CAPTURED'])) {
                 if ($order->payment_status !== 'paid') {
                     $order->update([
                         'payment_status' => 'paid',
