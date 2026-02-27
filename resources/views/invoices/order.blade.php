@@ -12,15 +12,14 @@
             font-family: 'DejaVu Sans', sans-serif;
             direction: rtl;
             text-align: right;
-            font-size: 14px;
-            color: #1f2937;
+            font-size: 13px;
+            color: #1a1e26;
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
-            line-height: 1.5;
+            background-color: #fdfaf6; /* Creamy background */
+            line-height: 1.6;
         }
         
-        /* Helper for Arabic Glyphs */
         @php
             $arabic = new \Arphp\Glyphs();
             $fix = function($text) use ($arabic) {
@@ -31,14 +30,21 @@
                 return $text;
             };
 
-            // Saudi Riyal SVG Base64 (Emerald-700 color: #047857)
-            $samaSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1125 1257" fill="#047857"><path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/><path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/></svg>';
+            // Logo conversion to base64
+            $logoPath = public_path('images/logo.png');
+            $logoData = '';
+            if (file_exists($logoPath)) {
+                $logoData = 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath));
+            }
+
+            // Currency symbol SVG (Gold: #c08d5d)
+            $samaSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1125 1257" fill="#c08d5d"><path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/><path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/></svg>';
             $samaLogo = 'data:image/svg+xml;base64,' . base64_encode($samaSvg);
         @endphp
 
-        .header-bg {
-            background-color: #fef3c7; /* Amber-100 */
-            height: 20px;
+        .top-stripe {
+            background-color: #0f172a; /* Navy */
+            height: 8px;
             width: 100%;
         }
         
@@ -49,224 +55,232 @@
         .header {
             width: 100%;
             margin-bottom: 40px;
-            border-bottom: 2px solid #d97706; /* Amber-600 */
-            padding-bottom: 20px;
+            border-bottom: 2px solid #c08d5d; /* Gold */
+            padding-bottom: 25px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        .header td {
-            vertical-align: middle;
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 10px;
         }
 
         .store-name {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
-            color: #d97706;
+            color: #0f172a;
             margin: 0;
+            display: block;
         }
         
         .invoice-title {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
-            color: #111827;
-            text-transform: uppercase;
+            color: #c08d5d; /* Gold */
             margin: 0;
             text-align: left;
         }
 
         .info-table {
+            width: 100%;
             margin-bottom: 40px;
         }
         
-        .info-table td {
-            padding: 8px;
-            vertical-align: top;
+        .info-card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(192, 141, 93, 0.2);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
         .info-label {
-            color: #6b7280;
-            font-size: 12px;
+            color: #64748b;
+            font-size: 11px;
             font-weight: bold;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             display: block;
+            text-transform: uppercase;
         }
         
         .info-value {
-            color: #1f2937;
-            font-size: 14px;
-            font-weight: normal;
+            color: #0f172a;
+            font-size: 13px;
         }
 
         .items-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
             margin-bottom: 30px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
         }
         
         .items-table th {
-            background-color: #d97706;
-            color: white;
-            padding: 12px 15px;
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 15px;
             font-weight: bold;
             text-align: right;
-            font-size: 13px;
+            font-size: 12px;
         }
         
         .items-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #f3f4f6;
-            color: #374151;
+            padding: 15px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+            background-color: #ffffff;
         }
         
-        .items-table tr:nth-child(even) {
-            background-color: #fffbeb;
+        .items-table tr:last-child td {
+            border-bottom: none;
         }
 
-        .totals-section td {
-            vertical-align: top;
-        }
-        
         .totals-box {
-            background: #f9fafb;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
+            background: #0f172a;
+            padding: 25px;
+            border-radius: 20px;
+            color: #ffffff;
+            width: 100%;
+            max-width: 320px;
+            float: left;
         }
 
         .total-row {
-            display: table;
+            clear: both;
             width: 100%;
-            margin-bottom: 8px;
-            border-bottom: 1px solid #e5e7eb;
-            padding-bottom: 5px;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .total-label {
-            display: table-cell;
-            font-weight: bold;
-            color: #4b5563;
-            text-align: right;
+            float: right;
+            font-size: 12px;
+            color: #94a3b8;
         }
 
         .total-value {
-            display: table-cell;
-            text-align: left;
+            float: left;
             font-weight: bold;
-            color: #1f2937;
+            color: #ffffff;
         }
         
         .grand-total {
-            background-color: #d97706;
-            color: white;
-            padding: 12px;
-            border-radius: 6px;
-            margin-top: 15px;
+            clear: both;
+            padding-top: 15px;
+            margin-top: 5px;
             font-weight: bold;
-            font-size: 16px;
-            display: table;
-            width: 100%;
+            font-size: 18px;
+            color: #c08d5d; /* Gold */
         }
 
         .footer {
-            position: fixed;
-            bottom: 40px;
-            left: 40px;
-            right: 40px;
+            margin-top: 80px;
             text-align: center;
-            color: #9ca3af;
-            font-size: 12px;
-            border-top: 1px solid #e5e7eb;
+            color: #64748b;
+            font-size: 11px;
             padding-top: 20px;
-            line-height: 1.6;
+            border-top: 1px solid #e2e8f0;
         }
         
-        .qr-code {
+        .qr-section {
+            float: right;
+            width: 120px;
             text-align: center;
-            margin-top: 10px;
+            margin-top: 20px;
         }
         
         .currency-logo {
-            width: 12px;
-            height: 12px;
+            width: 11px;
+            height: 11px;
             vertical-align: middle;
-            display: inline-block;
             margin-right: 2px;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
         }
     </style>
 </head>
 <body>
-    <div class="header-bg"></div>
+    <div class="top-stripe"></div>
     
     <div class="container">
         <!-- Header -->
         <table class="header">
             <tr>
                 <td width="60%">
+                    @if($logoData)
+                        <img src="{{ $logoData }}" class="logo" alt="Logo">
+                    @endif
                     <div class="store-name">{{ $fix('مناحل وادي الجرفة') }}</div>
-                    <div style="color: #6b7280; font-size: 12px; margin-top: 5px;">{{ $fix('أجود أنواع العسل البلدي الطبيعي') }}</div>
-                    <div style="color: #6b7280; font-size: 12px;">{{ $fix('سجل تجاري: 1010xxxxxx') }}</div>
+                    <div style="color: #64748b; font-size: 11px; margin-top: 3px;">{{ $fix('أجود أنواع العسل البلدي الطبيعي') }}</div>
+                    <div style="color: #64748b; font-size: 11px;">{{ $fix('سجل تجاري: 1010xxxxxx') }}</div>
                 </td>
                 <td width="40%" style="text-align: left;">
                     <div class="invoice-title">{{ $fix('فاتورة ضريبية') }}</div>
-                    <div style="color: #9ca3af; margin-top: 5px; font-size: 14px;">#{{ $order->id }}</div>
+                    <div style="color: #64748b; margin-top: 8px; font-size: 14px; font-weight: bold;">#{{ $order->id }}</div>
+                    <div style="color: #94a3b8; font-size: 11px; margin-top: 4px;">{{ $order->created_at->format('Y-m-d H:i') }}</div>
                 </td>
             </tr>
         </table>
 
-        <!-- Info -->
+        <!-- Info Cards -->
         <table class="info-table">
             <tr>
-                <td width="40%">
-                    <span class="info-label">{{ $fix('بيانات العميل') }}</span>
-                    <div class="info-value">
-                        <strong>{{ $fix($order->user->name ?? 'عميل زائر') }}</strong><br>
-                        {{ $order->user->email ?? '' }}<br>
-                        <span style="direction: ltr; display: inline-block;">{{ $order->user->phone ?? '' }}</span><br>
-                        {{ $fix($order->address ?? '') }}
+                <td width="50%" style="padding-left: 10px;">
+                    <div class="info-card">
+                        <span class="info-label">{{ $fix('العميل') }}</span>
+                        <div class="info-value">
+                            <strong>{{ $fix($order->user->name ?? 'عميل زائر') }}</strong><br>
+                            {{ $order->user->email ?? '' }}<br>
+                            <span style="direction: ltr; display: inline-block;">{{ $order->customer_phone ?? $order->user->phone ?? '' }}</span><br>
+                            {{ $fix($order->address ?? '') }}
+                        </div>
                     </div>
                 </td>
-                <td width="30%">
-                    <span class="info-label">{{ $fix('تفاصيل الفاتورة') }}</span>
-                    <div class="info-value">
-                        {{ $fix('رقم الطلب:') }} #{{ $order->id }}<br>
-                        {{ $fix('تاريخ الإصدار:') }} {{ $order->created_at->format('Y/m/d') }}<br>
-                        {{ $fix('طريقة الدفع:') }} {{ $fix($order->payment_method ?? 'البطاقة الائتمانية') }}
-                    </div>
-                </td>
-                <td width="30%">
-                    <span class="info-label">{{ $fix('حالة الدفع') }}</span>
-                    <div class="info-value" style="color: {{ $order->payment_status == 'paid' ? '#059669' : '#dc2626' }}; font-weight: bold; font-size: 16px;">
-                        {{ $fix($order->payment_status == 'paid' ? 'مدفوع' : 'غير مدفوع') }}
+                <td width="50%" style="padding-right: 10px;">
+                    <div class="info-card">
+                        <span class="info-label">{{ $fix('طريقة الدفع والحالة') }}</span>
+                        <div class="info-value">
+                            {{ $fix('الطريقة:') }} {{ $fix($order->payment_method_label ?? $order->payment_method) }}<br>
+                            {{ $fix('تاريخ الطلب:') }} {{ $order->created_at->format('Y/m/d') }}<br>
+                            <div style="margin-top: 8px; color: {{ $order->payment_status == 'paid' ? '#10b981' : '#ef4444' }}; font-weight: bold; font-size: 15px;">
+                                {{ $fix($order->payment_status == 'paid' ? 'مدفوع ✓' : 'بانتظار الدفع') }}
+                            </div>
+                        </div>
                     </div>
                 </td>
             </tr>
         </table>
 
-        <!-- Items -->
+        <!-- Table -->
         <table class="items-table">
             <thead>
                 <tr>
-                    <th style="border-top-right-radius: 6px;">{{ $fix('المنتج') }}</th>
+                    <th>{{ $fix('المنتج') }}</th>
                     <th style="text-align: center;">{{ $fix('الكمية') }}</th>
-                    <th>{{ $fix('سعر الوحدة') }}</th>
-                    <th style="border-top-left-radius: 6px;">{{ $fix('الإجمالي') }}</th>
+                    <th>{{ $fix('السعر') }}</th>
+                    <th style="text-align: left;">{{ $fix('الإجمالي') }}</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($order->items as $item)
                 <tr>
                     <td>
-                        <strong>{{ $fix($item->product->name) }}</strong>
+                        <strong style="color: #0f172a;">{{ $fix($item->product->name) }}</strong>
                     </td>
                     <td style="text-align: center;">{{ $item->quantity }}</td>
                     <td>
                         {{ number_format($item->price, 2) }} 
                         <img src="{{ $samaLogo }}" class="currency-logo" alt="SAR">
                     </td>
-                    <td style="font-weight: bold;">
+                    <td style="font-weight: bold; color: #0f172a; text-align: left;">
                         {{ number_format($item->price * $item->quantity, 2) }} 
                         <img src="{{ $samaLogo }}" class="currency-logo" alt="SAR">
                     </td>
@@ -275,51 +289,43 @@
             </tbody>
         </table>
 
-        <!-- Totals Logic -->
         @php
             $totalAmount = $order->total_amount;
-            $subTotal = $totalAmount / 1.15; // Extracting base amount from inclusive total
+            $subTotal = $totalAmount / 1.15;
             $vatAmount = $totalAmount - $subTotal;
         @endphp
 
-        <!-- Totals Layout -->
-        <table class="totals-section">
-            <tr>
-                <td width="60%" style="padding-left: 20px;">
-                    <div class="qr-code">
-                        {{-- QR Code: Contains essential invoice data (TLV format is standard for ZATCA but URL is fine for simple use) --}}
-                        <img src="data:image/svg+xml;base64,{{ base64_encode(\SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(100)->color(217, 119, 6)->generate(route('orders.show', $order->id))) }}" alt="QR Code">
-                        <div style="font-size: 10px; color: #6b7280; margin-top: 5px;">{{ $fix('امسح الكود لتفاصيل الطلب') }}</div>
-                    </div>
-                    <div style="margin-top: 20px; font-size: 10px; color: #9ca3af;">
-                        * {{ $fix('الأسعار تشمل ضريبة القيمة المضافة 15%') }}
-                    </div>
-                </td>
-                <td width="40%">
-                    <div class="totals-box">
-                        <div class="total-row">
-                            <span class="total-label">{{ $fix('المجموع الفرعي (غير شامل الضريبة)') }}</span>
-                            <span class="total-value">{{ number_format($subTotal, 2) }} <img src="{{ $samaLogo }}" class="currency-logo" alt="SAR"></span>
-                        </div>
-                        <div class="total-row">
-                            <span class="total-label">{{ $fix('ضريبة القيمة المضافة (15%)') }}</span>
-                            <span class="total-value">{{ number_format($vatAmount, 2) }} <img src="{{ $samaLogo }}" class="currency-logo" alt="SAR"></span>
-                        </div>
-                        <div class="grand-total">
-                            <span style="float: right;">{{ $fix('الإجمالي النهائي') }}</span>
-                            <span style="float: left;">{{ number_format($totalAmount, 2) }} <img src="{{ $samaLogo }}" class="currency-logo" style="filter: brightness(0) invert(1);" alt="SAR"></span>
-                            <div style="clear: both;"></div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
+        <!-- Calculation & QR -->
+        <div class="clearfix">
+            <div class="qr-section">
+                <img src="data:image/svg+xml;base64,{{ base64_encode(\SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(90)->color(15, 23, 42)->generate(route('orders.show', $order->id))) }}" alt="QR">
+                <div style="font-size: 9px; color: #94a3b8; margin-top: 5px;">{{ $fix('تفاصيل الطلب الإلكتروني') }}</div>
+            </div>
 
-    <div class="footer">
-        <div>{{ $fix('شكراً لثقتكم بمناحل وادي الجرفة') }}</div>
-        <div style="margin-top: 5px; direction: ltr;">Info@honey-store.com | +966 50 000 0000</div>
-        <div style="margin-top: 5px; font-size: 10px;">{{ $fix('تم إصدار هذه الفاتورة إلكترونياً') }}</div>
+            <div class="totals-box">
+                <div class="total-row clearfix">
+                    <span class="total-label">{{ $fix('المجموع (بدون ضريبة)') }}</span>
+                    <span class="total-value">{{ number_format($subTotal, 2) }} <img src="{{ $samaLogo }}" class="currency-logo" style="filter: brightness(0) invert(1);" alt="SAR"></span>
+                </div>
+                <div class="total-row clearfix">
+                    <span class="total-label">{{ $fix('الضريبة (15%)') }}</span>
+                    <span class="total-value">{{ number_format($vatAmount, 2) }} <img src="{{ $samaLogo }}" class="currency-logo" style="filter: brightness(0) invert(1);" alt="SAR"></span>
+                </div>
+                <div class="grand-total clearfix">
+                    <span style="float: right;">{{ $fix('الإجمالي النهائي') }}</span>
+                    <span style="float: left;">{{ number_format($totalAmount, 2) }} <img src="{{ $samaLogo }}" class="currency-logo" style="filter: brightness(0) invert(2);" alt="SAR"></span>
+                </div>
+                <div style="font-size: 9px; color: #94a3b8; margin-top: 15px; text-align: center;">
+                    * {{ $fix('جميع الأسعار تشمل ضريبة القيمة المضافة') }}
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div style="font-weight: bold; color: #0f172a; margin-bottom: 5px;">{{ $fix('شكراً لاختياركم مناحل وادي الجرفة') }}</div>
+            <div style="direction: ltr;">www.honey-store.com | Support@honey-store.com</div>
+            <div style="margin-top: 8px; font-size: 9px;">{{ $fix('فاتورة ضريبية مبسطة صادرة إلكترونياً') }}</div>
+        </div>
     </div>
 </body>
 </html>
