@@ -90,10 +90,9 @@ class PaymentController extends Controller
         $firstName = $nameParts[0];
         $lastName = count($nameParts) > 1 ? end($nameParts) : $firstName;
 
-        // Calculate tax correctly and ensure total consistency
-        $itemsSubtotal = collect($items)->sum(fn($i) => $i['total_amount']['amount']);
+        // Calculate amounts (No VAT)
         $totalAmount = round((float) $order->total_amount, 2);
-        $taxAmount = round($totalAmount - $itemsSubtotal, 2);
+        $taxAmount = 0.00;
 
         $payload = [
             'order_reference_id' => (string) $order->id,
@@ -102,7 +101,7 @@ class PaymentController extends Controller
                 'currency' => 'SAR',
             ],
             'tax_amount' => [
-                'amount' => max(0, $taxAmount),
+                'amount' => $taxAmount,
                 'currency' => 'SAR',
             ],
             'shipping_amount' => [

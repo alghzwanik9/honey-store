@@ -220,12 +220,11 @@
                     <div class="store-name">{{ $fix('مناحل وادي الجرفة') }}</div>
                     <div style="color: #64748b; font-size: 11px; margin-top: 3px;">{{ $fix('أجود أنواع العسل البلدي الطبيعي') }}</div>
                     <div style="color: #64748b; font-size: 11px;">
-                        {{ $fix('الرقم الضريبي:') }} <span style="direction: ltr;">{{ $vatNumber }}</span><br>
                         {{ $fix('السجل التجاري:') }} <span style="direction: ltr;">{{ $crNumber }}</span>
                     </div>
                 </td>
                 <td width="40%" style="text-align: left;">
-                    <div class="invoice-title">{{ $fix('فاتورة ضريبية مبسطة') }}</div>
+                    <div class="invoice-title">{{ $fix('فاتورة طلب') }}</div>
                     <div style="color: #64748b; margin-top: 8px; font-size: 14px; font-weight: bold;">#{{ $order->id }}</div>
                     <div style="color: #94a3b8; font-size: 11px; margin-top: 4px;">{{ $order->created_at->format('Y-m-d H:i') }}</div>
                 </td>
@@ -293,28 +292,17 @@
         <table class="totals-section">
             <tr>
                 <td class="qr-cell">
-                    <img src="data:image/svg+xml;base64,{{ base64_encode(\SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(90)->color(15, 23, 42)->generate($qrCodePayload)) }}" alt="ZATCA QR">
-                    <div style="font-size: 9px; color: #94a3b8; margin-top: 5px; text-align: right; width: 90px; margin-right: 0;">{{ $fix('فاتورة ضريبية معتمدة') }}</div>
+                    <img src="data:image/svg+xml;base64,{{ base64_encode(\SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(90)->color(15, 23, 42)->generate($qrCodePayload)) }}" alt="Order QR">
+                    <div style="font-size: 9px; color: #94a3b8; margin-top: 5px; text-align: right; width: 90px; margin-right: 0;">{{ $fix('شكراً لثقتكم بنا') }}</div>
                 </td>
                 <td class="totals-cell">
                     <div class="totals-box">
                         <table class="total-table">
                             <tr>
-                                <td class="total-row-td total-label">{{ $fix('المجموع الفرعي') }}</td>
-                                <td class="total-row-td total-value">{{ number_format($subTotal, 2) }} {{ $fix('ر.س') }}</td>
-                            </tr>
-                            <tr>
-                                <td class="total-row-td total-label">{{ $fix('الضريبة (15%)') }}</td>
-                                <td class="total-row-td total-value">{{ number_format($vatAmount, 2) }} {{ $fix('ر.س') }}</td>
-                            </tr>
-                            <tr>
-                                <td class="grand-total-label">{{ $fix('الإجمالي النهائي') }}</td>
+                                <td class="grand-total-label">{{ $fix('المجموع النهائي') }}</td>
                                 <td class="grand-total-value">{{ number_format($order->total_amount, 2) }} {{ $fix('ر.س') }}</td>
                             </tr>
                         </table>
-                        <div style="font-size: 9px; color: #94a3b8; margin-top: 15px; text-align: center;">
-                            * {{ $fix('جميع الأسعار تشمل ضريبة القيمة المضافة') }}
-                        </div>
                     </div>
                 </td>
             </tr>
@@ -323,7 +311,7 @@
         <div class="footer">
             <div style="font-weight: bold; color: #0f172a; margin-bottom: 5px;">{{ $fix('شكراً لاختياركم مناحل وادي الجرفة') }}</div>
             <div style="direction: ltr;">www.honey-store.com | Support@honey-store.com</div>
-            <div style="margin-top: 8px; font-size: 9px;">{{ $fix('تم إصدار هذه الفاتورة إلكترونياً وهي معتمدة من هيئة الزكاة والضريبة والجمارك') }}</div>
+            <div style="margin-top: 8px; font-size: 9px;">{{ $fix('تم إصدار هذه الفاتورة إلكترونياً من متجر مناحل وادي الجرفة') }}</div>
         </div>
     </div>
 </body>

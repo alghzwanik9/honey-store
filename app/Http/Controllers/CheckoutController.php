@@ -24,9 +24,6 @@ class CheckoutController extends Controller
             $total += $item['price'] * $item['quantity'];
         }
 
-        // Include 15% VAT
-        $total = $total * 1.15;
-
         return view('checkout.index', compact('cart', 'total'));
     }
 
@@ -52,9 +49,6 @@ class CheckoutController extends Controller
         foreach ($cart as $item) {
             $total += $item['price'] * $item['quantity'];
         }
-
-        // Include 15% VAT - Ensure backend matches frontend
-        $total = $total * 1.15;
 
         // Create Order
         $order = \App\Models\Order::create([
