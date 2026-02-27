@@ -36,10 +36,6 @@
             if (file_exists($logoPath)) {
                 $logoData = 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath));
             }
-
-            // Currency symbol SVG (Gold: #c08d5d)
-            $samaSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1125 1257" fill="#c08d5d"><path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/><path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/></svg>';
-            $samaLogo = 'data:image/svg+xml;base64,' . base64_encode($samaSvg);
         @endphp
 
         .top-stripe {
@@ -138,72 +134,75 @@
             border-bottom: none;
         }
 
+        /* Fixed Layout for Totals - Using table for stability */
+        .totals-section {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .qr-cell {
+            vertical-align: top;
+            padding-top: 10px;
+        }
+
+        .totals-cell {
+            width: 320px;
+            vertical-align: top;
+        }
+
         .totals-box {
             background: #0f172a;
             padding: 25px;
             border-radius: 20px;
             color: #ffffff;
             width: 100%;
-            max-width: 320px;
-            float: left;
         }
 
-        .total-row {
-            clear: both;
+        .total-table {
             width: 100%;
-            margin-bottom: 10px;
-            padding-bottom: 8px;
+            border-collapse: collapse;
+        }
+
+        .total-row-td {
+            padding: 8px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .total-label {
-            float: right;
             font-size: 12px;
             color: #94a3b8;
+            text-align: right;
         }
 
         .total-value {
-            float: left;
             font-weight: bold;
             color: #ffffff;
+            text-align: left;
         }
         
-        .grand-total {
-            clear: both;
+        .grand-total-label {
             padding-top: 15px;
-            margin-top: 5px;
             font-weight: bold;
             font-size: 18px;
             color: #c08d5d; /* Gold */
+            text-align: right;
+        }
+
+        .grand-total-value {
+            padding-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #c08d5d; /* Gold */
+            text-align: left;
         }
 
         .footer {
-            margin-top: 80px;
+            margin-top: 60px;
             text-align: center;
             color: #64748b;
             font-size: 11px;
             padding-top: 20px;
             border-top: 1px solid #e2e8f0;
-        }
-        
-        .qr-section {
-            float: right;
-            width: 120px;
-            text-align: center;
-            margin-top: 20px;
-        }
-        
-        .currency-logo {
-            width: 11px;
-            height: 11px;
-            vertical-align: middle;
-            margin-right: 2px;
-        }
-
-        .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
         }
     </style>
 </head>
@@ -220,10 +219,13 @@
                     @endif
                     <div class="store-name">{{ $fix('مناحل وادي الجرفة') }}</div>
                     <div style="color: #64748b; font-size: 11px; margin-top: 3px;">{{ $fix('أجود أنواع العسل البلدي الطبيعي') }}</div>
-                    <div style="color: #64748b; font-size: 11px;">{{ $fix('سجل تجاري: 1010xxxxxx') }}</div>
+                    <div style="color: #64748b; font-size: 11px;">
+                        {{ $fix('الرقم الضريبي:') }} <span style="direction: ltr;">{{ $vatNumber }}</span><br>
+                        {{ $fix('السجل التجاري:') }} <span style="direction: ltr;">{{ $crNumber }}</span>
+                    </div>
                 </td>
                 <td width="40%" style="text-align: left;">
-                    <div class="invoice-title">{{ $fix('فاتورة ضريبية') }}</div>
+                    <div class="invoice-title">{{ $fix('فاتورة ضريبية مبسطة') }}</div>
                     <div style="color: #64748b; margin-top: 8px; font-size: 14px; font-weight: bold;">#{{ $order->id }}</div>
                     <div style="color: #94a3b8; font-size: 11px; margin-top: 4px;">{{ $order->created_at->format('Y-m-d H:i') }}</div>
                 </td>
@@ -259,7 +261,7 @@
             </tr>
         </table>
 
-        <!-- Table -->
+        <!-- Items Table -->
         <table class="items-table">
             <thead>
                 <tr>
@@ -277,54 +279,51 @@
                     </td>
                     <td style="text-align: center;">{{ $item->quantity }}</td>
                     <td>
-                        {{ number_format($item->price, 2) }} 
-                        <img src="{{ $samaLogo }}" class="currency-logo" alt="SAR">
+                        {{ number_format($item->price, 2) }} {{ $fix('ر.س') }}
                     </td>
                     <td style="font-weight: bold; color: #0f172a; text-align: left;">
-                        {{ number_format($item->price * $item->quantity, 2) }} 
-                        <img src="{{ $samaLogo }}" class="currency-logo" alt="SAR">
+                        {{ number_format($item->price * $item->quantity, 2) }} {{ $fix('ر.س') }}
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
 
-        @php
-            $totalAmount = $order->total_amount;
-            $subTotal = $totalAmount / 1.15;
-            $vatAmount = $totalAmount - $subTotal;
-        @endphp
-
-        <!-- Calculation & QR -->
-        <div class="clearfix">
-            <div class="qr-section">
-                <img src="data:image/svg+xml;base64,{{ base64_encode(\SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(90)->color(15, 23, 42)->generate(route('orders.show', $order->id))) }}" alt="QR">
-                <div style="font-size: 9px; color: #94a3b8; margin-top: 5px;">{{ $fix('تفاصيل الطلب الإلكتروني') }}</div>
-            </div>
-
-            <div class="totals-box">
-                <div class="total-row clearfix">
-                    <span class="total-label">{{ $fix('المجموع (بدون ضريبة)') }}</span>
-                    <span class="total-value">{{ number_format($subTotal, 2) }} <img src="{{ $samaLogo }}" class="currency-logo" style="filter: brightness(0) invert(1);" alt="SAR"></span>
-                </div>
-                <div class="total-row clearfix">
-                    <span class="total-label">{{ $fix('الضريبة (15%)') }}</span>
-                    <span class="total-value">{{ number_format($vatAmount, 2) }} <img src="{{ $samaLogo }}" class="currency-logo" style="filter: brightness(0) invert(1);" alt="SAR"></span>
-                </div>
-                <div class="grand-total clearfix">
-                    <span style="float: right;">{{ $fix('الإجمالي النهائي') }}</span>
-                    <span style="float: left;">{{ number_format($totalAmount, 2) }} <img src="{{ $samaLogo }}" class="currency-logo" style="filter: brightness(0) invert(2);" alt="SAR"></span>
-                </div>
-                <div style="font-size: 9px; color: #94a3b8; margin-top: 15px; text-align: center;">
-                    * {{ $fix('جميع الأسعار تشمل ضريبة القيمة المضافة') }}
-                </div>
-            </div>
-        </div>
+        <!-- Calculation & QR Section -->
+        <table class="totals-section">
+            <tr>
+                <td class="qr-cell">
+                    <img src="data:image/svg+xml;base64,{{ base64_encode(\SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(90)->color(15, 23, 42)->generate($qrCodePayload)) }}" alt="ZATCA QR">
+                    <div style="font-size: 9px; color: #94a3b8; margin-top: 5px; text-align: right; width: 90px; margin-right: 0;">{{ $fix('فاتورة ضريبية معتمدة') }}</div>
+                </td>
+                <td class="totals-cell">
+                    <div class="totals-box">
+                        <table class="total-table">
+                            <tr>
+                                <td class="total-row-td total-label">{{ $fix('المجموع الفرعي') }}</td>
+                                <td class="total-row-td total-value">{{ number_format($subTotal, 2) }} {{ $fix('ر.س') }}</td>
+                            </tr>
+                            <tr>
+                                <td class="total-row-td total-label">{{ $fix('الضريبة (15%)') }}</td>
+                                <td class="total-row-td total-value">{{ number_format($vatAmount, 2) }} {{ $fix('ر.س') }}</td>
+                            </tr>
+                            <tr>
+                                <td class="grand-total-label">{{ $fix('الإجمالي النهائي') }}</td>
+                                <td class="grand-total-value">{{ number_format($order->total_amount, 2) }} {{ $fix('ر.س') }}</td>
+                            </tr>
+                        </table>
+                        <div style="font-size: 9px; color: #94a3b8; margin-top: 15px; text-align: center;">
+                            * {{ $fix('جميع الأسعار تشمل ضريبة القيمة المضافة') }}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
 
         <div class="footer">
             <div style="font-weight: bold; color: #0f172a; margin-bottom: 5px;">{{ $fix('شكراً لاختياركم مناحل وادي الجرفة') }}</div>
             <div style="direction: ltr;">www.honey-store.com | Support@honey-store.com</div>
-            <div style="margin-top: 8px; font-size: 9px;">{{ $fix('فاتورة ضريبية مبسطة صادرة إلكترونياً') }}</div>
+            <div style="margin-top: 8px; font-size: 9px;">{{ $fix('تم إصدار هذه الفاتورة إلكترونياً وهي معتمدة من هيئة الزكاة والضريبة والجمارك') }}</div>
         </div>
     </div>
 </body>

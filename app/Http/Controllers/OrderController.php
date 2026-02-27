@@ -32,13 +32,7 @@ class OrderController extends Controller
             abort(403);
         }
 
-        // Pass the order to the view.
-        // The view handles the logic of extracting VAT from the total_amount (which is tax-inclusive).
-        $data = [
-            'order' => $order,
-        ];
-
-        // QR Code generation is handled within the view for PDF compatibility
+        $data = $order->getInvoiceData();
         $pdf = Pdf::loadView('invoices.order', $data);
 
         return $pdf->download('invoice-' . $order->id . '.pdf');

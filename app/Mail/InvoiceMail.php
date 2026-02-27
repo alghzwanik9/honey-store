@@ -56,7 +56,8 @@ class InvoiceMail extends Mailable implements ShouldQueue
     public function attachments(): array
     {
         // Generate PDF here (inside the mailable) to avoid serialization issues with DOMDocument.
-        $pdf = Pdf::loadView('invoices.order', ['order' => $this->order]);
+        $data = $this->order->getInvoiceData();
+        $pdf = Pdf::loadView('invoices.order', $data);
 
         return [
             Attachment::fromData(fn () => $pdf->output(), 'invoice-' . $this->order->id . '.pdf')
