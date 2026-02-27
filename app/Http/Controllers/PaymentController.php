@@ -68,10 +68,12 @@ class PaymentController extends Controller
             $unitPrice = round((float) $item->price, 2);
             $totalPrice = round($unitPrice * $item->quantity, 2);
             
+            $productName = $item->product->name ?? 'منتج غير معروف';
+            
             return [
                 'reference_id' => (string) $item->product_id,
                 'type' => 'physical',
-                'name' => \Illuminate\Support\Str::limit($item->product->name, 128, ''),
+                'name' => \Illuminate\Support\Str::limit($productName, 128, ''),
                 'sku' => 'SKU-' . $item->product_id,
                 'quantity' => (int) $item->quantity,
                 'unit_price' => [
@@ -179,8 +181,12 @@ class PaymentController extends Controller
 
             return redirect()->route('checkout.payment', $order)->with('error', $errorMsg);
 
-        } catch (\Exception $e) {
-            \Log::error('Tamara Exception: ' . $e->getMessage());
+        } catch (\Throwable $e) {
+            \Log::error('Tamara Exception: ' . $e->getMessage(), [
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString()
+            ]);
             return redirect()->route('checkout.payment', $order)->with('error', 'خطأ تقني في تمارا: ' . $e->getMessage());
         }
     }
