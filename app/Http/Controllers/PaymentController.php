@@ -63,20 +63,23 @@ class PaymentController extends Controller
             $phone = '966' . $phone;
         }
 
-        // Prepare order items
+        // Prepare order items with precision rounding
         $items = $order->items->map(function ($item) {
+            $unitPrice = round((float) $item->price, 2);
+            $totalPrice = round($unitPrice * $item->quantity, 2);
+            
             return [
                 'reference_id' => (string) $item->product_id,
                 'type' => 'physical',
-                'name' => collect(str_split($item->product->name))->take(128)->join(''),
+                'name' => \Illuminate\Support\Str::limit($item->product->name, 128, ''),
                 'sku' => 'SKU-' . $item->product_id,
                 'quantity' => (int) $item->quantity,
                 'unit_price' => [
-                    'amount' => (float) $item->price,
+                    'amount' => $unitPrice,
                     'currency' => 'SAR',
                 ],
                 'total_amount' => [
-                    'amount' => (float) ($item->price * $item->quantity),
+                    'amount' => $totalPrice,
                     'currency' => 'SAR',
                 ],
             ];
@@ -87,14 +90,15 @@ class PaymentController extends Controller
         $firstName = $nameParts[0];
         $lastName = count($nameParts) > 1 ? end($nameParts) : $firstName;
 
-        // Calculate tax correctly for the payload to match the total_amount
-        $itemsTotal = collect($items)->sum(fn($i) => $i['total_amount']['amount']);
-        $taxAmount = (float) ($order->total_amount - $itemsTotal);
+        // Calculate tax correctly and ensure total consistency
+        $itemsSubtotal = collect($items)->sum(fn($i) => $i['total_amount']['amount']);
+        $totalAmount = round((float) $order->total_amount, 2);
+        $taxAmount = round($totalAmount - $itemsSubtotal, 2);
 
         $payload = [
             'order_reference_id' => (string) $order->id,
             'total_amount' => [
-                'amount' => (float) $order->total_amount,
+                'amount' => $totalAmount,
                 'currency' => 'SAR',
             ],
             'tax_amount' => [
@@ -332,35 +336,38 @@ class PaymentController extends Controller
 
     public function tamaraSuccess(Request $request, Order $order)
     {
-        // 1. Verify Payment Status via Tamara API
         $apiUrl = config('services.tamara.api_url');
         $merchantToken = config('services.tamara.merchant_token');
         $paymentId = $request->query('paymentId') ?? $order->payment_id;
 
+        \Log::info('Tamara Success Redirect', [
+            'order_id' => $order->id,
+            'paymentId_from_query' => $request->query('paymentId'),
+            'paymentId_from_db' => $order->payment_id
+        ]);
+
         if ($paymentId) {
             try {
-                // Determine order status from Tamara
-                $response = Http::withToken($merchantToken)
+                $response = Http::withToken(trim($merchantToken))
+                    ->timeout(10)
                     ->get($apiUrl . '/orders/' . $paymentId);
 
                 if ($response->successful()) {
                     $tamaraOrder = $response->json();
-                    
-                    // Possible statuses: NEW, APPROVED, AUTHORIZED, CANCELED, DECLINED...
                     $status = $tamaraOrder['status'] ?? '';
-                    
-                    if (in_array($status, ['APPROVED', 'AUTHORIZED', 'FULLY_CAPTURED'])) {
+
+                    \Log::info('Tamara Order Status Verified', [
+                        'order_id' => $order->id,
+                        'tamara_status' => $status
+                    ]);
+
+                    if (in_array($status, ['APPROVED', 'AUTHORIZED', 'FULLY_CAPTURED', 'captured', 'authorized'])) {
                         $order->update([
                             'payment_status' => 'paid',
                             'payment_id' => $paymentId
                         ]);
 
-                        // Clear Cart
-                        try {
-                            session()->forget('cart');
-                        } catch (\Exception $e) {
-                            \Log::error('Failed to clear cart: ' . $e->getMessage());
-                        }
+                        session()->forget('cart');
 
                         // Send Invoice Email
                         try {
@@ -368,20 +375,25 @@ class PaymentController extends Controller
                                 \Illuminate\Support\Facades\Mail::to($order->user)->queue(new \App\Mail\InvoiceMail($order));
                             }
                         } catch (\Exception $e) {
-                            \Log::error('Failed to send invoice email: ' . $e->getMessage());
+                            \Log::error('Invoice Email Error: ' . $e->getMessage());
                         }
 
                         return redirect()->route('payment.success', ['order' => $order->id]);
                     }
+                } else {
+                    \Log::error('Tamara Verification Failed', [
+                        'status' => $response->status(),
+                        'body' => $response->body()
+                    ]);
                 }
             } catch (\Exception $e) {
-                \Log::error('Tamara Verification Error: ' . $e->getMessage());
+                \Log::error('Tamara Success Exception: ' . $e->getMessage());
             }
         }
 
-        // Fallback if verification fails but user is redirected here
+        // Final fallback: if we reach here and order is still pending, but reached success page
         return redirect()->route('payment.success', ['order' => $order->id])
-                         ->with('message', 'تم استلام طلبك، وجاري تأكيد الدفع مع تمارا.');
+                         ->with('message', 'تم استلام طلبك، وجاري تأكيد حالة الدفع من النظام.');
     }
 
     public function tamaraFailure(Request $request, Order $order)
