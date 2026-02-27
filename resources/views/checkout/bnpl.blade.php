@@ -9,7 +9,7 @@
                         <h2 class="text-3xl font-black" style="color: #c08d5d;">TAMARA</h2>
                     </div>
                 </div>
-                <p id="status-text" class="text-gray-400 font-medium font-black">جاري تحويلك إلى بوابة دفع تمارا الآمنة...</p>
+                <p id="status-text" class="text-gray-400 font-black">جاري تحويلك إلى بوابة دفع تمارا الآمنة...</p>
             </div>
 
             <div id="loader" class="flex justify-center mb-8">
