@@ -5,7 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>مناحل وادي الجرفة</title>
+        <meta name="description" content="مناحل وادي الجرفة.. مصدرك الموثوق للعسل البلدي الطبيعي. جودة مضمونة 100%، نقطفها بعناية من مناحلنا لنجعلها بين يديك.">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+        <meta property="og:site_name" content="مناحل وادي الجرفة">
+        <script type="application/ld+json">
+        {
+          "@context" : "https://schema.org",
+          "@type" : "WebSite",
+          "name" : "مناحل وادي الجرفة",
+          "url" : "{{ url('/') }}"
+        }
+        </script>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
