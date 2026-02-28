@@ -1,6 +1,6 @@
 <x-layout title="سلة المشتريات">
-    <div class="container mx-auto px-4 py-12" dir="rtl">
-        <h1 class="text-3xl md:text-4xl font-black text-brand-navy mb-12 text-center">سلة المشتريات</h1>
+    <div class="container mx-auto px-4 py-16 md:py-24" dir="rtl">
+        <h1 class="text-3xl font-bold text-brand-navy mb-12 text-center">سلة المشتريات</h1>
 
         @if(empty($cart) || count($cart) == 0)
             <div class="bg-brand-cream-light rounded-3xl shadow-2xl p-20 text-center border border-brand-gold/10 relative overflow-hidden">
@@ -8,9 +8,9 @@
                 <div class="mb-8">
                     <svg class="w-24 h-24 mx-auto text-brand-gold/20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                 </div>
-                <h2 class="text-2xl font-black text-brand-navy mb-4">سلتك بانتظار عسلنا الفاخر</h2>
-                <p class="text-lg text-gray-400 mb-10">تبدو سلة مشترياتك خالية حالياً، ما رأيك باكتشاف تشكيلتنا؟</p>
-                <a href="/" class="bg-brand-navy text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-black py-4 px-12 rounded-xl transition-all shadow-xl inline-block">ابدأ التسوق الآن</a>
+                <h2 class="text-2xl font-bold text-brand-navy mb-4 leading-relaxed">سلتك بانتظار عسلنا الفاخر</h2>
+                <p class="text-base text-gray-500 mb-10 leading-relaxed">تبدو سلة مشترياتك خالية حالياً، ما رأيك باكتشاف تشكيلتنا؟</p>
+                <a href="/" class="bg-brand-navy text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-semibold py-4 px-12 rounded-xl transition-all shadow-xl inline-block">ابدأ التسوق الآن</a>
             </div>
         @else
             <div class="flex flex-col lg:flex-row gap-8">
@@ -32,23 +32,23 @@
 
                                 <!-- Details -->
                                 <div class="grow mr-6">
-                                    <h3 class="text-lg font-bold text-brand-navy mb-1 leading-snug">
+                                    <h3 class="text-base font-semibold text-brand-navy mb-2 leading-relaxed">
                                         <a href="{{ route('products.show', ['product' => $details['slug']]) }}" class="hover:text-brand-gold transition-colors">
                                             {{ $details['name'] }}
                                         </a>
                                     </h3>
                                     <p class="text-sm text-gray-400 mb-2 font-medium">الكمية: {{ $details['quantity'] }}</p>
-                                    <div class="flex items-center gap-1 font-black text-brand-navy">
+                                    <div class="flex items-center gap-1 font-bold text-brand-navy">
                                         <span>{{ number_format($details['price']) }}</span>
-                                        <x-currency-symbol class="w-6 h-6 text-brand-gold" />
+                                        <x-currency-symbol class="w-5 h-5 text-brand-gold" />
                                     </div>
                                 </div>
 
                                 <!-- Actions -->
                                 <div class="flex flex-col items-end justify-between self-stretch">
-                                    <div class="text-xl font-black text-brand-navy mb-2 flex items-center gap-1 leading-none">
+                                    <div class="text-lg font-bold text-brand-navy mb-2 flex items-center gap-1 leading-none">
                                         {{ number_format($details['price'] * $details['quantity']) }} 
-                                        <x-currency-symbol class="w-6 h-6 text-brand-gold" />
+                                        <x-currency-symbol class="w-5 h-5 text-brand-gold" />
                                     </div>
                                     
                                     <form action="{{ route('cart.remove') }}" method="POST">
@@ -70,7 +70,7 @@
                 <div class="lg:w-1/3">
                     <div class="bg-brand-cream-light rounded-3xl shadow-xl p-8 border border-brand-gold/10 sticky top-28 overflow-hidden">
                         <div class="absolute top-0 right-0 w-full h-1 bg-brand-gold"></div>
-                        <h2 class="text-xl font-black text-brand-navy mb-8 border-b border-brand-gold/10 pb-4">ملخص الطلب</h2>
+                        <h2 class="text-lg font-bold text-brand-navy mb-6 border-b border-brand-gold/10 pb-4 leading-relaxed">ملخص الطلب</h2>
                         
                         <div class="space-y-4 mb-8">
                             <div class="flex justify-between text-gray-500 font-medium">
@@ -80,23 +80,16 @@
                                     <x-currency-symbol class="w-5 h-5 text-brand-gold/50" />
                                 </span>
                             </div>
-                            <div class="flex justify-between text-gray-500 font-medium">
-                                <span>الضريبة (15%)</span>
-                                <span class="flex items-center gap-1 text-brand-navy">
-                                    {{ number_format($total * 0.15) }} 
-                                    <x-currency-symbol class="w-5 h-5 text-brand-gold/50" />
-                                </span>
-                            </div>
-                            <div class="flex justify-between text-xl font-black text-brand-navy border-t border-brand-gold/10 pt-6 mt-6">
+                            <div class="flex justify-between text-lg font-bold text-brand-navy border-t border-brand-gold/10 pt-6 mt-6">
                                 <span>الإجمالي</span>
                                 <div class="flex items-center gap-1 text-brand-gold">
-                                    {{ number_format($total * 1.15) }} 
-                                    <x-currency-symbol class="w-7 h-7" />
+                                    {{ number_format($total) }} 
+                                    <x-currency-symbol class="w-6 h-6" />
                                 </div>
                             </div>
                         </div>
 
-                        <a href="{{ route('checkout.index') }}" class="w-full bg-brand-navy text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-black py-4 rounded-xl shadow-xl transition-all transform active:scale-95 flex items-center justify-center gap-2 group">
+                        <a href="{{ route('checkout.index') }}" class="w-full bg-brand-navy text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-semibold text-base py-4 rounded-xl shadow-xl transition-all transform active:scale-95 flex items-center justify-center gap-2 group">
                             <span>إتمام الطلب</span>
                             <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                         </a>

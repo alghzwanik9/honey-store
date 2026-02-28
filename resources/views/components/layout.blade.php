@@ -77,7 +77,7 @@
                     </a>
 
                     <!-- Navigation Links -->
-                    <div class="flex items-center gap-6 text-sm font-black text-gray-200 tracking-wide">
+                    <div class="flex items-center gap-6 text-sm font-medium text-gray-200 tracking-wide">
                         <a href="/" class="hover:text-brand-gold py-1 border-b-2 border-transparent hover:border-brand-gold transition-all duration-300 {{ request()->routeIs('home') ? 'text-brand-gold border-brand-gold' : '' }}">الرئيسية</a>
                         
                         <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
@@ -129,7 +129,7 @@
                     @auth
                         <!-- User Menu -->
                         <div class="relative group" x-data="{ userOpen: false }" @mouseenter="userOpen = true" @mouseleave="userOpen = false">
-                            <button class="flex items-center gap-1.5 text-white bg-brand-navy-light px-3 py-1.5 rounded-full hover:bg-brand-gold hover:text-brand-navy transition border border-brand-gold/10 text-sm font-black">
+                            <button class="flex items-center gap-1.5 text-white bg-brand-navy-light px-3 py-1.5 rounded-full hover:bg-brand-gold hover:text-brand-navy transition border border-brand-gold/10 text-sm font-medium">
                                 <div class="w-6 h-6 bg-brand-gold/20 rounded-full flex items-center justify-center text-brand-gold group-hover:text-brand-navy group-hover:bg-transparent">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                                 </div>
@@ -147,7 +147,7 @@
                             </div>
                         </div>
                     @else
-                        <div class="flex items-center gap-1 font-bold text-sm">
+                        <div class="flex items-center gap-1 font-medium text-sm">
                             <a href="{{ route('login') }}" class="text-white hover:text-brand-gold px-2 py-1.5 rounded-lg transition">دخول</a>
                             <span class="text-brand-gold/30">|</span>
                             <a href="{{ route('register') }}" class="text-brand-gold hover:text-brand-gold-light px-2 py-1.5 rounded-lg transition border border-brand-gold/20 hover:border-brand-gold">تسجيل</a>
@@ -180,7 +180,7 @@
                          alt="Logo">
                 </a>
                 <div>
-                    <h2 class="text-xl font-black text-white mb-1">مناحل وادي الجرفة</h2>
+                    <h2 class="text-lg font-bold text-white mb-1">مناحل وادي الجرفة</h2>
                 </div>
             </div>
 
@@ -266,7 +266,7 @@
             <div class="grid md:grid-cols-3 gap-10 text-center md:text-right mb-12">
                 <div>
                     <img src="/images/logo.png" class="h-20 md:h-28 w-auto mb-6 mx-auto md:mx-0 opacity-100 transition duration-500 drop-shadow-[0_0_15px_rgba(194,155,64,0.4)] object-contain filter brightness-110" alt="مناحل وادي الجرفة">
-                    <p class="text-sm leading-relaxed text-gray-200 font-bold">مناحل وادي الجرفة.. أصالة التراث وعذوبة المذاق في كل قطرة. نقدم لكم أجود أنواع العسل البلدي الطبيعي من مناحلنا مباشرة إليكم بكل فخر.</p>
+                    <p class="text-sm leading-relaxed text-gray-200 font-medium">مناحل وادي الجرفة.. مصدرك الموثوق للعسل البلدي الطبيعي. جودة مضمونة 100%، نقطفها بعناية من مناحلنا لنجعلها بين يديك.</p>
                     {{-- Social Icons --}}
                     <div class="flex gap-4 mt-5 justify-center md:justify-start">
                         <a href="https://wa.me/966550360118" target="_blank" class="w-9 h-9 rounded-full bg-brand-navy-light hover:bg-green-600 flex items-center justify-center transition-colors duration-300 border border-brand-gold/10" title="واتساب">
@@ -364,7 +364,7 @@
                  class="w-screen max-w-md bg-white shadow-2xl flex flex-col pt-6 pointer-events-auto z-[150]">
                 
                 <div class="px-6 pb-6 border-b border-gray-100 flex items-center justify-between">
-                    <h2 class="text-2xl font-black text-brand-navy flex items-center gap-2">
+                    <h2 class="text-xl font-bold text-brand-navy flex items-center gap-2">
                         <svg class="w-6 h-6 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                         سلة التسوق
                     </h2>

@@ -123,10 +123,6 @@
                                 <span>الشحن</span>
                                 <span>مجاني</span>
                             </div>
-                            <div class="flex justify-between text-gray-600">
-                                <span>الضريبة (15%)</span>
-                                <span>شامل الضريبة</span>
-                            </div>
                         </div>
                         <div class="flex justify-between items-center mb-8">
                             <span class="font-black text-brand-navy text-lg">الإجمالي</span>

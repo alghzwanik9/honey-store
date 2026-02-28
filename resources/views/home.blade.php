@@ -7,14 +7,14 @@
         {{-- Page Header when search/filter active --}}
         @if(request('category') || request('search'))
         <div class="mb-6 flex items-center gap-3">
-            <a href="{{ route('home') }}" class="text-brand-gold hover:text-brand-gold-dark font-bold flex items-center gap-1 text-sm">
+            <a href="{{ route('home') }}" class="text-brand-gold hover:text-brand-gold-dark font-medium flex items-center gap-1 text-sm">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
                 الرئيسية
             </a>
             <span class="text-gray-300">/</span>
-            <span class="text-gray-600 font-black">
+            <span class="text-gray-600 font-semibold text-sm">
                 @if(request('search'))
                     نتائج البحث عن: "{{ request('search') }}"
                 @elseif(request('category'))
@@ -31,7 +31,7 @@
         {{-- Section Title --}}
         <div class="flex items-center justify-between mb-8">
             <div>
-                <h2 class="text-2xl md:text-3xl font-black text-gray-900">
+                <h2 class="text-2xl font-bold text-gray-900 leading-relaxed">
                     @if(request('search'))
                         نتائج البحث
                     @elseif(request('category'))
@@ -40,7 +40,7 @@
                         تشكيلة عسلنا الفاخرة
                     @endif
                 </h2>
-                <p class="text-gray-400 text-sm mt-1">{{ $products->total() }} منتج متاح</p>
+                <p class="text-gray-400 text-sm mt-2 font-medium">{{ $products->total() }} منتج متاح</p>
             </div>
 
             {{-- Sort / View toggle placeholder --}}
@@ -124,33 +124,33 @@
                         </div>
 
                         {{-- معلومات المنتج --}}
-                        <div class="p-3 sm:p-4 text-center flex flex-col items-center justify-between grow bg-brand-cream/50">
+                        <div class="p-6 text-center flex flex-col items-center justify-between grow gap-3 bg-brand-cream/50">
                             <div class="w-full">
                                 @if($product->category)
-                                    <span class="text-[10px] font-bold tracking-wider text-brand-navy bg-brand-gold/10 border border-brand-gold/20 px-2.5 py-1 rounded-full mb-2 inline-block">
+                                    <span class="text-xs font-medium tracking-wider text-brand-navy bg-brand-gold/10 border border-brand-gold/20 px-3 py-1 rounded-full mb-3 inline-block">
                                         {{ $product->category->name }}
                                     </span>
                                 @endif
-                                <h2 class="text-base md:text-lg font-black text-brand-navy mb-1 group-hover:text-brand-gold transition-colors line-clamp-2 leading-snug">
+                                <h2 class="text-base font-semibold text-brand-navy mb-1 group-hover:text-brand-gold transition-colors line-clamp-2 leading-relaxed">
                                     {{ $product->name }}
                                 </h2>
                             </div>
 
                             {{-- السعر --}}
-                            <div class="flex items-center justify-center gap-1.5 mt-3 bg-brand-beige/50 px-4 py-1 rounded-full border border-brand-gold/5">
-                                <span class="text-brand-navy font-black text-2xl tabular-nums">{{ number_format($product->price) }}</span>
-                                <x-currency-symbol class="w-6 h-6 text-brand-gold" />
+                            <div class="flex items-center justify-center gap-2 mt-4 bg-brand-beige/50 px-5 py-2 rounded-full border border-brand-gold/5">
+                                <span class="text-brand-navy font-bold text-xl tabular-nums">{{ number_format($product->price) }}</span>
+                                <x-currency-symbol class="w-5 h-5 text-brand-gold" />
                             </div>
                         </div>
                     </a>
 
                     {{-- زر الإضافة للسلة --}}
-                    <div class="px-3 sm:px-4 pb-4 bg-brand-cream/50">
+                    <div class="px-6 pb-6 bg-brand-cream/50">
                         <form action="{{ route('cart.add', $product) }}" method="POST">
                             @csrf
                             <input type="hidden" name="quantity" value="1">
                             <button type="submit"
-                                    class="w-full bg-brand-navy text-white font-bold py-3 px-4 rounded-xl hover:bg-brand-gold hover:text-brand-navy transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-lg hover:shadow-brand-gold/20 btn-glow">
+                                    class="w-full bg-brand-navy text-white font-medium text-sm py-3 px-6 rounded-xl hover:bg-brand-gold hover:text-brand-navy transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-md hover:shadow-brand-gold/20 btn-glow">
                                 <span>أضف للسلة</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform group-hover/btn:scale-110 transition-transform text-brand-gold group-hover/btn:text-brand-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -168,9 +168,9 @@
             <div class="bg-white w-24 h-24 rounded-full flex items-center justify-center shadow-md mb-6 border border-gray-100">
                 <span class="text-5xl">🔍</span>
             </div>
-            <h3 class="text-3xl font-black text-brand-navy mb-4">لم يتم العثور على منتجات</h3>
-            <p class="text-gray-500 mb-8 text-lg max-w-md mx-auto leading-relaxed">عذراً، لم نتمكن من العثور على أي منتجات تطابق بحثك الحالي. جرب استخدام كلمات مختلفة أو عرض جميع المنتجات.</p>
-            <a href="{{ route('home') }}" class="group inline-flex items-center gap-2 bg-brand-navy hover:bg-brand-gold text-brand-gold hover:text-brand-navy font-black text-lg px-8 py-4 rounded-xl transition-all duration-300 shadow-xl hover:-translate-y-1">
+            <h3 class="text-2xl font-bold text-brand-navy mb-4 leading-relaxed">لم يتم العثور على منتجات</h3>
+            <p class="text-gray-500 mb-8 text-base max-w-md mx-auto leading-relaxed">عذراً، لم نتمكن من العثور على أي منتجات تطابق بحثك الحالي. جرب استخدام كلمات مختلفة أو عرض جميع المنتجات.</p>
+            <a href="{{ route('home') }}" class="group inline-flex items-center gap-2 bg-brand-navy hover:bg-brand-gold text-brand-gold hover:text-brand-navy font-semibold text-base px-8 py-4 rounded-xl transition-all duration-300 shadow-xl hover:-translate-y-1">
                 <span>إزالة الفلاتر وعرض الكل</span>
                 <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
             </a>
