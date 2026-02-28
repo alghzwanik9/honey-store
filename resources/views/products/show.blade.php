@@ -70,7 +70,7 @@
                                 <span class="text-gray-500 text-sm font-semibold block mb-1">السعر</span>
                                 <div class="flex items-center gap-2">
                                     <span class="text-3xl md:text-4xl font-bold text-brand-navy tracking-tight">{{ number_format($product->price) }}</span>
-                                    <x-currency-symbol class="w-8 h-8 text-brand-gold" />
+                                    <x-currency-symbol class="text-brand-gold" />
                                 </div>
                             </div>
                             

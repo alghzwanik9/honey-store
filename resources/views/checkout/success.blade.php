@@ -26,8 +26,9 @@
                 <div class="flex justify-between items-center">
                     <span class="text-gray-400 font-bold">الإجمالي النهائي:</span>
                     <span class="font-black text-white text-3xl flex items-center gap-2">
-                        {{ number_format($order->total_amount) }} 
-                        <x-currency-symbol class="w-10 h-10 text-brand-gold" />
+                        <span class="text-brand-navy">المبلغ المدفوع:</span>
+                        <x-currency-symbol class="text-brand-gold" />
+                        <span class="text-brand-gold tabular-nums">{{ number_format($order->total_amount, 2) }}</span>
                     </span>
                 </div>
             </div>

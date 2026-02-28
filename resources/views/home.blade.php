@@ -139,7 +139,7 @@
                             {{-- السعر --}}
                             <div class="flex items-center justify-center gap-2 mt-4 bg-brand-beige/50 px-5 py-2 rounded-full border border-brand-gold/5">
                                 <span class="text-brand-navy font-bold text-xl tabular-nums">{{ number_format($product->price) }}</span>
-                                <x-currency-symbol class="w-5 h-5 text-brand-gold" />
+                                <x-currency-symbol class="text-brand-gold" />
                             </div>
                         </div>
                     </a>

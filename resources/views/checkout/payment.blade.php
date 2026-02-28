@@ -19,8 +19,8 @@
                 <div class="flex justify-between items-center text-lg">
                     <span class="text-brand-navy font-bold">المبلغ المطلوب:</span>
                     <span class="text-brand-gold font-black flex items-center gap-2">
-                        {{ number_format($order->total_amount) }} 
-                        <x-currency-symbol class="w-8 h-8" />
+                        {{ number_format($order->total_amount, 2) }} 
+                        <x-currency-symbol />
                     </span>
                 </div>
             </div>

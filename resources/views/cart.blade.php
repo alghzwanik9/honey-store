@@ -40,7 +40,7 @@
                                     <p class="text-sm text-gray-400 mb-2 font-medium">الكمية: {{ $details['quantity'] }}</p>
                                     <div class="flex items-center gap-1 font-bold text-brand-navy">
                                         <span>{{ number_format($details['price']) }}</span>
-                                        <x-currency-symbol class="w-5 h-5 text-brand-gold" />
+                                        <x-currency-symbol class="text-brand-gold" />
                                     </div>
                                 </div>
 
@@ -48,7 +48,7 @@
                                 <div class="flex flex-col items-end justify-between self-stretch">
                                     <div class="text-lg font-bold text-brand-navy mb-2 flex items-center gap-1 leading-none">
                                         {{ number_format($details['price'] * $details['quantity']) }} 
-                                        <x-currency-symbol class="w-5 h-5 text-brand-gold" />
+                                        <x-currency-symbol class="text-brand-gold" />
                                     </div>
                                     
                                     <form action="{{ route('cart.remove') }}" method="POST">
@@ -77,14 +77,14 @@
                                 <span>المجموع الفرعي</span>
                                 <span class="flex items-center gap-1 text-brand-navy">
                                     {{ number_format($total) }} 
-                                    <x-currency-symbol class="w-5 h-5 text-brand-gold/50" />
+                                    <x-currency-symbol class="text-brand-gold/50" />
                                 </span>
                             </div>
                             <div class="flex justify-between text-lg font-bold text-brand-navy border-t border-brand-gold/10 pt-6 mt-6">
                                 <span>الإجمالي</span>
                                 <div class="flex items-center gap-1 text-brand-gold">
                                     {{ number_format($total) }} 
-                                    <x-currency-symbol class="w-6 h-6" />
+                                    <x-currency-symbol />
                                 </div>
                             </div>
                         </div>

@@ -44,7 +44,7 @@
                                             <td class="px-6 py-5 font-black text-brand-navy">
                                                 <div class="flex items-center gap-1">
                                                     {{ number_format($order->total_amount) }} 
-                                                    <x-currency-symbol class="w-5 h-5 text-brand-gold/70" />
+                                                    <x-currency-symbol class="text-brand-gold/70" />
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4">

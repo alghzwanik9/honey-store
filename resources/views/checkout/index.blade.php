@@ -18,7 +18,7 @@
                     <span class="text-gray-500 font-bold text-lg">الإجمالي النهائي:</span>
                     <span class="text-3xl font-black text-brand-gold flex items-center gap-2">
                         {{ number_format($total) }}
-                        <x-currency-symbol class="w-8 h-8" />
+                        <x-currency-symbol />
                     </span>
                 </div>
             </div>

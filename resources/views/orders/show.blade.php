@@ -89,13 +89,13 @@
                                         <td class="px-6 py-4">
                                             <div class="flex items-center gap-1 font-bold">
                                                 {{ number_format($item->price, 2) }} 
-                                                <x-currency-symbol class="w-4 h-4 text-brand-gold/70" />
+                                                <x-currency-symbol class="text-brand-gold/70" />
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 font-black text-brand-navy text-lg">
                                             <div class="flex items-center gap-1">
                                                 {{ number_format($item->price * $item->quantity) }} 
-                                                <x-currency-symbol class="w-6 h-6 text-brand-gold" />
+                                                <x-currency-symbol class="text-brand-gold" />
                                             </div>
                                         </td>
                                     </tr>
@@ -115,7 +115,7 @@
                                 <span>المجموع الفرعي</span>
                                 <span class="flex items-center gap-1 text-brand-navy">
                                     {{ number_format($order->total_amount, 2) }} 
-                                    <x-currency-symbol class="w-4 h-4 text-brand-gold/40" />
+                                    <x-currency-symbol class="text-brand-gold/40" />
                                 </span>
                             </div>
                             <!-- Mock Tax/Shipping if needed later -->
@@ -128,7 +128,7 @@
                             <span class="font-black text-brand-navy text-lg">الإجمالي</span>
                             <span class="font-black text-brand-gold text-3xl flex items-center gap-1">
                                 {{ number_format($order->total_amount) }} 
-                                <x-currency-symbol class="w-8 h-8" />
+                                <x-currency-symbol />
                             </span>
                         </div>
                         

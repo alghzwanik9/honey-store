@@ -37,7 +37,7 @@
                     <span class="text-gray-500 font-bold">إجمالي المبلغ:</span>
                     <span class="font-black text-brand-gold text-2xl flex items-center gap-2">
                         {{ number_format($order->total_amount) }} 
-                        <x-currency-symbol class="w-8 h-8" />
+                        <x-currency-symbol />
                     </span>
                 </div>
             </div>
