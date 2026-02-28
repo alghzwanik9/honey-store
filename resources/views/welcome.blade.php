@@ -3,6 +3,15 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="google-site-verification" content="u6I9tBc82GeY02xZ-Bd_KYRrB7-fH1XfOp4P7YYcig4" />
+        <script type="application/ld+json">
+        {
+          "@context" : "https://schema.org",
+          "@type" : "WebSite",
+          "name" : "مناحل وادي الجرفة",
+          "url" : "{{ url('/') }}"
+        }
+        </script>
         <title>مرحباً بك في متجر العسل</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
