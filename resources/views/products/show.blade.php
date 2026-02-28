@@ -43,7 +43,7 @@
                     @endphp
 
                      @if($imageUrl)
-                        <img src="{{ $imageUrl }}" alt="{{ $product->name }}" class="max-w-full max-h-full object-contain transform group-hover:scale-110 transition-transform duration-1000 drop-shadow-2xl">
+                        <img src="{{ $imageUrl }}" alt="{{ $product->name }}" loading="lazy" class="max-w-full max-h-full object-contain transform group-hover:scale-110 transition-transform duration-1000 drop-shadow-2xl">
                     @else
                         <div class="w-full h-full flex items-center justify-center text-gray-300 flex-col gap-4">
                              <div class="w-32 h-32 bg-brand-cream rounded-full flex items-center justify-center">

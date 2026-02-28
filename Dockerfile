@@ -13,7 +13,12 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     nginx \
     nodejs \
-    npm
+    npm \
+    jpegoptim \
+    optipng \
+    pngquant \
+    gifsicle \
+    webp
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*

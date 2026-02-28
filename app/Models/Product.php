@@ -30,4 +30,16 @@ class Product extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    protected static function booted()
+    {
+        static::saved(function ($product) {
+            if ($product->isDirty('image_url') && $product->image_url) {
+                $path = \Illuminate\Support\Facades\Storage::disk('public')->path($product->image_url);
+                if (file_exists($path)) {
+                    \Spatie\LaravelImageOptimizer\Facades\ImageOptimizer::optimize($path);
+                }
+            }
+        });
+    }
 }
