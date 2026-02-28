@@ -1,1 +1,3 @@
-<span {{ $attributes->merge(['class' => 'mr-1 font-sans text-base font-medium']) }} style="line-height: inherit;">⃁</span>
+<span {{ $attributes->merge(['class' => 'mr-1 font-sans text-xl font-bold !text-black']) }} style="line-height: inherit;">
+    ⃁
+</span>
