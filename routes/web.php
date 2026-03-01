@@ -54,6 +54,17 @@ Route::get('/products/{product:slug}', function (Product $product) {
 // AI Chat Route (Public)
 Route::post('/chat', [\App\Http\Controllers\ChatController::class, 'sendMessage'])->name('chat.send');
 
+// Sitemap
+Route::get('/sitemap.xml', function () {
+    $products = Product::where('is_active', true)->get();
+    
+    $content = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . view('sitemap', [
+        'products' => $products
+    ])->render();
+
+    return response($content)->header('Content-Type', 'text/xml');
+});
+
 // --- Cart Routes ---
 Route::get('/cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{product}', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');

@@ -1,2 +1,4 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://honey-store-production.up.railway.app/sitemap.xml
