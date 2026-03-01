@@ -65,7 +65,7 @@
                     <a href="{{ route('products.show', $product) }}" class="flex flex-col grow">
 
                         {{-- صورة المنتج --}}
-                        <div class="relative h-48 md:h-60 w-full bg-gray-50 overflow-hidden">
+                        <div class="relative h-64 md:h-72 w-full bg-gray-50 overflow-hidden">
 
                             {{-- Badge: نفد قريباً --}}
                             @if($isLowStock)
@@ -211,7 +211,7 @@
 
                         <div class="bg-brand-cream-light rounded-2xl shadow-sm border border-brand-gold/5 overflow-hidden flex flex-col h-full hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group animate-fade-in-up {{ $staggerClass }}">
                             <a href="{{ route('products.show', $product) }}" class="flex flex-col grow">
-                                <div class="relative h-48 md:h-60 w-full bg-gray-50 overflow-hidden text-center">
+                                <div class="relative h-64 md:h-72 w-full bg-gray-50 overflow-hidden text-center">
                                     @if($isLowStock)
                                     <div class="absolute top-2 right-2 z-10">
                                         <span class="bg-red-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full shadow-md animate-pulse">ينفد قريباً</span>
