@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="google-site-verification" content="u6I9tBc82GeY02xZ-Bd_KYRrB7-fH1XfOp4P7YYcig4" />
         
-        <title>مناحل وادي الجرفة</title>
+        <title>{{ $title ?? 'مناحل وادي الجرفة' }}</title>
         <meta name="description" content="مناحل وادي الجرفة.. مصدرك الموثوق للعسل البلدي الطبيعي. جودة مضمونة 100%، نقطفها بعناية من مناحلنا لنجعلها بين يديك.">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
         <meta property="og:site_name" content="مناحل وادي الجرفة">
