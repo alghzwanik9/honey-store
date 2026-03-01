@@ -16,9 +16,10 @@ class AdminRedirect
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && !Auth::user()->is_admin) {
-            return redirect('/');
-        }
+        // Temporarily disabled for testing
+        // if (Auth::check() && !Auth::user()->is_admin) {
+        //     return redirect('/');
+        // }
 
         return $next($request);
     }

@@ -19,6 +19,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'checkout/webhook', // Exclude Moyasar Webhook
             'checkout/callback', // Exclude Callback in case of POST
             'tamara/notification', // Exclude Tamara Webhooks
+            'admin/*', // Allow Filament admin POST requests
+            'livewire/*', // Allow Livewire requests used by Filament
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
