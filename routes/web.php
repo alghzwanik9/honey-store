@@ -8,27 +8,43 @@ use Illuminate\Support\Facades\Route;
 // --- Public Routes ---
 
 Route::get('/', function () {
-    // أضفنا with('category') لكي يجلب الأقسام مع المنتجات في خبطة واحدة
-    $query = Product::with('category')
-        ->where('is_active', true)
-        ->where('stock', '>', 0);
+    // If there is a search or category filter, use pagination
+    if (request('search') || request('category')) {
+        $query = Product::with('category')
+            ->where('is_active', true)
+            ->where('stock', '>', 0);
 
-    // Search Filter
-    if (request('search')) {
-        $query->where('name', 'like', '%' . request('search') . '%')
-              ->orWhere('description', 'like', '%' . request('search') . '%');
+        if (request('search')) {
+            $query->where('name', 'like', '%' . request('search') . '%')
+                  ->orWhere('description', 'like', '%' . request('search') . '%');
+        }
+
+        if (request('category')) {
+            $query->whereHas('category', function ($q) {
+                $q->where('slug', request('category'));
+            });
+        }
+
+        $products = $query->paginate(12);
+
+        return view('home', [
+            'products' => $products,
+            'isFiltered' => true
+        ]);
     }
 
-    // Category Filter
-    if (request('category')) {
-        $query->whereHas('category', function ($q) {
-            $q->where('slug', request('category'));
+    // Default Home Page view - Grouped by Category
+    $categoriesWithProducts = \App\Models\Category::where('slug', '!=', 'honey')
+        ->with(['products' => function($q) {
+            $q->where('is_active', true)->where('stock', '>', 0);
+        }])->get()->filter(function ($category) {
+            return $category->products->count() > 0;
         });
-    }
 
-    $products = $query->paginate(12);
-
-    return view('home', ['products' => $products]);
+    return view('home', [
+        'isFiltered' => false,
+        'categoriesWithProducts' => $categoriesWithProducts
+    ]);
 })->name('home');
 
 Route::get('/products/{product:slug}', function (Product $product) {

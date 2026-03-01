@@ -1,6 +1,6 @@
 <x-layout title="الرئيسية">
 
-
+    @if(isset($isFiltered) && $isFiltered)
     {{-- ===== PRODUCTS SECTION ===== --}}
     <section id="products" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14" dir="rtl">
 
@@ -184,5 +184,113 @@
 
     </section>
 
+    @else
+    {{-- ===== CATEGORIES SHOWCASE SECTION ===== --}}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14" dir="rtl">
+        @foreach($categoriesWithProducts as $category)
+            <div class="mb-16 last:mb-0">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-3 border-b-2 border-brand-gold/10">
+                    <h2 class="text-2xl md:text-3xl font-black text-brand-navy border-r-4 border-brand-gold pr-3 relative group">
+                        {{ $category->name }}
+                        <span class="absolute bottom-0 right-0 w-0 h-0.5 bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
+                    </h2>
+                    <a href="{{ url('/?category=' . $category->slug) }}" class="group flex items-center justify-center gap-2 text-sm md:text-sm font-semibold text-brand-gold hover:text-brand-navy transition-colors bg-brand-gold/5 hover:bg-brand-gold/10 px-5 py-2.5 rounded-full border border-brand-gold/20 shadow-sm w-full sm:w-auto">
+                        <span>عرض جميع منتجات {{ $category->name }}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transform pt-0.5 group-hover:-translate-x-1.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 lg:gap-7">
+                    @foreach($category->products->take(8) as $index => $product)
+                        @php
+                            $staggerClass = 'stagger-' . (($index % 4) + 1);
+                            $isLowStock = $product->stock > 0 && $product->stock <= 5;
+                        @endphp
+
+                        <div class="bg-brand-cream-light rounded-2xl shadow-sm border border-brand-gold/5 overflow-hidden flex flex-col h-full hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group animate-fade-in-up {{ $staggerClass }}">
+                            <a href="{{ route('products.show', $product) }}" class="flex flex-col grow">
+                                <div class="relative h-48 md:h-60 w-full bg-gray-50 overflow-hidden text-center">
+                                    @if($isLowStock)
+                                    <div class="absolute top-2 right-2 z-10">
+                                        <span class="bg-red-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full shadow-md animate-pulse">ينفد قريباً</span>
+                                    </div>
+                                    @endif
+
+                                    <div class="absolute bottom-4 left-0 right-0 flex justify-center z-10 pointer-events-none">
+                                        @if($product->weight)
+                                            @php
+                                                $categoryName = $category->name;
+                                                $badgeClasses = 'bg-brand-navy/90 text-brand-gold border-brand-gold/30';
+
+                                                if (Str::contains($categoryName, 'مجرى')) {
+                                                    $badgeClasses = 'bg-white/90 text-gray-900 border-gray-200 shadow-md';
+                                                } elseif (Str::contains($categoryName, ['سلام', 'سمرة'])) {
+                                                    $badgeClasses = 'bg-[#3E2723]/90 text-amber-100 border-[#5D4037] shadow-md';
+                                                } elseif (Str::contains($categoryName, 'سدر')) {
+                                                    $badgeClasses = 'bg-[#D2691E]/90 text-white border-[#A0522D] shadow-md';
+                                                } elseif (Str::contains($categoryName, 'قتاد')) {
+                                                    $badgeClasses = 'bg-[#FFD700]/90 text-amber-900 border-[#FFC107] shadow-md';
+                                                } elseif (Str::contains($categoryName, 'ضهيانة')) {
+                                                    $badgeClasses = 'bg-[#FBC02D]/90 text-gray-900 border-[#F9A825] shadow-md';
+                                                } elseif (Str::contains($categoryName, 'مورينقا')) {
+                                                    $badgeClasses = 'bg-brand-gold/20 backdrop-blur-md text-brand-gold-dark border-brand-gold shadow-sm';
+                                                }
+                                            @endphp
+                                            <span class="{{ $badgeClasses }} text-[10px] md:text-xs font-bold px-3 py-0.5 md:py-1 rounded-full border shadow-lg tracking-wide backdrop-blur-sm">
+                                                {{ $product->weight }}
+                                            </span>
+                                        @endif
+                                    </div>
+
+                                    @php
+                                        $imageUrl = $product->image_url ? Storage::url($product->image_url) : ($category->image ? Storage::url($category->image) : null);
+                                    @endphp
+
+                                    @if($imageUrl)
+                                        <img src="{{ $imageUrl }}" alt="{{ $product->name }}" loading="lazy" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                                    @else
+                                        <div class="w-full h-full flex items-center justify-center text-gray-200">
+                                            <div class="text-center">
+                                                <span class="text-4xl md:text-5xl block mb-2">🍯</span>
+                                                <span class="text-[10px] md:text-xs text-gray-300">لا توجد صورة</span>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <div class="p-4 md:p-6 text-center flex flex-col items-center justify-between grow gap-2 md:gap-3 bg-brand-cream/50">
+                                    <div class="w-full">
+                                        <h2 class="text-sm md:text-base font-semibold text-brand-navy mb-1 group-hover:text-brand-gold transition-colors line-clamp-2 leading-relaxed">
+                                            {{ $product->name }}
+                                        </h2>
+                                    </div>
+                                    <div class="flex items-center justify-center gap-1.5 md:gap-2 mt-3 bg-brand-beige/50 px-4 py-1.5 md:py-2 rounded-full border border-brand-gold/5">
+                                        <span class="text-brand-navy font-bold text-lg md:text-xl tabular-nums">{{ number_format($product->price) }}</span>
+                                        <x-currency-symbol class="text-brand-gold h-4 w-4 md:h-5 md:w-5" />
+                                    </div>
+                                </div>
+                            </a>
+
+                            <div class="px-3 pb-3 md:px-6 md:pb-6 bg-brand-cream/50">
+                                <form action="{{ route('cart.add', $product) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="w-full bg-brand-navy text-white font-medium text-[13px] md:text-sm py-2.5 md:py-3 px-3 md:px-6 rounded-xl hover:bg-brand-gold hover:text-brand-navy transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-md btn-glow">
+                                        <span>أضف للسلة</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 transform group-hover/btn:scale-110 transition-transform text-brand-gold group-hover/btn:text-brand-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endforeach
+    </div>
+    @endif
 
 </x-layout>
