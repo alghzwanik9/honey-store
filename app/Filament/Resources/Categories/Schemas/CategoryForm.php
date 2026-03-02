@@ -4,15 +4,15 @@ namespace App\Filament\Resources\Categories\Schemas;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 
 use Illuminate\Support\Str;
 
 class CategoryForm
 {
-    public static function configure(Form $form): Form
+    public static function configure(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->components([
                 TextInput::make('name')
                     ->label('الاسم')

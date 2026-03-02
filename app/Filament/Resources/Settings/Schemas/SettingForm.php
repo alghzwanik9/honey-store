@@ -5,13 +5,13 @@ namespace App\Filament\Resources\Settings\Schemas;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 
 class SettingForm
 {
-    public static function configure(Form $form): Form
+    public static function configure(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->components([
                 TextInput::make('key')
                     ->label('معرف الإعداد (Key)')
