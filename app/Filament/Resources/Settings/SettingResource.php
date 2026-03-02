@@ -10,7 +10,7 @@ use App\Filament\Resources\Settings\Tables\SettingsTable;
 use App\Models\Setting;
 use BackedEnum;
 use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
+use Filament\Forms\Form;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
@@ -35,9 +35,9 @@ class SettingResource extends Resource
         return 'إعدادات المتجر';
     }
 
-    public static function form(Schema $schema): Schema
+    public static function form(Form $form): Form
     {
-        return SettingForm::configure($schema);
+        return SettingForm::configure($form);
     }
 
     public static function table(Table $table): Table
