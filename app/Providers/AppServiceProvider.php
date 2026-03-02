@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if (app()->environment('production')) {
             \Illuminate\Support\Facades\URL::forceScheme('https');
+            $this->app['request']->server->set('HTTPS', 'on');
         }
 
         \Illuminate\Database\Eloquent\Model::shouldBeStrict(!app()->isProduction());
