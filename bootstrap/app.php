@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->trustProxies(at: '*');
         $middleware->alias([
-            'admin.redirect' => \App\Http\Middleware\AdminRedirect::class,
+         //   'admin.redirect' => \App\Http\Middleware\AdminRedirect::class,
         ]);
         $middleware->validateCsrfTokens(except: [
             'checkout/webhook', // Exclude Moyasar Webhook
