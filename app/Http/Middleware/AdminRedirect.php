@@ -16,8 +16,13 @@ class AdminRedirect
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && !Auth::user()->is_admin) {
-            return redirect('/');
+        if (Auth::check()) {
+            $user = Auth::user();
+            $isAuthorized = in_array($user->email, ['alghzwany7@gmail.com', 'aljorfah.honey@gmail.com']) || $user->is_admin;
+            
+            if (!$isAuthorized) {
+                return redirect('/');
+            }
         }
 
         return $next($request);
