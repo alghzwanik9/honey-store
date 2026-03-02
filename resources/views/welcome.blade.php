@@ -6,8 +6,8 @@
         <meta name="google-site-verification" content="u6I9tBc82GeY02xZ-Bd_KYRrB7-fH1XfOp4P7YYcig4" />
         <script type="application/ld+json">
         {
-          "@context" : "https://schema.org",
-          "@type" : "WebSite",
+          "@@context" : "https://schema.org",
+          "@@type" : "WebSite",
           "name" : "مناحل وادي الجرفة",
           "url" : "{{ url('/') }}"
         }

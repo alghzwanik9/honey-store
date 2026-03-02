@@ -12,8 +12,8 @@
         <meta property="og:site_name" content="مناحل وادي الجرفة">
         <script type="application/ld+json">
         {
-          "@context" : "https://schema.org",
-          "@type" : "WebSite",
+          "@@context" : "https://schema.org",
+          "@@type" : "WebSite",
           "name" : "مناحل وادي الجرفة",
           "url" : "{{ url('/') }}"
         }
