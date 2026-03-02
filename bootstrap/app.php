@@ -11,10 +11,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // 1. الوثوق في البروكسي (حل مشكلة HTTPS وعلامة الاستفهام ?)
         $middleware->trustProxies(at: '*');
+
+        // 2. توجيه الزوار غير المسجلين لصفحة الدخول
+        $middleware->redirectGuestsTo('/admin/login');
+
         $middleware->alias([
          //   'admin.redirect' => \App\Http\Middleware\AdminRedirect::class,
         ]);
+
         $middleware->validateCsrfTokens(except: [
             'checkout/webhook', // Exclude Moyasar Webhook
             'checkout/callback', // Exclude Callback in case of POST
