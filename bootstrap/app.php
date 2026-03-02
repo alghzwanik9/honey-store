@@ -18,7 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectGuestsTo('/admin/login');
 
         $middleware->alias([
-         //   'admin.redirect' => \App\Http\Middleware\AdminRedirect::class,
+            'admin.redirect' => \App\Http\Middleware\AdminRedirect::class,
         ]);
 
         $middleware->validateCsrfTokens(except: [
