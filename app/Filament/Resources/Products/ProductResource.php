@@ -8,17 +8,16 @@ use App\Filament\Resources\Products\Pages\ListProducts;
 use App\Filament\Resources\Products\Schemas\ProductForm;
 use App\Filament\Resources\Products\Tables\ProductsTable;
 use App\Models\Product;
-use BackedEnum;
+use Filament\Forms\Form; // تم استبدال Schema بـ Form
 use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    // تم التحديث لنظام الأيقونات الجديد في Filament v3
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -37,9 +36,10 @@ class ProductResource extends Resource
         return 'المنتجات';
     }
 
-    public static function form(Schema $schema): Schema
+    // تم استبدال Schema بـ Form هنا وفي الباراميتر
+   public static function form(Form $form): Form
     {
-        return ProductForm::configure($schema);
+        return ProductForm::configure($form);
     }
 
     public static function table(Table $table): Table

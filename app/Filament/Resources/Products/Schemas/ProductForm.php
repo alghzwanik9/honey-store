@@ -7,8 +7,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Schemas\Schema;
-
+use Filament\Forms\Form;
 use Filament\Actions\Action;
 // use Filament\Forms\Set; // Removed to fix IDE error
 // use Filament\Forms\Get; // Removed to fix IDE error
@@ -17,9 +16,9 @@ use Illuminate\Support\Str;
 
 class ProductForm
 {
-    public static function configure(Schema $schema): Schema
+    public static function configure(Form $form): Form
     {
-        return $schema
+        return $form
             ->components([
                 Select::make('category_id')
                     ->relationship('category', 'name')
