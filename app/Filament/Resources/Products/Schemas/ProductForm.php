@@ -101,6 +101,12 @@ class ProductForm
                     ->required()
                     ->numeric()
                     ->suffix('ر.س'),
+                TextInput::make('sale_price')
+                    ->label('سعر العرض (اختياري)')
+                    ->nullable()
+                    ->numeric()
+                    ->suffix('ر.س')
+                    ->helperText('اتركه فارغاً إذا لم يكن هناك عرض'),
                 TextInput::make('stock')
                     ->label('الكمية')
                     ->required()

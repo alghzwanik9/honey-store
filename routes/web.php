@@ -15,8 +15,18 @@ Route::get('/', function () {
             ->where('stock', '>', 0);
 
         if (request('search')) {
-            $query->where('name', 'like', '%' . request('search') . '%')
-                  ->orWhere('description', 'like', '%' . request('search') . '%');
+            // بحث ذكي: نكسّر الجملة لكلمات، ونحذف "ال" التعريف من كل كلمة
+            $rawTerms = preg_split('/\s+/', trim(request('search')), -1, PREG_SPLIT_NO_EMPTY);
+            $terms = array_map(fn($t) => preg_replace('/^ال/', '', $t), $rawTerms);
+            $terms = array_filter($terms); // نزيل الكلمات الفارغة
+
+            foreach ($terms as $term) {
+                $query->where(function ($q) use ($term) {
+                    $q->where('name', 'like', '%' . $term . '%')
+                      ->orWhere('description', 'like', '%' . $term . '%')
+                      ->orWhereHas('category', fn($c) => $c->where('name', 'like', '%' . $term . '%'));
+                });
+            }
         }
 
         if (request('category')) {
@@ -41,9 +51,18 @@ Route::get('/', function () {
             return $category->products->count() > 0;
         });
 
+    $newProductsActive = \App\Models\Setting::where('key', 'new_products_active')->value('value') == '1';
+    $newProducts = collect();
+    if ($newProductsActive) {
+        $count = \App\Models\Setting::where('key', 'new_products_count')->value('value') ?: 4;
+        $newProducts = Product::with('category')->where('is_active', true)->where('stock', '>', 0)->orderBy('created_at', 'desc')->take((int)$count)->get();
+    }
+
     return view('home', [
         'isFiltered' => false,
-        'categoriesWithProducts' => $categoriesWithProducts
+        'categoriesWithProducts' => $categoriesWithProducts,
+        'newProductsActive' => $newProductsActive,
+        'newProducts' => $newProducts
     ]);
 })->name('home');
 

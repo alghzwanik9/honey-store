@@ -30,9 +30,14 @@ class ProductsTable
                     ->label('الرابط'),
 
                 TextColumn::make('price')
-                    ->money('SAR')  // <--- هنا التغيير المهم (ريال سعودي)
+                    ->formatStateUsing(function ($record) {
+                        return $record->sale_price 
+                            ? new \Illuminate\Support\HtmlString("<span style='text-decoration: line-through; color: #999;font-size: 0.8em; margin-left:5px;'>{$record->price}</span><span style='color: rgb(22 101 52); font-weight: bold;'>{$record->sale_price} ر.س</span>")
+                            : "{$record->price} ر.س";
+                    })
+                    ->html()
                     ->sortable()
-                    ->label('السعر'), // تعريب
+                    ->label('السعر'), 
 
                 TextColumn::make('stock')
                     ->numeric()

@@ -31,7 +31,7 @@ class CartController extends Controller
             $cart[$product->id] = [
                 "name" => $product->name,
                 "quantity" => $validated['quantity'],
-                "price" => $product->price,
+                "price" => $product->sale_price > 0 ? $product->sale_price : $product->price,
                 "image_url" => $product->image_url,
                 "slug" => $product->slug
             ];
