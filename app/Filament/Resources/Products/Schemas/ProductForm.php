@@ -109,8 +109,7 @@ class ProductForm
                 FileUpload::make('image_url')
                     ->label('صورة المنتج')
                     ->image()
-                    ->imageEditor() // يسمح بقص الصورة في لوحة التحكم
-                    ->optimize('webp') // الضغط وتحويل الصيغة لـ WebP السريعة
+                    ->imageEditor()
                     ->imageResizeMode('contain')
                     ->imageResizeTargetWidth('800')
                     ->imageResizeTargetHeight('800'),
