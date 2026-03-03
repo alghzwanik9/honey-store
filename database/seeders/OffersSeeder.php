@@ -18,8 +18,7 @@ class OffersSeeder extends Seeder
         $category = Category::firstOrCreate(
             ['slug' => 'offers'],
             [
-                'name' => 'العروض',
-                'description' => 'أفضل العروض والبكجات الحصرية'
+                'name' => 'العروض'
             ]
         );
         $categoryId = $category->id;
