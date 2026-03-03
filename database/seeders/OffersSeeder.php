@@ -19,7 +19,6 @@ class OffersSeeder extends Seeder
             ['slug' => 'offers'],
             [
                 'name' => 'العروض',
-                'is_active' => true,
                 'description' => 'أفضل العروض والبكجات الحصرية'
             ]
         );
