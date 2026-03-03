@@ -13,61 +13,61 @@ class ProductsSeeder extends Seeder
     {
         $now = Carbon::now();
 
-        // جلب الأقسام من قاعدة البيانات بالاسم
-        $categories = Category::pluck('id', 'name');
+        // جلب الأقسام من قاعدة البيانات بالـ slug (أكيد ومضمون)
+        $categories = Category::pluck('id', 'slug');
 
         $honeyTypes = [
             [
-                'name'     => 'السدر',
-                'category' => 'عسل السدر',
-                'slug_key' => 'alsdr',
-                'prices'   => [350, 175, 87],
+                'name'          => 'السدر',
+                'category_slug' => 'aasl-alsdr',
+                'slug_key'      => 'alsdr',
+                'prices'        => [350, 175, 87],
             ],
             [
-                'name'     => 'الطلح',
-                'category' => 'عسل الطلح',
-                'slug_key' => 'altalh',
-                'prices'   => [350, 175, 87],
+                'name'          => 'الطلح',
+                'category_slug' => 'aasl-altlh',
+                'slug_key'      => 'altalh',
+                'prices'        => [350, 175, 87],
             ],
             [
-                'name'     => 'السمرة',
-                'category' => 'عسل السمرة',
-                'slug_key' => 'alsmra',
-                'prices'   => [250, 125, 62.5],
+                'name'          => 'السمرة',
+                'category_slug' => 'aasl-alsmr',
+                'slug_key'      => 'alsmra',
+                'prices'        => [250, 125, 62.5],
             ],
             [
-                'name'     => 'السلام',
-                'category' => 'عسل السلام',
-                'slug_key' => 'aslam',
-                'prices'   => [300, 150, 75],
+                'name'          => 'السلام',
+                'category_slug' => 'aasl-alslam',
+                'slug_key'      => 'aslam',
+                'prices'        => [300, 150, 75],
             ],
             [
-                'name'     => 'الضهيانة',
-                'category' => 'عسل الضهيانة',
-                'slug_key' => 'aldhyan',
-                'prices'   => [250, 125, 62.5],
+                'name'          => 'الضهيانة',
+                'category_slug' => 'aasl-aldhyan',
+                'slug_key'      => 'aldhyan',
+                'prices'        => [250, 125, 62.5],
             ],
             [
-                'name'     => 'المجرى',
-                'category' => 'عسل المجرى',
-                'slug_key' => 'almjra',
-                'prices'   => [800, 400, 200],
+                'name'          => 'المجرى',
+                'category_slug' => 'aasl-almgr',
+                'slug_key'      => 'almjra',
+                'prices'        => [800, 400, 200],
             ],
         ];
 
         $sizes = [
-            ['label' => 'كيلو',      'weight' => '1 كيلو',    'suffix' => 'kilo'],
-            ['label' => 'نص كيلو',   'weight' => 'نص كيلو',   'suffix' => 'half'],
-            ['label' => 'ربع كيلو',  'weight' => 'ربع كيلو',  'suffix' => 'quarter'],
+            ['label' => 'كيلو',     'weight' => '1 كيلو',   'suffix' => 'kilo'],
+            ['label' => 'نص كيلو',  'weight' => 'نص كيلو',  'suffix' => 'half'],
+            ['label' => 'ربع كيلو', 'weight' => 'ربع كيلو', 'suffix' => 'quarter'],
         ];
 
         $products = [];
 
         foreach ($honeyTypes as $honey) {
-            $categoryId = $categories[$honey['category']] ?? null;
+            $categoryId = $categories[$honey['category_slug']] ?? null;
 
             if (! $categoryId) {
-                $this->command->warn("⚠️  القسم '{$honey['category']}' غير موجود - تم تخطي منتجات {$honey['name']}");
+                $this->command->warn("⚠️  القسم '{$honey['category_slug']}' غير موجود - تم تخطي منتجات {$honey['name']}");
                 continue;
             }
 
