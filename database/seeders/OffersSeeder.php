@@ -14,9 +14,16 @@ class OffersSeeder extends Seeder
      */
     public function run(): void
     {
-        // البحث عن قسم العروض بالاسم أو الرابط، وإذا لم يوجد نضعه في القسم الأول كخيار بديل
-        $category = Category::where('slug', 'like', '%offer%')->orWhere('name', 'like', '%عروض%')->first();
-        $categoryId = $category ? $category->id : 1;
+        // إنشاء أو استدعاء قسم العروض
+        $category = Category::firstOrCreate(
+            ['slug' => 'offers'],
+            [
+                'name' => 'العروض',
+                'is_active' => true,
+                'description' => 'أفضل العروض والبكجات الحصرية'
+            ]
+        );
+        $categoryId = $category->id;
 
         $products = [
             ['name' => 'نص سدر + نص سمره + هدية عسل زهور', 'price' => 300, 'weight' => '1 كيلو'],
