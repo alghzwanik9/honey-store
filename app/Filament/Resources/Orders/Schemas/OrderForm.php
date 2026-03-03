@@ -4,12 +4,12 @@ namespace App\Filament\Resources\Orders\Schemas;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 class OrderForm
 {
-    public static function configure(Form $form): Form
+    public static function configure(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->components([
                 TextInput::make('customer_name')
                     ->label('اسم العميل')

@@ -10,7 +10,7 @@ use App\Filament\Resources\Orders\Tables\OrdersTable;
 use App\Models\Order;
 use BackedEnum;
 use Filament\Resources\Resource;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
@@ -37,9 +37,9 @@ class OrderResource extends Resource
         return 'الطلبات';
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return OrderForm::configure($form);
+        return OrderForm::configure($schema);
     }
 
     public static function table(Table $table): Table
