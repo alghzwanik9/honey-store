@@ -39,7 +39,7 @@ class OrderResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return OrderForm::configure($form);ٍٍ
+        return OrderForm::configure($form);
     }
 
     public static function table(Table $table): Table

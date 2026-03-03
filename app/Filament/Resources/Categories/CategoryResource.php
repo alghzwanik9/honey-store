@@ -10,7 +10,7 @@ use App\Filament\Resources\Categories\Tables\CategoriesTable;
 use App\Models\Category;
 use BackedEnum;
 use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
+use Filament\Forms\Form;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
@@ -37,9 +37,9 @@ class CategoryResource extends Resource
         return 'الأقسام';
     }
 
-    public static function form(Schema $schema): Schema
+    public static function form(Form $form): Form
     {
-        return CategoryForm::configure($schema);
+        return CategoryForm::configure($form);
     }
 
     public static function table(Table $table): Table
