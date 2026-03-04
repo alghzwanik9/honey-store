@@ -3,25 +3,26 @@
 namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Form;
-use Filament\Forms\Components\Section;
+use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Schemas\Concerns\InteractsWithSchemas;
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\TextInput;
 use Filament\Actions\Action;
 use App\Models\Setting;
 use Filament\Notifications\Notification;
 
-class ManageStoreSettings extends Page implements HasForms
+class ManageStoreSettings extends Page implements HasSchemas
 {
-    use InteractsWithForms;
+    use InteractsWithSchemas;
 
     protected static \BackedEnum|string|null $navigationIcon = 'heroicon-o-cog-6-tooth';
     protected static ?string $navigationLabel = 'إعدادات المتجر';
     protected static ?string $title = 'إعدادات المنصة المتقدمة';
     protected static ?int $navigationSort = 10;
-    protected static string $view = 'filament.pages.manage-store-settings';
+    
+    // We intentionally removed the custom $view so it falls back to native Filament page view
 
     public ?array $data = [];
 
@@ -35,9 +36,23 @@ class ManageStoreSettings extends Page implements HasForms
         ]);
     }
 
-    public function form(Form $form): Form
+    public function content(Schema $schema): Schema
     {
-        return $form
+        return $schema->components([
+            \Filament\Schemas\Components\Form::make([
+                \Filament\Schemas\Components\EmbeddedSchema::make('form'),
+            ])
+            ->id('form')
+            ->livewireSubmitHandler('save')
+            ->footer([
+                \Filament\Schemas\Components\Actions::make($this->getFormActions()),
+            ]),
+        ]);
+    }
+
+    public function form(Schema $schema): Schema
+    {
+        return $schema
             ->schema([
                 Section::make('الشريط الإعلاني أعلى الموقع')
                     ->description('تحكم في الشريط الذي يظهر أعلى جميع الصفحات')
