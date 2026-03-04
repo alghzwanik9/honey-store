@@ -17,7 +17,7 @@ class ManageStoreSettings extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
+    protected static \BackedEnum|string|null $navigationIcon = 'heroicon-o-cog-6-tooth';
     protected static ?string $navigationLabel = 'إعدادات المتجر';
     protected static ?string $title = 'إعدادات المنصة المتقدمة';
     protected static ?int $navigationSort = 10;
