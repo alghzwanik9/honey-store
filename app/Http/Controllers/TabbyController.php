@@ -62,10 +62,12 @@ class TabbyController extends Controller
         // Send POST request to Tabby API v2 Checkout
         $response = Http::withToken($publicKey)->post('https://api.tabby.ai/api/v2/checkout', $payload);
 
-        // For the purpose of the review, you might just return the response or handle redirects here
         if ($response->successful()) {
-            return $response->json();
-            // In a real scenario, you would redirect to: $response->json('configuration.available_products.installments.web_url')
+            $url = $response->json('configuration.available_products.installments.web_url');
+            if ($url) {
+                return redirect()->away($url);
+            }
+            return response()->json($response->json());
         }
 
         return response()->json(['error' => 'Tabby API error', 'details' => $response->json()], 400);
