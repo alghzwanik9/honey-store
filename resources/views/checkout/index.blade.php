@@ -98,7 +98,7 @@
                             <label class="relative flex flex-col p-5 border-2 border-gray-100 rounded-[2rem] cursor-pointer hover:border-brand-gold/30 hover:bg-brand-cream/30 transition-all bg-white group select-none has-[:checked]:border-brand-gold has-[:checked]:bg-brand-gold/5 has-[:checked]:shadow-lg has-[:checked]:shadow-brand-gold/10">
                                 <input type="radio" name="payment_method" value="tamara" class="absolute left-6 top-6 w-5 h-5 text-brand-gold border-gray-300 focus:ring-brand-gold">
                                 <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-gold/20 transition-colors">
-                                    <img src="https://tamara.co/assets/logos/tamara-logo-short-en.svg" class="w-8 h-8 opacity-60">
+                                    <img src="https://cdn.tamara.co/assets/svg/tamara-logo-badge-ar.svg" class="w-8 h-8 opacity-60">
                                 </div>
                                 <span class="font-black text-brand-navy text-lg block mb-1">تمارا (3 دفعات)</span>
                                 <span class="text-xs text-gray-400 font-medium">قسم فاتورتك على 3 دفعات بدون فوائد</span>

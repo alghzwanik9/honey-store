@@ -532,7 +532,7 @@
                             <div class="flex gap-4 group animate-fade-in-up">
                                 <div
                                     class="w-20 h-20 bg-brand-cream rounded-2xl overflow-hidden shrink-0 border border-brand-gold/5">
-                                    <img src="{{ isset($details['image_url']) ? (Str::startsWith($details['image_url'], ['http', '/']) ? $details['image_url'] : Storage::url($details['image_url'])) : '/images/placeholder.png' }}"
+                                    <img src="{{ isset($details['image_url']) ? (Str::startsWith($details['image_url'], ['http', '/']) ? $details['image_url'] : asset('storage/' . $details['image_url'])) : asset('images/placeholder.png') }}"
                                         loading="lazy"
                                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 </div>
