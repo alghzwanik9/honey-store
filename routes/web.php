@@ -104,10 +104,10 @@ Route::prefix('tamara')->name('tamara.')->group(function () {
 
 // --- Tabby Routes ---
 Route::prefix('tabby')->name('tabby.')->group(function () {
-    Route::post('/checkout', [\App\Http\Controllers\TabbyController::class, 'initiateTabbyCheckout'])->name('checkout');
-    Route::get('/success', [\App\Http\Controllers\TabbyController::class, 'success'])->name('success');
-    Route::get('/cancel', [\App\Http\Controllers\TabbyController::class, 'cancel'])->name('cancel');
-    Route::get('/failure', [\App\Http\Controllers\TabbyController::class, 'failure'])->name('failure');
+    Route::post('/checkout', [\App\Http\Controllers\TabbyController::class, 'initiateTabbyCheckoutLocal'])->name('checkout');
+    Route::get('/{order}/success', [\App\Http\Controllers\TabbyController::class, 'success'])->name('success');
+    Route::get('/{order}/cancel', [\App\Http\Controllers\TabbyController::class, 'cancel'])->name('cancel');
+    Route::get('/{order}/failure', [\App\Http\Controllers\TabbyController::class, 'failure'])->name('failure');
 });
 
 // --- Authenticated Customer Routes ---
@@ -125,6 +125,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout/{order}/payment', [\App\Http\Controllers\PaymentController::class, 'show'])->name('checkout.payment');
     Route::get('/checkout/{order}/bnpl', [\App\Http\Controllers\PaymentController::class, 'bnpl'])->name('checkout.bnpl');
     Route::post('/checkout/{order}/tamara-init', [\App\Http\Controllers\TamaraController::class, 'initTamara'])->name('tamara.init');
+    Route::post('/checkout/{order}/tabby-init', [\App\Http\Controllers\TabbyController::class, 'initTabby'])->name('tabby.init');
 
     Route::get('/orders/{order}', [\App\Http\Controllers\OrderController::class, 'show'])->name('orders.show');
     Route::get('/orders/{order}/invoice', [\App\Http\Controllers\OrderController::class, 'downloadInvoice'])->name('orders.invoice');

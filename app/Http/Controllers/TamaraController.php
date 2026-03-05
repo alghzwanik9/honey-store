@@ -29,8 +29,8 @@ class TamaraController extends Controller
 
     private function processTamaraCheckout(Order $order, $isJson = false)
     {
-        // Enforce the API URL mentioned in the task
-        $apiUrl = 'https://api.tamara.co/api/v1';
+        // Use API URL from config
+        $apiUrl = config('services.tamara.api_url');
         $merchantToken = config('services.tamara.merchant_token');
 
         if (!$merchantToken) {
@@ -171,7 +171,7 @@ class TamaraController extends Controller
 
     public function success(Request $request, Order $order)
     {
-        $apiUrl = 'https://api.tamara.co/api/v1';
+        $apiUrl = config('services.tamara.api_url');
         $merchantToken = config('services.tamara.merchant_token');
         $paymentId = $request->query('paymentId') ?? $order->payment_id;
 
