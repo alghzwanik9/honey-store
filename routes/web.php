@@ -100,6 +100,12 @@ Route::get('/tamara/{order}/failure', [\App\Http\Controllers\PaymentController::
 Route::get('/tamara/{order}/cancel', [\App\Http\Controllers\PaymentController::class, 'tamaraCancel'])->name('tamara.cancel');
 Route::post('/tamara/notification', [\App\Http\Controllers\PaymentController::class, 'tamaraNotification'])->name('tamara.notification');
 
+// Tabby Routes
+Route::post('/payments/tabby/checkout', [\App\Http\Controllers\TabbyController::class, 'initiateTabbyCheckout'])->name('tabby.checkout');
+Route::get('/payments/tabby/success', [\App\Http\Controllers\TabbyController::class, 'success'])->name('tabby.success');
+Route::get('/payments/tabby/cancel', [\App\Http\Controllers\TabbyController::class, 'cancel'])->name('tabby.cancel');
+Route::get('/payments/tabby/failure', [\App\Http\Controllers\TabbyController::class, 'failure'])->name('tabby.failure');
+
 // --- Authenticated Customer Routes ---
 
 Route::get('/dashboard', function () {
