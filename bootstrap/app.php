@@ -15,8 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->trustProxies(at: '*');
 
         // 2. توجيه الزوار غير المسجلين لصفحة الدخول
-        $middleware->redirectGuestsTo('/admin/login');
-
+$middleware->redirectGuestsTo(function (\Illuminate\Http\Request $request) {
+    // إذا كان الرابط المطلوب يبدأ بـ admin يوجهه لدخول الإدارة، غير كذا يوجهه لصفحة العملاء
+    return $request->is('admin*') ? '/admin/login' : '/login';
+});
         $middleware->alias([
             'admin.redirect' => \App\Http\Middleware\AdminRedirect::class,
         ]);
