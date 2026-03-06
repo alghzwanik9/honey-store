@@ -35,9 +35,8 @@
                                 <div
                                     class="w-24 h-24 shrink-0 bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
                                     @if ($details['image_url'])
-                                        <img src="{{ filter_var($details['image_url'], FILTER_VALIDATE_URL) ? $details['image_url'] : Storage::url($details['image_url']) }}"
-                                            alt="{{ $details['name'] }}" loading="lazy"
-                                            class="w-full h-full object-cover">
+                                        <img src="{{ Storage::url('products/' . $details['image_url']) }}"
+                                            alt="{{ $details['name'] }}" class="w-full h-full object-cover">
                                     @else
                                         <div class="w-full h-full flex items-center justify-center text-gray-300">
                                             <svg class="w-8 h-8" fill="none" stroke="currentColor"
