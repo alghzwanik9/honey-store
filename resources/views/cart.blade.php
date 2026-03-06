@@ -35,7 +35,7 @@
                                 <div
                                     class="w-24 h-24 shrink-0 bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
                                     @if ($details['image_url'])
-                                        <img src="{{ Str::startsWith($details['image_url'], ['http', '/']) ? $details['image_url'] : asset('storage/' . $details['image_url']) }}"
+                                        <img src="{{ filter_var($details['image_url'], FILTER_VALIDATE_URL) ? $details['image_url'] : Storage::url($details['image_url']) }}"
                                             alt="{{ $details['name'] }}" loading="lazy"
                                             class="w-full h-full object-cover">
                                     @else
