@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ? $title . ' - متجر وادي الجرفة' : 'متجر وادي الجرفة' }}</title>
+    <title>{{ $title ? $title . ' - مناحل وادي الجرفة' : 'مناحل وادي الجرفة' }}</title>
 
     {{-- Google Fonts: Cairo --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,6 +26,7 @@
             font-family: 'Cairo', sans-serif;
         }
     </style>
+    <link rel="canonical" href="{{ request()->url() }}" />
 </head>
 
 <body class="antialiased bg-brand-cream text-gray-800 font-cairo" x-data="{ cartOpen: false, mobileMenuOpen: false, aboutModalOpen: false }">
