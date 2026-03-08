@@ -57,6 +57,22 @@
         </main>
     </div>
 
+    {{-- Footer --}}
+    <footer class="bg-brand-cream-light border-t border-brand-gold/20 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-gray-500">
+                <p>© {{ date('Y') }} مناحل وادي الجرفة — جميع الحقوق محفوظة</p>
+                <p>
+                    تم التطوير بـ ❤️ بواسطة
+                    <a href="https://github.com/alghzwanik9" target="_blank" rel="noopener noreferrer"
+                        class="font-semibold text-brand-gold hover:text-brand-gold/80 transition-colors duration-200">
+                        KMG | AI
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
     <x-chat-widget />
 </body>
 
