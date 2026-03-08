@@ -439,9 +439,15 @@
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-brand-gold/10 pt-6 text-center text-xs text-gray-500">
+            <div class="border-t border-brand-gold/10 pt-6 text-center text-xs text-gray-500 space-y-1">
                 <p>© {{ date('Y') }} <span class="text-brand-gold">مناحل وادي الجرفة</span> · جميع الحقوق محفوظة ·
                     صُنع بـ ❤️ في المملكة العربية السعودية</p>
+                <p>تم التطوير بواسطة
+                    <a href="https://github.com/alghzwanik9" target="_blank" rel="noopener noreferrer"
+                        class="text-brand-gold hover:text-brand-gold/70 font-semibold transition-colors duration-200">
+                        KMG | AI
+                    </a>
+                </p>
             </div>
         </div>
     </footer>
