@@ -12,7 +12,12 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         // 1. الوثوق في البروكسي (حل مشكلة HTTPS وعلامة الاستفهام ?)
-        $middleware->trustProxies(at: '*');
+        $middleware->trustProxies(at: '*', headers: \Illuminate\Http\Request::HEADER_X_FORWARDED_FOR |
+            \Illuminate\Http\Request::HEADER_X_FORWARDED_HOST |
+            \Illuminate\Http\Request::HEADER_X_FORWARDED_PORT |
+            \Illuminate\Http\Request::HEADER_X_FORWARDED_PROTO |
+            \Illuminate\Http\Request::HEADER_X_FORWARDED_AWS_ELB
+        );
 
         // 2. توجيه الزوار غير المسجلين لصفحة الدخول
 $middleware->redirectGuestsTo(function (\Illuminate\Http\Request $request) {

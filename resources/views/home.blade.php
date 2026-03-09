@@ -399,7 +399,7 @@
 
                             <div
                                 class="bg-brand-cream-light rounded-2xl shadow-sm border border-brand-gold/5 overflow-hidden flex flex-col h-full hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group animate-fade-in-up {{ $staggerClass }}">
-                                <a href="{{ route('products.show', $product) }}" class="flex flex-col grow">
+                                <a href="{{ route('products.show', $product->slug) }}" class="flex flex-col grow">
                                     <div class="relative h-64 md:h-72 w-full bg-gray-50 overflow-hidden text-center">
                                         @if ($isLowStock)
                                             <div class="absolute top-2 right-2 z-10">
