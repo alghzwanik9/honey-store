@@ -80,7 +80,8 @@
             const errorMessage = document.getElementById('error-message');
             const loader = document.getElementById('loader');
 
-  const endpoint = '{{ route('tamara.init', $order) }}';
+  const endpoint = "{{ route('tamara.init', $order) }}";
+
 const gatewayName = 'تمارا';
 
              // Trigger Gateway Initialization via AJAX
