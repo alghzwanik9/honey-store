@@ -9,9 +9,11 @@
             <div class="mb-10">
                 <div class="flex justify-center mb-4">
                     @if ($order->payment_method === 'tabby')
+{{--
                         <div class="bg-gray-100 px-6 py-4 rounded-xl border border-gray-200">
                             <img src="https://cdn.tabby.ai/assets/logo.svg" alt="Tabby" class="h-8">
                         </div>
+--}}
                     @else
                         <div class="bg-[#c08d5d]/10 px-6 py-2 rounded-xl border border-[#c08d5d]/20">
                             <h2 class="text-3xl font-black" style="color: #c08d5d;">TAMARA</h2>
@@ -19,7 +21,7 @@
                     @endif
                 </div>
                 <p id="status-text" class="text-gray-400 font-black">
-                    @if ($order->payment_method === 'tabby')
+                    @if (false)
                         جاري تحويلك إلى بوابة دفع تابي الآمنة...
                     @else
                         جاري تحويلك إلى بوابة دفع تمارا الآمنة...
@@ -78,9 +80,8 @@
             const errorMessage = document.getElementById('error-message');
             const loader = document.getElementById('loader');
 
-            const endpoint =
-                '{{ $order->payment_method === 'tabby' ? route('tabby.init', $order) : route('tamara.init', $order) }}';
-            const gatewayName = '{{ $order->payment_method === 'tabby' ? 'تابي' : 'تمارا' }}';
+  const endpoint = '{{ route('tamara.init', $order) }}';
+const gatewayName = 'تمارا';
 
             // Trigger Gateway Initialization via AJAX
             fetch(endpoint, {
