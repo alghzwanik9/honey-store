@@ -83,36 +83,36 @@
   const endpoint = '{{ route('tamara.init', $order) }}';
 const gatewayName = 'تمارا';
 
-            // Trigger Gateway Initialization via AJAX
-            fetch(endpoint, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                            'content'),
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => response.json().then(data => ({
-                    status: response.status,
-                    body: data
-                })))
-                .then(res => {
-                    if (res.status === 200 && res.body.checkout_url) {
-                        statusText.innerText = 'تم التجهيز، جاري التوجيه...';
-                        window.location.href = res.body.checkout_url;
-                    } else {
-                        throw new Error(res.body.error ||
-                            `فشل الاتصال بـ ${gatewayName}، يرجى المحاولة لاحقاً.`);
-                    }
-                })
-                .catch(error => {
-                    console.error('Gateway Error:', error);
-                    loader.classList.add('hidden');
-                    statusText.classList.add('hidden');
-                    errorContainer.classList.remove('hidden');
-                    errorMessage.innerText = error.message;
-                });
-        });
-    </script>
+             // Trigger Gateway Initialization via AJAX
+             fetch(endpoint, {
+                     method: 'POST',
+                     headers: {
+                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                             'content'),
+                         'Content-Type': 'application/json',
+                         'Accept': 'application/json'
+                     }
+                 })
+                 .then(response => response.json().then(data => ({
+                     status: response.status,
+                     body: data
+                 })))
+                 .then(res => {
+                     if (res.status === 200 && res.body.checkout_url) {
+                         statusText.innerText = 'تم التجهيز، جاري التوجيه...';
+                         window.location.href = res.body.checkout_url;
+                     } else {
+                         throw new Error(res.body.error ||
+                             `فشل الاتصال بخالد`);
+                     }
+                 })
+                 .catch(error => {
+                     console.error('Gateway Error:', error);
+                     loader.classList.add('hidden');
+                     statusText.classList.add('hidden');
+                     errorContainer.classList.remove('hidden');
+                     errorMessage.innerText = error.message;
+                 });
+         });
+     </script>
 </x-layout>
