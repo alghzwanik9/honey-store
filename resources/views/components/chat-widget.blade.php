@@ -12,11 +12,11 @@
          x-transition:leave-start="opacity-100 translate-y-0 scale-100"
          x-transition:leave-end="opacity-0 translate-y-10 scale-95"
          class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-brand-gold/20 mb-4"
-         style="height: 500px; width: 350px; max-width: 95vw; max-height: 85vh; display: flex; flex-direction: column; position: relative;">
+         style="height: 480px; width: 360px; max-width: 95vw; max-height: 85vh; display: grid; grid-template-rows: auto 1fr auto; position: relative;">
         
         <!-- Header -->
         <div class="bg-brand-navy border-b border-brand-gold/20 p-4 flex justify-between items-center shadow-lg relative overflow-hidden" 
-             style="flex-shrink: 0; height: 75px;">
+             style="height: 70px;">
             <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold"></div>
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-brand-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-brand-gold/30">
@@ -45,7 +45,7 @@
         <!-- Messages Area -->
         <div x-ref="scrollContainer" 
              class="bg-gray-50/50 p-4 scroll-smooth"
-             style="flex-grow: 1; overflow-y: auto; display: block; position: relative;">
+             style="overflow-y: auto; display: block; position: relative; width: 100%;">
             <template x-for="msg in messages" :key="msg.id">
                 <div :class="{'flex justify-start': msg.sender === 'bot', 'flex justify-end': msg.sender === 'user'}">
                     <div :class="{
@@ -71,8 +71,7 @@
         </div>
 
         <!-- Input Area -->
-        <div class="p-3 bg-white border-t border-gray-100" 
-             style="flex-shrink: 0;">
+        <div class="p-3 bg-white border-t border-gray-100">
             <form @submit.prevent="sendMessage" class="flex gap-2 items-center">
                 <input x-model="message" type="text" placeholder="اسألني هنا..." 
                        class="flex-1 h-12 bg-gray-50 border-brand-gold/10 text-brand-navy rounded-xl px-4 focus:ring-2 focus:ring-brand-gold/20 focus:border-brand-gold transition-all placeholder-gray-400 text-sm">
