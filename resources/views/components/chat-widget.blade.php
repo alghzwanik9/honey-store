@@ -60,8 +60,11 @@
                         <p class="whitespace-pre-wrap break-words" x-text="msg.text"></p>
                         <span
                             class="text-[10px] opacity-0 group-hover:opacity-70 transition-opacity absolute bottom-0.5"
-                            :class="{ 'left-2 text-gray-400': msg.sender === 'bot', 'right-2 text-gray-300': msg
-                                    .sender === 'user' }"
+                            :class="{
+                                'left-2 text-gray-400': msg.sender === 'bot',
+                                'right-2 text-gray-300': msg
+                                    .sender === 'user'
+                            }"
                             x-text="msg.time"></span>
                     </div>
                 </div>
@@ -94,7 +97,7 @@
                 </button>
             </form>
             <div class="text-center mt-1">
-                <span class="text-[9px] text-gray-400">مدعوم بالذكاء الاصطناعي</span>
+                <span class="text-[9px] text-gray-400">مدكم بالذكاء الاصطناعي</span>
             </div>
         </div>
     </div>
