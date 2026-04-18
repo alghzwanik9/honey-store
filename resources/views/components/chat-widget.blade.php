@@ -11,7 +11,7 @@
          x-transition:leave="transition ease-in duration-200"
          x-transition:leave-start="opacity-100 translate-y-0 scale-100"
          x-transition:leave-end="opacity-0 translate-y-10 scale-95"
-         class="bg-white w-80 md:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-brand-gold/20 mb-4">
+         class="bg-white w-80 md:w-96 h-[500px] max-h-[80vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-brand-gold/20 mb-4">
         
         <!-- Header -->
         <div class="bg-brand-navy border-b border-brand-gold/20 p-4 flex justify-between items-center shadow-lg relative overflow-hidden">
@@ -39,14 +39,14 @@
         </div>
 
         <!-- Messages Area -->
-        <div x-ref="scrollContainer" class="flex-1 bg-gray-50/50 p-4 h-80 overflow-y-auto space-y-4">
+        <div x-ref="scrollContainer" class="flex-1 min-h-0 bg-gray-50/50 p-4 overflow-y-auto space-y-4 scroll-smooth">
             <template x-for="msg in messages" :key="msg.id">
                 <div :class="{'flex justify-start': msg.sender === 'bot', 'flex justify-end': msg.sender === 'user'}">
                     <div :class="{
                         'bg-white text-brand-navy rounded-tl-none border border-brand-gold/10': msg.sender === 'bot', 
                         'bg-brand-navy text-white rounded-tr-none border border-brand-gold/20': msg.sender === 'user'
                     }" class="max-w-[85%] rounded-2xl px-4 py-3 shadow-sm relative group text-sm leading-relaxed">
-                        <p x-text="msg.text"></p>
+                        <p class="whitespace-pre-wrap break-words" x-text="msg.text"></p>
                         <span class="text-[10px] opacity-0 group-hover:opacity-70 transition-opacity absolute bottom-0.5" 
                               :class="{'left-2 text-gray-400': msg.sender === 'bot', 'right-2 text-gray-300': msg.sender === 'user'}"
                               x-text="msg.time"></span>
