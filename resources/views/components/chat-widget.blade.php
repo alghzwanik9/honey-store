@@ -1,7 +1,6 @@
 <div x-data="chatWidget" class="z-50 font-cairo" style="direction: rtl; position: fixed; bottom: 20px; right: 20px;"
     x-cloak>
 
-    <!-- Chat Window -->
     <div x-show="open && !minimized" x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-10 scale-95"
         x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="transition ease-in duration-200"
@@ -10,7 +9,6 @@
         class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-brand-gold/20 mb-4"
         style="height: 500px; width: 360px; max-width: 95vw; max-height: 85vh; display: flex; flex-direction: column; position: relative;">
 
-        <!-- Header -->
         <div class="bg-brand-navy border-b border-brand-gold/20 p-4 flex justify-between items-center shadow-lg relative overflow-hidden"
             style="height: 75px; flex-shrink: 0;">
             <div
@@ -30,16 +28,14 @@
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <!-- Minimize Button -->
                 <button @click="minimized = true"
-                    class="text-gray-400 hover:text-white transition p-1 hover:bg-white/10 rounded-full" title="تصغير">
+                    class="text-gray-400 hover:text-white transition p-1 hover:bg-white/10 rounded-full">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6"></path>
                     </svg>
                 </button>
-                <!-- Close Button -->
                 <button @click="open = false"
-                    class="text-white bg-red-500/20 hover:bg-red-500 transition p-1 rounded-lg" title="إغلاق">
+                    class="text-white bg-red-500/20 hover:bg-red-500 transition p-1 rounded-lg">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                         </path>
@@ -48,9 +44,9 @@
             </div>
         </div>
 
-        <!-- Messages Area -->
         <div x-ref="scrollContainer" class="flex-1 bg-gray-50/50 p-4 space-y-4 scroll-smooth"
-            style="overflow-y: auto; overflow-x: hidden; min-height: 0;">
+            style="overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column;">
+
             <template x-for="msg in messages" :key="msg.id">
                 <div
                     :class="{ 'flex justify-start': msg.sender === 'bot', 'flex justify-end': msg.sender === 'user' }">
@@ -64,17 +60,13 @@
                         <p class="whitespace-pre-wrap break-words" x-text="msg.text"></p>
                         <span
                             class="text-[10px] opacity-0 group-hover:opacity-70 transition-opacity absolute bottom-0.5"
-                            :class="{
-                                'left-2 text-gray-400': msg.sender === 'bot',
-                                'right-2 text-gray-300': msg
-                                    .sender === 'user'
-                            }"
+                            :class="{ 'left-2 text-gray-400': msg.sender === 'bot', 'right-2 text-gray-300': msg
+                                    .sender === 'user' }"
                             x-text="msg.time"></span>
                     </div>
                 </div>
             </template>
 
-            <!-- Typing Indicator -->
             <div x-show="isTyping" class="flex justify-start">
                 <div
                     class="bg-white border border-gray-100 rounded-2xl rounded-tl-none px-4 py-3 shadow-sm flex items-center gap-1">
@@ -88,43 +80,34 @@
             </div>
         </div>
 
-        <!-- Input Area -->
-        <div class="p-3 bg-white border-t border-gray-100" style="flex-shrink: 0;">
+        <div class="p-3 bg-white border-t border-gray-100" style="height: 85px; flex-shrink: 0;">
             <form @submit.prevent="sendMessage" class="flex gap-2 items-center">
                 <input x-model="message" type="text" placeholder="اسألني هنا..."
-                    class="flex-1 h-12 bg-gray-50 border-brand-gold/10 text-brand-navy rounded-xl px-4 focus:ring-2 focus:ring-brand-gold/20 focus:border-brand-gold transition-all placeholder-gray-400 text-sm">
+                    class="flex-1 h-12 bg-gray-50 border-brand-gold/10 text-brand-navy rounded-xl px-4 focus:ring-2 focus:ring-brand-gold/20 focus:border-brand-gold transition-all text-sm">
 
                 <button type="submit" :disabled="!message.trim()"
-                    class="h-12 w-12 bg-brand-navy hover:bg-brand-gold text-brand-gold hover:text-brand-navy disabled:opacity-50 disabled:cursor-not-allowed rounded-xl transition-all duration-300 transform active:scale-95 shadow-lg flex items-center justify-center group/btn">
-                    <svg class="w-6 h-6 transform -rotate-90 group-hover/btn:-translate-y-0.5 transition-transform"
-                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class="h-12 w-12 bg-brand-navy hover:bg-brand-gold text-brand-gold hover:text-brand-navy disabled:opacity-50 rounded-xl transition-all flex items-center justify-center">
+                    <svg class="w-6 h-6 transform -rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                     </svg>
                 </button>
             </form>
-            <div class="text-center mt-2">
-                <span class="text-[10px] text-gray-400">مدعوم بالذكاء الاصطناعي</span>
+            <div class="text-center mt-1">
+                <span class="text-[9px] text-gray-400">مدعوم بالذكاء الاصطناعي</span>
             </div>
         </div>
     </div>
 
-    <!-- Toggle Button (Floating) -->
     <button @click="toggle()"
         :class="{ 'scale-0 opacity-0': open && !minimized, 'scale-100 opacity-100': !open || minimized }"
-        class="bg-brand-navy hover:bg-brand-navy-light text-brand-gold w-16 h-16 rounded-full shadow-2xl hover:shadow-brand-gold/20 transition-all duration-500 flex items-center justify-center transform group border-2 border-brand-gold/40">
-        <span
-            class="absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-20 animate-ping group-hover:hidden"></span>
-        <svg class="w-8 h-8 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor"
-            viewBox="0 0 24 24">
+        class="bg-brand-navy hover:bg-brand-navy-light text-brand-gold w-16 h-16 rounded-full shadow-2xl transition-all duration-500 flex items-center justify-center transform border-2 border-brand-gold/40">
+        <span class="absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-20 animate-ping"></span>
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
             </path>
         </svg>
-
-        <!-- Notification Badge if closed -->
-        <span x-show="!open"
-            class="absolute top-0 right-0 block h-3.5 w-3.5 rounded-full ring-2 ring-white bg-red-500 transform translate-x-1 -translate-y-1"></span>
     </button>
 </div>
 
@@ -164,18 +147,16 @@
 
             sendMessage() {
                 if (!this.message.trim()) return;
-
+                const userMsg = this.message;
                 this.messages.push({
                     id: Date.now(),
-                    text: this.message,
+                    text: userMsg,
                     sender: 'user',
                     time: new Date().toLocaleTimeString('ar-SA', {
                         hour: '2-digit',
                         minute: '2-digit'
                     })
                 });
-
-                const userMsg = this.message;
                 this.message = '';
                 this.isTyping = true;
                 this.$nextTick(() => this.scrollToBottom());
@@ -205,17 +186,13 @@
                         });
                         this.$nextTick(() => this.scrollToBottom());
                     })
-                    .catch(error => {
-                        console.error('Error:', error);
+                    .catch(() => {
                         this.isTyping = false;
                         this.messages.push({
                             id: Date.now(),
-                            text: 'عذراً، حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.',
+                            text: 'عذراً، حدث خطأ. حاول ثانية.',
                             sender: 'bot',
-                            time: new Date().toLocaleTimeString('ar-SA', {
-                                hour: '2-digit',
-                                minute: '2-digit'
-                            })
+                            time: 'الآن'
                         });
                     });
             },
