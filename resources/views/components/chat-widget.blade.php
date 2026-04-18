@@ -44,8 +44,8 @@
             </div>
         </div>
 
-        <div x-ref="scrollContainer" class="flex-1 bg-gray-50/50 p-4 space-y-4 scroll-smooth"
-            style="overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column;">
+        <div x-ref="scrollContainer" id="chat-scroll-container" class="flex-1 bg-gray-50/50 p-4 space-y-4 scroll-smooth"
+            style="overflow-y: scroll !important; display: flex; flex-direction: column; min-height: 0;">
 
             <template x-for="msg in messages" :key="msg.id">
                 <div
@@ -60,11 +60,8 @@
                         <p class="whitespace-pre-wrap break-words" x-text="msg.text"></p>
                         <span
                             class="text-[10px] opacity-0 group-hover:opacity-70 transition-opacity absolute bottom-0.5"
-                            :class="{
-                                'left-2 text-gray-400': msg.sender === 'bot',
-                                'right-2 text-gray-300': msg
-                                    .sender === 'user'
-                            }"
+                            :class="{ 'left-2 text-gray-400': msg.sender === 'bot', 'right-2 text-gray-300': msg
+                                    .sender === 'user' }"
                             x-text="msg.time"></span>
                     </div>
                 </div>
@@ -97,7 +94,7 @@
                 </button>
             </form>
             <div class="text-center mt-1">
-                <span class="text-[9px] text-gray-400">مدكم بالذكاء الاصطناعي</span>
+                <span class="text-[9px] text-gray-400">مدعوم بالذكاء الاصطناعي</span>
             </div>
         </div>
     </div>
@@ -117,6 +114,34 @@
 <style>
     [x-cloak] {
         display: none !important;
+    }
+
+    /* تنسيق شريط التمرير (المؤشر) ليكون واضحاً وقابلاً للسحب بالفارة */
+    #chat-scroll-container::-webkit-scrollbar {
+        width: 8px !important;
+        display: block !important;
+    }
+
+    #chat-scroll-container::-webkit-scrollbar-track {
+        background: #f8f9fa !important;
+        border-radius: 10px;
+    }
+
+    #chat-scroll-container::-webkit-scrollbar-thumb {
+        background: #D4AF37 !important;
+        /* ذهبي وادي الجربة */
+        border-radius: 10px;
+        border: 2px solid #f8f9fa;
+    }
+
+    #chat-scroll-container::-webkit-scrollbar-thumb:hover {
+        background: #B8860B !important;
+    }
+
+    /* لمتصفح فايرفوكس */
+    #chat-scroll-container {
+        scrollbar-width: thin;
+        scrollbar-color: #D4AF37 #f8f9fa;
     }
 </style>
 
