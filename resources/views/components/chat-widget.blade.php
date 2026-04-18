@@ -6,8 +6,8 @@
         x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
         x-transition:leave-end="opacity-0 translate-y-10 scale-95"
-        class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-brand-gold/20 mb-4"
-        style="height: 500px; width: 360px; max-width: 95vw; max-height: 85vh; display: flex; flex-direction: column; position: relative;">
+         class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-brand-gold/20 mb-4"
+         style="height: 500px; width: 360px; max-width: 95vw; max-height: 85vh; display: flex; flex-direction: column; position: relative;">
 
         <div class="bg-brand-navy border-b border-brand-gold/20 p-4 flex justify-between items-center shadow-lg relative overflow-hidden"
             style="height: 75px; flex-shrink: 0;">
@@ -29,13 +29,13 @@
             </div>
             <div class="flex items-center gap-2">
                 <button @click="minimized = true"
-                    class="text-gray-400 hover:text-white transition p-1 hover:bg-white/10 rounded-full">
+                    class="text-gray-200 hover:text-white transition p-1.5 hover:bg-white/10 rounded-full bg-white/5" title="تصغير">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6"></path>
                     </svg>
                 </button>
                 <button @click="open = false"
-                    class="text-white bg-red-500/20 hover:bg-red-500 transition p-1 rounded-lg">
+                    class="text-white bg-red-500/40 hover:bg-red-500 transition p-1.5 rounded-lg border border-red-500/20" title="إغلاق">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                         </path>
@@ -45,7 +45,7 @@
         </div>
 
         <div x-ref="scrollContainer" id="chat-scroll-container" class="flex-1 bg-gray-50/50 p-4 space-y-4 scroll-smooth"
-            style="overflow-y: scroll !important; display: flex; flex-direction: column; min-height: 0;">
+            style="overflow-y: auto !important; display: flex; flex-direction: column; min-height: 0; flex: 1;">
 
             <template x-for="msg in messages" :key="msg.id">
                 <div
@@ -119,6 +119,7 @@
     /* تنسيق شريط التمرير (المؤشر) ليكون واضحاً وقابلاً للسحب بالفارة */
     #chat-scroll-container::-webkit-scrollbar {
         width: 8px !important;
+        height: 8px !important;
         display: block !important;
     }
 
