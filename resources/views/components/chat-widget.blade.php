@@ -11,7 +11,8 @@
          x-transition:leave="transition ease-in duration-200"
          x-transition:leave-start="opacity-100 translate-y-0 scale-100"
          x-transition:leave-end="opacity-0 translate-y-10 scale-95"
-         class="bg-white w-80 md:w-96 h-[500px] max-h-[80vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-brand-gold/20 mb-4">
+         class="bg-white w-80 md:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-brand-gold/20 mb-4"
+         style="height: 500px; max-height: 80vh;">
         
         <!-- Header -->
         <div class="bg-brand-navy border-b border-brand-gold/20 p-4 flex justify-between items-center shadow-lg relative overflow-hidden">
@@ -29,17 +30,21 @@
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <button @click="minimized = true" class="text-gray-400 hover:text-white transition p-1 hover:bg-white/10 rounded-full">
+                <!-- Minimize Button -->
+                <button @click="minimized = true" class="text-gray-400 hover:text-white transition p-1 hover:bg-white/10 rounded-full" title="تصغير">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6"></path></svg>
                 </button>
-                <button @click="open = false" class="text-gray-400 hover:text-white transition p-1 hover:bg-white/10 rounded-full">
+                <!-- Close Button -->
+                <button @click="open = false" class="text-white bg-red-500/20 hover:bg-red-500 transition p-1 rounded-lg" title="إغلاق">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
         </div>
 
         <!-- Messages Area -->
-        <div x-ref="scrollContainer" class="flex-1 min-h-0 bg-gray-50/50 p-4 overflow-y-auto space-y-4 scroll-smooth">
+        <div x-ref="scrollContainer" 
+             class="flex-1 bg-gray-50/50 p-4 scroll-smooth"
+             style="overflow-y: auto; height: 100%; min-height: 0;">
             <template x-for="msg in messages" :key="msg.id">
                 <div :class="{'flex justify-start': msg.sender === 'bot', 'flex justify-end': msg.sender === 'user'}">
                     <div :class="{
