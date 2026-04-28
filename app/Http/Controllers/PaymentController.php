@@ -101,7 +101,7 @@ class PaymentController extends Controller
             $order->update([
                 'payment_status' => 'paid',
                 'payment_id' => $paymentId,
-                'status' => 'processing' // Move to processing status
+                'status' => 'pending' // Use allowed ENUM value
             ]);
 
             // 4. Clear Cart
