@@ -32,7 +32,7 @@ class CartController extends Controller
                 "name" => $product->name,
                 "quantity" => $validated['quantity'],
                 "price" => $product->sale_price > 0 ? $product->sale_price : $product->price,
-                "image_url" => $product->image_url,
+                "image_url" => $product->image_url ?: ($product->category ? $product->category->image : null),
                 "slug" => $product->slug
             ];
         }

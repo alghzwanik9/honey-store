@@ -34,8 +34,8 @@
                                 <!-- Image -->
                                 <div
                                     class="w-24 h-24 shrink-0 bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
-                                    @if ($details['image_url'])
-                                        <img src="{{ Storage::url('products/' . $details['image_url']) }}"
+                                    @if (!empty($details['image_url']))
+                                        <img src="{{ Str::startsWith($details['image_url'], ['http', '/']) ? $details['image_url'] : asset('storage/' . $details['image_url']) }}"
                                             alt="{{ $details['name'] }}" class="w-full h-full object-cover">
                                     @else
                                         <div class="w-full h-full flex items-center justify-center text-gray-300">
