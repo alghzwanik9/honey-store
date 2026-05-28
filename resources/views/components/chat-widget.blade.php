@@ -1,4 +1,4 @@
-<div x-data="chatWidget" class="z-50 font-cairo" style="direction: rtl;" x-cloak>
+<div x-data="chatWidget" class="z-[9999] font-cairo" style="direction: rtl;" x-cloak>
 
     <!-- Chat Window -->
     <div x-show="open && !minimized" 
@@ -8,8 +8,8 @@
          x-transition:leave="transition ease-in duration-200"
          x-transition:leave-start="opacity-100 translate-y-0 scale-100"
          x-transition:leave-end="opacity-0 translate-y-10 scale-95"
-         class="fixed bottom-24 right-4 md:right-6 bg-white w-[90vw] md:w-96 rounded-2xl shadow-2xl flex flex-col border border-brand-gold/20 z-50 overflow-hidden"
-         style="height: 550px; max-height: calc(100vh - 120px);">
+         class="fixed bottom-24 right-4 md:right-6 bg-white w-[90vw] md:w-96 rounded-2xl shadow-2xl flex flex-col border border-brand-gold/20 z-[9999] overflow-hidden"
+         style="height: 550px; max-height: calc(100vh - 180px);">
         
         <!-- Header -->
         <div class="bg-brand-navy border-b border-brand-gold/20 p-4 flex justify-between items-center shadow-lg relative shrink-0">
