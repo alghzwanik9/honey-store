@@ -1,15 +1,21 @@
-<div x-data="chatWidget" class="z-50 font-cairo" style="direction: rtl; position: fixed; bottom: 20px; right: 20px;"
-    x-cloak>
+<div x-data="chatWidget" 
+     class="fixed bottom-4 right-4 z-50 flex flex-col items-end font-cairo" 
+     style="direction: rtl;"
+     x-cloak>
 
-    <div x-show="open && !minimized" x-transition:enter="transition ease-out duration-300"
-        class="bg-white rounded-2xl shadow-2xl border border-brand-gold/20 mb-4 flex flex-col overflow-hidden"
-        style="height: 500px; width: 360px; max-width: 95vw; max-height: 80vh; position: relative;">
-
-        <div class="bg-brand-navy border-b border-brand-gold/20 p-4 flex justify-between items-center shadow-lg shrink-0"
-            style="height: 75px;">
-            <div
-                class="absolute top-0 right-0 w-full h-1 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold">
-            </div>
+    <!-- Chat Window -->
+    <div x-show="open && !minimized" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 translate-y-10 scale-95"
+         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+         x-transition:leave-end="opacity-0 translate-y-10 scale-95"
+         class="bg-white w-80 md:w-96 h-[550px] max-h-[85vh] rounded-2xl shadow-2xl flex flex-col border border-brand-gold/20 mb-4">
+        
+        <!-- Header -->
+        <div class="bg-brand-navy border-b border-brand-gold/20 p-4 flex justify-between items-center shadow-lg relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold"></div>
             <div class="flex items-center gap-3">
                 <div
                     class="w-10 h-10 bg-brand-gold/20 rounded-full flex items-center justify-center border border-brand-gold/30">
@@ -38,10 +44,8 @@
             </div>
         </div>
 
-        <div x-ref="scrollContainer" id="chat-scroll-container"
-            class="flex-1 bg-gray-50/50 p-4 space-y-4 overflow-y-auto scroll-smooth"
-            style="min-height: 0; display: block;">
-
+        <!-- Messages Area -->
+        <div x-ref="scrollContainer" id="chat-scroll-container" class="flex-1 overflow-y-auto min-h-0 h-[calc(100%-120px)] bg-gray-50/50 p-4 space-y-4 scroll-smooth">
             <template x-for="msg in messages" :key="msg.id">
                 <div
                     :class="{ 'flex justify-start': msg.sender === 'bot', 'flex justify-end': msg.sender === 'user' }">

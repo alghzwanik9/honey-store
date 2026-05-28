@@ -50,7 +50,12 @@ class PaymentController extends Controller
         $status = $request->query('status');
         $message = $request->query('message');
 
-        Log::info('Moyasar Callback Start', $request->all());
+        Log::info('Moyasar Callback Start', [
+            'id' => $paymentId,
+            'status' => $status,
+            'message' => $message,
+            'order_id_param' => $request->query('order_id')
+        ]);
 
         if ($status !== 'paid') {
             Log::warning('Moyasar Callback: Status is not paid', ['status' => $status, 'message' => $message]);
@@ -58,15 +63,25 @@ class PaymentController extends Controller
         }
 
         try {
-            // 1. Fetch Payment
-            $payment = \Moyasar\Facades\Payment::fetch($paymentId);
-            Log::info('Moyasar Payment Fetched', ['payment_status' => $payment->status, 'amount' => $payment->amount]);
-
-            if ($payment->status !== 'paid') {
-                return redirect()->route('cart.index')->with('error', 'حالة الدفع غير صحيحة.');
+            // Check if API Key is set
+            if (!config('moyasar.key')) {
+                Log::error('Moyasar Callback Error: API Key is not configured in config/moyasar.php');
+                return redirect()->route('cart.index')->with('error', 'خطأ في إعدادات بوابة الدفع (API Key Missing).');
             }
 
-            // 2. Find Order (Best effort)
+            // 1. Fetch Payment
+            $payment = \Moyasar\Facades\Payment::fetch($paymentId);
+            Log::info('Moyasar Payment Fetched', [
+                'payment_status' => $payment->status, 
+                'amount' => $payment->amount,
+                'description' => $payment->description
+            ]);
+
+            if ($payment->status !== 'paid') {
+                return redirect()->route('cart.index')->with('error', 'حالة الدفع من ميسر غير مؤكدة.');
+            }
+
+            // 2. Find Order
             $orderId = $request->query('order_id');
             if (!$orderId) {
                 // Try to find in metadata description if not in query
@@ -82,37 +97,35 @@ class PaymentController extends Controller
             $order = Order::findOrFail($orderId);
             Log::info('Order Found', ['order_id' => $order->id]);
 
-            // 3. Update Order Immediately (Requested by User)
+            // 3. Update Order Immediately
             $order->update([
-                // 'status' => 'paid', // Removed: ENUM constraint violation (pending, shipped, completed)
                 'payment_status' => 'paid',
-                'payment_id' => $paymentId
+                'payment_id' => $paymentId,
+                'status' => 'pending' // Use allowed ENUM value
             ]);
 
-            // 4. Clear Cart in Try-Catch (Requested by User)
+            // 4. Clear Cart
             try {
                 session()->forget('cart');
             } catch (\Exception $e) {
                 Log::error('Failed to clear cart: ' . $e->getMessage());
             }
 
-            // 5. Send Invoice Email (Try/Catch to avoid blocking redirect if mail fails)
+            // 5. Send Invoice Email (Wrapped to prevent failure)
             try {
                 if ($order->user && $order->user->email) {
-                    // InvoiceMail generates the PDF internally to avoid DOMDocument serialization issues with queues
                     \Illuminate\Support\Facades\Mail::to($order->user)->queue(new \App\Mail\InvoiceMail($order));
                 }
             } catch (\Exception $e) {
                 Log::error('Failed to send invoice email: ' . $e->getMessage());
             }
 
-            // 6. Explicit Redirect (Requested by User)
-            Log::info('Redirecting to Success Page');
+            Log::info('Payment Processed Successfully, Redirecting to Success Page');
             return redirect()->route('payment.success', ['order' => $order->id]);
 
         } catch (\Exception $e) {
-            Log::error('Moyasar Callback Error: ' . $e->getMessage());
-            return redirect()->route('cart.index')->with('error', 'حدث خطأ: ' . $e->getMessage());
+            Log::error('Moyasar Callback Error Trace: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            return redirect()->route('cart.index')->with('error', 'حدث خطأ أثناء تأكيد الدفع: ' . $e->getMessage());
         }
     }
 
