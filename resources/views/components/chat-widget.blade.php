@@ -1,5 +1,5 @@
 <div x-data="chatWidget" 
-     class="fixed bottom-6 right-6 z-50 font-cairo" 
+     class="fixed bottom-4 right-4 z-50 flex flex-col items-end font-cairo" 
      style="direction: rtl;"
      x-cloak>
 
@@ -11,7 +11,7 @@
          x-transition:leave="transition ease-in duration-200"
          x-transition:leave-start="opacity-100 translate-y-0 scale-100"
          x-transition:leave-end="opacity-0 translate-y-10 scale-95"
-         class="bg-white w-80 md:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-brand-gold/20 mb-4">
+         class="bg-white w-80 md:w-96 h-[550px] max-h-[85vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-brand-gold/20 mb-4">
         
         <!-- Header -->
         <div class="bg-brand-navy border-b border-brand-gold/20 p-4 flex justify-between items-center shadow-lg relative overflow-hidden">
@@ -39,7 +39,7 @@
         </div>
 
         <!-- Messages Area -->
-        <div x-ref="scrollContainer" class="flex-1 bg-gray-50/50 p-4 h-80 overflow-y-auto space-y-4">
+        <div x-ref="scrollContainer" class="flex-1 bg-gray-50/50 p-4 overflow-y-auto space-y-4">
             <template x-for="msg in messages" :key="msg.id">
                 <div :class="{'flex justify-start': msg.sender === 'bot', 'flex justify-end': msg.sender === 'user'}">
                     <div :class="{
