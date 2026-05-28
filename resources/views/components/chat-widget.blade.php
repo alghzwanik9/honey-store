@@ -11,7 +11,7 @@
          x-transition:leave="transition ease-in duration-200"
          x-transition:leave-start="opacity-100 translate-y-0 scale-100"
          x-transition:leave-end="opacity-0 translate-y-10 scale-95"
-         class="bg-white w-80 md:w-96 h-[550px] max-h-[85vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-brand-gold/20 mb-4">
+         class="bg-white w-80 md:w-96 h-[550px] max-h-[85vh] rounded-2xl shadow-2xl flex flex-col border border-brand-gold/20 mb-4">
         
         <!-- Header -->
         <div class="bg-brand-navy border-b border-brand-gold/20 p-4 flex justify-between items-center shadow-lg relative overflow-hidden">
@@ -39,7 +39,7 @@
         </div>
 
         <!-- Messages Area -->
-        <div x-ref="scrollContainer" class="flex-1 bg-gray-50/50 p-4 overflow-y-auto space-y-4">
+        <div x-ref="scrollContainer" class="flex-1 overflow-y-auto min-h-0 h-[calc(100%-120px)] bg-gray-50/50 p-4 space-y-4">
             <template x-for="msg in messages" :key="msg.id">
                 <div :class="{'flex justify-start': msg.sender === 'bot', 'flex justify-end': msg.sender === 'user'}">
                     <div :class="{
