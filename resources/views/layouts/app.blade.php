@@ -7,20 +7,20 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="google-site-verification" content="u6I9tBc82GeY02xZ-Bd_KYRrB7-fH1XfOp4P7YYcig4" />
 
-    <title>{{ $title ?? 'مناحل وادي الجرفة' }}</title>
+    <title>{{ $title ?? 'متجر رِواء' }}</title>
     <meta name="description"
-        content="مناحل وادي الجرفة.. مصدرك الموثوق للعسل البلدي الطبيعي. جودة مضمونة 100%، نقطفها بعناية من مناحلنا لنجعلها بين يديك.">
+        content="متجر رِواء.. مصدرك الموثوق للعسل البلدي الطبيعي. جودة مضمونة 100%، ننتقيها بعناية من أجود المناحل لنجعلها بين يديك.">
 
     <link rel="canonical" href="{{ url()->current() }}" />
 
-    <meta property="og:site_name" content="مناحل وادي الجرفة">
+    <meta property="og:site_name" content="متجر رِواء">
 
     <script type="application/ld+json">
         {
           "@@context" : "https://schema.org",
           "@@type" : "WebSite",
-          "name" : "مناحل وادي الجرفة",
-          "alternateName" : ["متجر وادي الجرفة", "وادي الجرفة"],
+          "name" : "متجر رِواء",
+          "alternateName" : ["متجر رِواء للعسل الطبيعي", "رِواء"],
           "url" : "{{ url('/') }}"
         }
         </script>
@@ -61,7 +61,7 @@
     <footer class="bg-brand-cream-light border-t border-brand-gold/20 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-gray-500">
-                <p>© {{ date('Y') }} مناحل وادي الجرفة — جميع الحقوق محفوظة</p>
+                <p>© {{ date('Y') }} متجر رِواء — جميع الحقوق محفوظة</p>
                 <p>
                     تم التطوير بـ ❤️ بواسطة
                     <a href="https://github.com/alghzwanik9" target="_blank" rel="noopener noreferrer"

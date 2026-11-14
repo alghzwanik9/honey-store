@@ -6,15 +6,15 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="google-site-verification" content="u6I9tBc82GeY02xZ-Bd_KYRrB7-fH1XfOp4P7YYcig4" />
 
-        <title>{{ $title ?? 'مناحل وادي الجرفة' }}</title>
-        <meta name="description" content="مناحل وادي الجرفة.. مصدرك الموثوق للعسل البلدي الطبيعي. جودة مضمونة 100%، نقطفها بعناية من مناحلنا لنجعلها بين يديك.">
+        <title>{{ $title ?? 'متجر رِواء' }}</title>
+        <meta name="description" content="متجر رِواء.. مصدرك الموثوق للعسل البلدي الطبيعي. جودة مضمونة 100%، ننتقيها بعناية من أجود المناحل لنجعلها بين يديك.">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-        <meta property="og:site_name" content="مناحل وادي الجرفة">
+        <meta property="og:site_name" content="متجر رِواء">
         <script type="application/ld+json">
         {
         "@@context" : "https://schema.org",
         "@@type" : "WebSite",
-          "name" : "مناحل وادي الجرفة",
+          "name" : "متجر رِواء",
           "url" : "{{ url('/') }}"
         }
         </script>
@@ -42,7 +42,7 @@
 
             <div class="relative z-10 transition-transform duration-500 hover:scale-105 mb-6">
                 <a href="/" class="flex flex-col items-center gap-2">
-                    <img src="/images/logo.png" alt="مناحل وادي الجرفة" class="h-32 md:h-48 w-auto object-contain filter drop-shadow-[0_0_25px_rgba(194,155,64,0.5)] brightness-110">
+                    <img src="/images/logo.png" alt="متجر رِواء" class="h-32 md:h-48 w-auto object-contain filter drop-shadow-[0_0_25px_rgba(194,155,64,0.5)] brightness-110">
                 </a>
             </div>
 

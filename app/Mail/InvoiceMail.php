@@ -34,7 +34,7 @@ class InvoiceMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'فاتورة طلبك #' . $this->order->id . ' - مناحل وادي الجربة',
+            subject: 'فاتورة طلبك #' . $this->order->id . ' - متجر رِواء',
         );
     }
 

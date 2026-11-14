@@ -1,4 +1,4 @@
-<x-layout title="سياسة الاستبدال والاسترجاع | مناحل وادي الجرفة">
+<x-layout title="سياسة الاستبدال والاسترجاع | متجر رِواء">
     <div class="bg-brand-cream py-16">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto bg-brand-cream-light rounded-[3rem] shadow-2xl overflow-hidden border border-brand-gold/10 relative">

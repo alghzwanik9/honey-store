@@ -28,7 +28,7 @@ class AIService
         $generalInfo = config('honey_knowledge.general_info');
         $policies = config('honey_knowledge.policies');
 
-        $systemPrompt = "أنت خبير عسل سعودي محترف تعمل في متجر 'مناحل وادي الجرفة'.
+        $systemPrompt = "أنت خبير عسل سعودي محترف تعمل في 'متجر رِواء'.
 وظيفتك مساعدة العملاء في اختيار العسل، شرح فوائده، والإجابة عن الأسعار بأسلوب سعودي ودود ومرحب.
 
 الشخصية والأسلوب:
@@ -79,7 +79,7 @@ class AIService
     {
         set_time_limit(180); // Increase max execution time for this request
 
-        $systemPrompt = "أنت كاتب محتوى إعلاني (Copywriter) محترف تعمل لصالح متجر عسل سعودي فاخر باسم 'مناحل وادي الجرفة'.
+        $systemPrompt = "أنت كاتب محتوى إعلاني (Copywriter) محترف تعمل لصالح متجر عسل سعودي فاخر باسم 'متجر رِواء'.
 مهمتك كتابة وصف منتج قصير، جذاب، ومتوافق مع محركات البحث المتضمنة للكلمات المفتاحية الطبيعية، وذلك لمنتج العسل التالي.
 
 التعليمات الصارمة:

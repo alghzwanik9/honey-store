@@ -1,4 +1,4 @@
-<x-layout title="الشروط والأحكام | مناحل وادي الجرفة">
+<x-layout title="الشروط والأحكام | متجر رِواء">
     <div class="bg-brand-cream py-16">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto bg-brand-cream-light rounded-[3rem] shadow-2xl overflow-hidden border border-brand-gold/10 relative">
@@ -11,7 +11,7 @@
                 <div class="p-8 md:p-12 space-y-10 leading-relaxed text-gray-700 text-right" dir="rtl">
                     <section>
                         <h2 class="text-2xl font-black text-brand-navy border-r-4 border-brand-gold pr-4 mb-5">عام</h2>
-                        <p>استخدامك لمتجر <strong>مناحل وادي الجرفة</strong> يعني موافقتك الكاملة على الشروط والأحكام المذكورة هنا. نحتفظ بالحق في تحديث أو تغيير هذه الشروط في أي وقت دون إشعار مسبق.</p>
+                        <p>استخدامك لمتجر <strong>رِواء</strong> يعني موافقتك الكاملة على الشروط والأحكام المذكورة هنا. نحتفظ بالحق في تحديث أو تغيير هذه الشروط في أي وقت دون إشعار مسبق.</p>
                     </section>
 
                     <section>

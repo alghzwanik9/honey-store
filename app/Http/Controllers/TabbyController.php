@@ -66,7 +66,7 @@ class TabbyController extends Controller
             'payment' => [
                 'amount' => number_format((float) $order->total_amount, 2, '.', ''),
                 'currency' => 'SAR',
-                'description' => 'طلب رقم #' . $order->id . ' من مناحل وادي الجرفة',
+                'description' => 'طلب رقم #' . $order->id . ' من متجر رِواء',
                 'buyer' => [
                     'phone' => $order->customer_phone ?? '+966500000000',
                     'email' => $order->user->email ?? 'card.success@tabby.ai',

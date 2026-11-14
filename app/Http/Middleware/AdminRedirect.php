@@ -18,7 +18,7 @@ class AdminRedirect
     {
         if (Auth::check()) {
             $user = Auth::user();
-            $isAuthorized = in_array($user->email, ['alghzwany7@gmail.com', 'aljorfah.honey@gmail.com']) || $user->is_admin;
+            $isAuthorized = in_array($user->email, ['alghzwany7@gmail.com', 'info@riwaa.store']) || $user->is_admin;
             
             if (!$isAuthorized) {
                 return redirect('/');

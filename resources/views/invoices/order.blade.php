@@ -217,7 +217,7 @@
                     @if($logoData)
                         <img src="{{ $logoData }}" class="logo" alt="Logo">
                     @endif
-                    <div class="store-name">{{ $fix('مناحل وادي الجرفة') }}</div>
+                    <div class="store-name">{{ $fix('متجر رِواء') }}</div>
                     <div style="color: #64748b; font-size: 11px; margin-top: 3px;">{{ $fix('أجود أنواع العسل البلدي الطبيعي') }}</div>
                     <div style="color: #64748b; font-size: 11px;">
                         {{ $fix('السجل التجاري:') }} <span style="direction: ltr;">{{ $crNumber }}</span>
@@ -309,9 +309,9 @@
         </table>
 
         <div class="footer">
-            <div style="font-weight: bold; color: #0f172a; margin-bottom: 5px;">{{ $fix('شكراً لاختياركم مناحل وادي الجرفة') }}</div>
-            <div style="direction: ltr;">www.honey-store.com | aljorfah.honey@gmail.com</div>
-            <div style="margin-top: 8px; font-size: 9px;">{{ $fix('تم إصدار هذه الفاتورة إلكترونياً من متجر مناحل وادي الجرفة') }}</div>
+            <div style="font-weight: bold; color: #0f172a; margin-bottom: 5px;">{{ $fix('شكراً لاختياركم متجر رِواء') }}</div>
+            <div style="direction: ltr;">riwaa.store | info@riwaa.store</div>
+            <div style="margin-top: 8px; font-size: 9px;">{{ $fix('تم إصدار هذه الفاتورة إلكترونياً من متجر رِواء') }}</div>
         </div>
     </div>
 </body>

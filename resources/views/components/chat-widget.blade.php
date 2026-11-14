@@ -143,7 +143,7 @@
                     if (this.messages.length === 0) {
                         this.messages.push({
                             id: Date.now(),
-                            text: 'مرحباً! أنا خبير العسل في مناحل وادي الجرفة. كيف يمكنني مساعدتك اليوم؟ 🍯',
+                            text: 'مرحباً! أنا خبير العسل في متجر رِواء. كيف يمكنني مساعدتك اليوم؟ 🍯',
                             sender: 'bot',
                             time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })
                         });

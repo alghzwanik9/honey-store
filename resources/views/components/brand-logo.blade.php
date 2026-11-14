@@ -8,6 +8,6 @@
         <path d="M40 50L60 50M50 40L50 60" stroke="#0f172a" stroke-width="2" stroke-linecap="round" />
     </svg>
     <div class="mt-1 text-center">
-        <span class="block text-xs font-black tracking-widest text-brand-gold uppercase">مناحل وادي الجرفة</span>
+        <span class="block text-xs font-black tracking-widest text-brand-gold uppercase">متجر رِواء</span>
     </div>
 </div>

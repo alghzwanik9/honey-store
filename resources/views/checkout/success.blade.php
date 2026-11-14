@@ -4,12 +4,12 @@
             <div class="absolute top-0 right-0 w-full h-2 bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold"></div>
             <div class="mb-10 flex flex-col items-center justify-center">
                 <div class="transition-all duration-500 hover:scale-105">
-                    <img src="/images/logo.png" class="h-20 md:h-28 w-auto object-contain filter drop-shadow-[0_0_15px_rgba(194,155,64,0.3)]" alt="مناحل وادي الجرفة">
+                    <img src="/images/logo.png" class="h-20 md:h-28 w-auto object-contain filter drop-shadow-[0_0_15px_rgba(194,155,64,0.3)]" alt="متجر رِواء">
                 </div>
             </div>
 
             <h1 class="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight">تهانينا! تم الطلب بنجاح</h1>
-            <p class="text-xl text-gray-200 mb-10 leading-relaxed font-bold">نشكرك على ثقتك في مناحل وادي الجرفة. طلبك قيد التجهيز الآن بكل فخر.</p>
+            <p class="text-xl text-gray-200 mb-10 leading-relaxed font-bold">نشكرك على ثقتك في متجر رِواء. طلبك قيد التجهيز الآن بكل فخر.</p>
 
             <div class="bg-brand-navy rounded-3xl p-10 mb-12 text-right border border-gray-800 shadow-inner relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-1.5 h-full bg-brand-gold"></div>

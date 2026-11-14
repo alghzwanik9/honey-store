@@ -8,11 +8,11 @@
         {
           "@@context" : "https://schema.org",
           "@@type" : "WebSite",
-          "name" : "مناحل وادي الجرفة",
+          "name" : "متجر رِواء",
           "url" : "{{ url('/') }}"
         }
         </script>
-        <title>مرحباً بك في متجر العسل</title>
+        <title>مرحباً بك في متجر رِواء</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased bg-gray-50 text-gray-800 flex items-center justify-center min-h-screen">
@@ -23,7 +23,7 @@
                     <span class="text-7xl">🍯</span>
                  </div>
             </div>
-            <h1 class="text-4xl font-black text-brand-navy mb-4 tracking-tight">مناحل وادي الجرفة</h1>
+            <h1 class="text-4xl font-black text-brand-navy mb-4 tracking-tight">متجر رِواء</h1>
             <p class="text-gray-600 mb-8 text-lg leading-relaxed">
                 اكتشف أجود أنواع العسل الطبيعي. سدر، طلح، والمزيد من خيرات الطبيعة.
             </p>

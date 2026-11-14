@@ -99,7 +99,7 @@ class TamaraController extends Controller
                 'amount' => 0.0,
                 'currency' => 'SAR',
             ],
-            'description' => 'طلب رقم #' . $order->id . ' من مناحل وادي الجرفة',
+            'description' => 'طلب رقم #' . $order->id . ' من متجر رِواء',
             'country_code' => 'SA',
             'payment_type' => 'PAY_BY_INSTALMENTS',
             'locale' => 'ar_SA',
